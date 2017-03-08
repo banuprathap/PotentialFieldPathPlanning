@@ -1,1 +1,4 @@
 **/LaTeX/
+*~
+*.txt
+**/build/
