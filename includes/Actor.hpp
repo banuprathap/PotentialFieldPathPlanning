@@ -46,6 +46,11 @@ struct Point {
  */
 class RobotSimulator {
   public:
+    /**
+     * A vector to store obstacles information
+     */
+
+    std::vector<double> _circles;
     RobotSimulator(void);
 
     ~RobotSimulator(void);
@@ -79,7 +84,7 @@ class RobotSimulator {
      */
     Point ClosestPointOnObstacle(const int i, const double x, const double y);
     /**
-     * @brief      Returns the number obstacles.
+     * @brief      Returns the number of obstacles.
      *
      * @return     The number obstacles.
      */
@@ -140,11 +145,7 @@ class RobotSimulator {
 
   private:
     void InitializeRobot();
-    /**
-     * A vector to store obstacles information
-     */
-
-    std::vector<double> _circles;
+    
     /**
      * @brief      Structure to store Robot information
      */

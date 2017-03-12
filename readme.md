@@ -15,12 +15,15 @@ STATUS
 =======
 - ~~Proposal Pending Approval~~
 - ~~Created Skeleton and added preliminary UML diagram~~
+- ~~Implement other Callback functions~~
+- ~~Change Projection for easier transformations~~
 - GUI with Robot and Goal position visible and updated UML
-- Added doxygen style comments
 
 TODO
 ===
 - Learn Coverity
-- Look up quality assurance tools
-- Implement other Callback functions
+- Look up quality assurance tools 
+- made _circles public  (investigate other options)
+- Implement heuristic cost function with euclidean distance
+- Implement MoveRobot()
 

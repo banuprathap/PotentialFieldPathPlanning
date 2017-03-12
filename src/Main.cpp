@@ -23,7 +23,7 @@
  *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  *  SOFTWARE.
  *
- *   
+ *
  *
  *  Program: Potentail field Path Planning in C++
  *
@@ -35,6 +35,8 @@
 
 RobotSimulator _simulator;
 RobotPlanner _planner;
+int _selectedCircle;
+bool _plan;
 /**
  * @brief      Draws a circle.
  *
@@ -44,7 +46,7 @@ RobotPlanner _planner;
  */
 void DrawCircle(const double cx, const double cy, const double r) {
   const int    nsides = 50;
-  const double angle  = 2 * M_PI / nsides;
+  const double angle  = 2 * PI / nsides;
   glBegin(GL_POLYGON);
   for (int i = 0; i <= nsides; i++)
     glVertex2d(cx + r * cos(i * angle), cy + r * sin(i * angle));
@@ -56,7 +58,7 @@ void DrawCircle(const double cx, const double cy, const double r) {
  */
 void HandleEventOnDisplay(void) {
   std::vector<double> vert = _simulator.GetRobotVertices();
-  glColor3f(1, 0, 0);
+  glColor3f(0, 0.5, 1);
   glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
   glBegin(GL_QUADS);
   glVertex2f(vert[0], vert[1]);
@@ -67,14 +69,41 @@ void HandleEventOnDisplay(void) {
   glColor3f(0, 1, 0);
   DrawCircle(_simulator.GetGoalCenterX(), _simulator.GetGoalCenterY(),
              _simulator.GetGoalRadius());
-  glColor3f(0, 0, 1);
-  std::vector<double> _obst = _simulator.GetObstacles();
+  glColor3f(1, 0, 0);
   for (int i = 0; i < _simulator.GetNrObstacles(); ++i)
-    DrawCircle(_obst[3 + 3 * i],
-               _obst[4 + 3 * i],
-               _obst[5 + 3 * i]);
+    DrawCircle(_simulator._circles[3 + 3 * i],
+               _simulator._circles[4 + 3 * i],
+               _simulator._circles[5 + 3 * i]);
   glutSwapBuffers();
 }
+
+/**
+ * @brief      Function to handle an event on mouse click. It also checks if the cursor is inside any obstacle region during the event
+ *
+ * @param[in]  whichBtn   The which button
+ * @param[in]  mousePosX  The mouse position x
+ * @param[in]  mousePosY  The mouse position y
+ */
+void HandleEventOnMouseClick(const int whichBtn, const double mousePosX,
+                             const double mousePosY) {
+  _selectedCircle = -1;
+  for (int i = 0; i < _simulator._circles.size()
+       && _selectedCircle == -1; i += 3) {
+    const double _x = _simulator._circles[i];
+    const double _y = _simulator._circles[i + 1];
+    const double _r  = _simulator._circles[i + 2];
+    const double _d  = sqrt((mousePosX - _x) * (mousePosX - _x) +
+                            (mousePosY - _y) * (mousePosY - _y));
+    if (_d <= _r)
+      _selectedCircle = i / 3;
+  }
+  if (_selectedCircle == -1) {
+    _simulator._circles.push_back(mousePosX);
+    _simulator._circles.push_back(mousePosY);
+    _simulator._circles.push_back(20.0);
+  }
+}
+
 /**
  * @brief      Call back for an event on display
  */
@@ -87,7 +116,8 @@ void CallbackEventOnDisplay(void) {
   glViewport(0, 0, glutGet(GLUT_WINDOW_WIDTH), glutGet(GLUT_WINDOW_HEIGHT));
   glMatrixMode(GL_PROJECTION);
   glLoadIdentity();
-  glOrtho(-22, 22, -14, 14, -1.0, 1.0);
+  //  glOrtho(-22, 22, -14, 14, -1.0, 1.0);
+  glOrtho(0.0f, 1000, 600, 0.0f, 0.0f, 1.0f);
   glMatrixMode(GL_MODELVIEW);
   glLoadIdentity();
   HandleEventOnDisplay();
@@ -103,6 +133,11 @@ void CallbackEventOnDisplay(void) {
  */
 void CallbackEventOnMouseClick(int whichBtn, int state, int mousePosX,
                                int mousePosY) {
+  if (state == GLUT_DOWN) {
+    std::cout << mousePosX << "\t" << mousePosY << std::endl;
+    HandleEventOnMouseClick(whichBtn, mousePosX , mousePosY);
+    glutPostRedisplay();
+  }
 }
 /**
  * @brief      Call back for an event on mouse movement with a click
@@ -110,7 +145,12 @@ void CallbackEventOnMouseClick(int whichBtn, int state, int mousePosX,
  * @param[in]  x     x position of mouse coordinate
  * @param[in]  y     y position of mouse coordinate
  */
-void CallbackEventOnMouseMove(int x, int y) {
+void CallbackEventOnMouseMove(int mousePosX, int mousePosY) {
+  if (_selectedCircle >= 0) {
+    _simulator._circles[3 * _selectedCircle] = mousePosX;
+    _simulator._circles[3 * _selectedCircle + 1] = mousePosY;
+  }
+  glutPostRedisplay();
 }
 
 /**
@@ -130,6 +170,14 @@ void CallbackEventOnTimer(int dummy) {
  */
 void CallbackEventOnKeyPress(const unsigned char key, const int mousePosX,
                              const int mousePosY) {
+  std::cout << "pressed key = " << key << std::endl;
+  switch (key) {
+  case 27:  //  escape key
+    exit(0);
+  case 's':
+    _plan = !_plan;
+    break;
+  }
 }
 
 /**

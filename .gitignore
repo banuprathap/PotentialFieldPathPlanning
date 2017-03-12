@@ -3,3 +3,4 @@
 *.txt
 **/build/
 !CMakeLists.txt
+*.dia

@@ -34,14 +34,15 @@
  */
 RobotSimulator::RobotSimulator(void) {
   // initialize robot position
-  _robot._x = _robot._y = _robot._theta = 0;
+  _robot._x = _robot._y = 100;
+  _robot._theta = 0;
   InitializeRobot();
   // initialize goal X
-  _circles.push_back(16);
+  _circles.push_back(800);
   // initialize goal Y
-  _circles.push_back(-7);
+  _circles.push_back(500);
   // initialize goal Radius
-  _circles.push_back(1.0);
+  _circles.push_back(20.0);
 }
 /**
  * @brief      Destroys the object.
@@ -73,14 +74,15 @@ Point RobotSimulator::ClosestPointOnObstacle(const int i, const double x,
  * @brief      Initializes the robot
  */
 void RobotSimulator::InitializeRobot() {
-  _robot._currVertices.push_back(-1.0);
-  _robot._currVertices.push_back(-0.5);
-  _robot._currVertices.push_back(1.0);
-  _robot._currVertices.push_back(-0.5);
-  _robot._currVertices.push_back(1.0);
-  _robot._currVertices.push_back(0.5);
-  _robot._currVertices.push_back(-1.0);
-  _robot._currVertices.push_back(0.5);
+  _robot._initVertices.push_back(80.0);
+  _robot._initVertices.push_back(85);
+  _robot._initVertices.push_back(120.0);
+  _robot._initVertices.push_back(85);
+  _robot._initVertices.push_back(120.0);
+  _robot._initVertices.push_back(115);
+  _robot._initVertices.push_back(80.0);
+  _robot._initVertices.push_back(115);
+  _robot._currVertices = _robot._initVertices;
 }
 
 /**
