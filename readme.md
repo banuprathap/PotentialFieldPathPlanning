@@ -1,6 +1,7 @@
 Introduction
 ===========
 - Midterm Project for ENPM808x
+- Tested on  Ubuntu 14.4 with GCC 4.8.4 and OpenGL 4.3.0
 
 [![Build Status](https://travis-ci.org/banuprathap/PotentialFieldPathPlanning.svg?branch=master)](https://travis-ci.org/banuprathap/PotentialFieldPathPlanning)
 
@@ -21,7 +22,7 @@ STATUS
 
 TODO
 ===
-- Learn Coverity
+- ~~Learn Coverity~~ Change Travis to include coverity
 - Look up quality assurance tools 
 - made _circles public  (investigate other options)
 - Implement heuristic cost function with euclidean distance

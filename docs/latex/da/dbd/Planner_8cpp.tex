@@ -1,0 +1,50 @@
+\hypertarget{Planner_8cpp}{\section{src/\-Planner.cpp File Reference}
+\label{Planner_8cpp}\index{src/\-Planner.\-cpp@{src/\-Planner.\-cpp}}
+}
+
+
+Contains Implementation of planner A\-P\-I.  
+
+
+{\ttfamily \#include \char`\"{}Planner.\-hpp\char`\"{}}\\*
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+double \hyperlink{Planner_8cpp_ab4cbcbdd9738f425dc89a3cc99d9f81e}{Distance} (\hyperlink{structPoint}{Point} One, \hyperlink{structPoint}{Point} Two)
+\begin{DoxyCompactList}\small\item\em Returns the next move to the simulator. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Contains Implementation of planner A\-P\-I. This file contains path planner's funtionalities. It can be accessed by the objects of this class. This class assumes no initial knowledge of the environment.
+
+\begin{DoxyAuthor}{Author}
+Banuprathap Anandan 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+03/14/2017 
+\end{DoxyDate}
+
+
+\subsection{Function Documentation}
+\hypertarget{Planner_8cpp_ab4cbcbdd9738f425dc89a3cc99d9f81e}{\index{Planner.\-cpp@{Planner.\-cpp}!Distance@{Distance}}
+\index{Distance@{Distance}!Planner.cpp@{Planner.\-cpp}}
+\subsubsection[{Distance}]{\setlength{\rightskip}{0pt plus 5cm}double Distance (
+\begin{DoxyParamCaption}
+\item[{{\bf Point}}]{One, }
+\item[{{\bf Point}}]{Two}
+\end{DoxyParamCaption}
+)}}\label{Planner_8cpp_ab4cbcbdd9738f425dc89a3cc99d9f81e}
+
+
+Returns the next move to the simulator. 
+
+\begin{DoxyReturn}{Returns}
+Returns a structure variable 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+64                                       \{
+65   \textcolor{keywordflow}{return} sqrt((One.\hyperlink{structPoint_a77b9bd094b57efb7c185fdb3fb781900}{\_x} - Two.\hyperlink{structPoint_a77b9bd094b57efb7c185fdb3fb781900}{\_x}) * (One.\hyperlink{structPoint_a77b9bd094b57efb7c185fdb3fb781900}{\_x} - Two.\hyperlink{structPoint_a77b9bd094b57efb7c185fdb3fb781900}{\_x}) + (One.\hyperlink{structPoint_aa8be383c30dee092979999b523373658}{\_y} - Two.\hyperlink{structPoint_aa8be383c30dee092979999b523373658}{\_y}) *
+66               (One.\hyperlink{structPoint_aa8be383c30dee092979999b523373658}{\_y} - Two.\hyperlink{structPoint_aa8be383c30dee092979999b523373658}{\_y}));
+67 \}
+\end{DoxyCode}

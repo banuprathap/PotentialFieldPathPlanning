@@ -1,0 +1,620 @@
+\hypertarget{classRobotSimulator}{\section{Robot\-Simulator Class Reference}
+\label{classRobotSimulator}\index{Robot\-Simulator@{Robot\-Simulator}}
+}
+
+
+Class for \hyperlink{classRobotSimulator}{Robot\-Simulator}.  
+
+
+
+
+{\ttfamily \#include $<$Actor.\-hpp$>$}
+
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{structRobotSimulator_1_1Robot}{Robot}
+\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classRobotSimulator_a05c69560bba897588fef7567cb23d5e8}{Robot\-Simulator} (void)
+\begin{DoxyCompactList}\small\item\em Default constructor. \end{DoxyCompactList}\item 
+\hyperlink{classRobotSimulator_a409ed4b76d901a102687a87933f512b9}{$\sim$\-Robot\-Simulator} (void)
+\begin{DoxyCompactList}\small\item\em Destroys the object. \end{DoxyCompactList}\item 
+double \hyperlink{classRobotSimulator_a7e26ec222d3524872e4e48f2188b385f}{Get\-Goal\-Center\-X} (void)
+\begin{DoxyCompactList}\small\item\em Returns the goal center x. \end{DoxyCompactList}\item 
+double \hyperlink{classRobotSimulator_a11ef47f5c24415d1ae2422de45969910}{Get\-Goal\-Center\-Y} (void)
+\begin{DoxyCompactList}\small\item\em Returns the goal center y. \end{DoxyCompactList}\item 
+double \hyperlink{classRobotSimulator_a69decfa495b2aa982bcb0b454e02a529}{Get\-Goal\-Radius} (void)
+\begin{DoxyCompactList}\small\item\em Returns the goal radius. \end{DoxyCompactList}\item 
+\hyperlink{structPoint}{Point} \hyperlink{classRobotSimulator_aeac39519c3c9672bd4e43d9e9a1233bd}{Closest\-Point\-On\-Obstacle} (const int i, const double x, const double y)
+\begin{DoxyCompactList}\small\item\em Returns closest point from (x,y) for a given i'th obstacle. \end{DoxyCompactList}\item 
+int \hyperlink{classRobotSimulator_a5e2c13048d6e6c364019c07bf8bac220}{Get\-Nr\-Obstacles} (void) const 
+\begin{DoxyCompactList}\small\item\em Returns the number of obstacles. \end{DoxyCompactList}\item 
+double \hyperlink{classRobotSimulator_ac7bea18d767ec267142fbc72391ca89b}{Get\-Robot\-X} (void)
+\begin{DoxyCompactList}\small\item\em Returns the robot's x coordinate. \end{DoxyCompactList}\item 
+double \hyperlink{classRobotSimulator_a83e9060cfd1bab860ae56c80697d6de0}{Get\-Robot\-Y} (void)
+\begin{DoxyCompactList}\small\item\em Returns the robot's y coordinate. \end{DoxyCompactList}\item 
+double \hyperlink{classRobotSimulator_ade2906f35ab46657323d354ba5c7ba50}{Get\-Robot\-Theta} (void)
+\begin{DoxyCompactList}\small\item\em Returns the robot's angle of orientation. \end{DoxyCompactList}\item 
+double \hyperlink{classRobotSimulator_ace930a7f7cbef97b82c08629a3319b05}{Get\-Robot\-Size\-X} (void)
+\begin{DoxyCompactList}\small\item\em Returns the robot length. \end{DoxyCompactList}\item 
+double \hyperlink{classRobotSimulator_ae2efdc2fbc4793f205b2f4c10d4a301d}{Get\-Robot\-Size\-Y} (void)
+\begin{DoxyCompactList}\small\item\em Returns the robot height. \end{DoxyCompactList}\item 
+double \hyperlink{classRobotSimulator_a660a5fac6b81c87528aba1d3f978b75f}{Get\-Robot\-Speed} (void)
+\begin{DoxyCompactList}\small\item\em Gets the robot speed. \end{DoxyCompactList}\item 
+double \hyperlink{classRobotSimulator_a05fd185adb07605ab99da82a07028fb9}{Get\-Robot\-Accel} (void)
+\begin{DoxyCompactList}\small\item\em Gets the robot accel. \end{DoxyCompactList}\item 
+double \hyperlink{classRobotSimulator_a3ca3ad525b38e5f0b2ee556916058775}{Get\-Robot\-Turn} (void)
+\begin{DoxyCompactList}\small\item\em Gets the robot turn. \end{DoxyCompactList}\item 
+std\-::vector$<$ double $>$ \hyperlink{classRobotSimulator_a46889428dbad6da706f451df859c5473}{Get\-Robot\-Vertices} (void) const 
+\begin{DoxyCompactList}\small\item\em Returns the robot vertices. \end{DoxyCompactList}\item 
+std\-::vector$<$ double $>$ \hyperlink{classRobotSimulator_a28cb2c0a5c2b2f003def7fdcfa8971cf}{Get\-Obstacles} (void) const 
+\begin{DoxyCompactList}\small\item\em Returns the obstacles. \end{DoxyCompactList}\item 
+bool \hyperlink{classRobotSimulator_a2a4c5f6ce1c2388f02f9006811e6b6e0}{Has\-Robot\-Reached\-Goal} (void)
+\begin{DoxyCompactList}\small\item\em Determines if it has robot reached goal. \end{DoxyCompactList}\item 
+bool \hyperlink{classRobotSimulator_a564d79ead199c034841eda1b3ebebfcd}{is\-Colliding} (const double x, const double y)
+\begin{DoxyCompactList}\small\item\em Determines if given point lies in the obstacle region. \end{DoxyCompactList}\item 
+void \hyperlink{classRobotSimulator_a33390e3aa4106ca2e2ee8dd414bdcaea}{Add\-To\-Robot\-Configuration} (const double dx, const double dy, const double dtheta)
+\begin{DoxyCompactList}\small\item\em Adds changes to robot configuration. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\-::vector$<$ double $>$ \hyperlink{classRobotSimulator_a3ce83e536763d1892fb099ba110be183}{\-\_\-circles}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Class for \hyperlink{classRobotSimulator}{Robot\-Simulator}. 
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classRobotSimulator_a05c69560bba897588fef7567cb23d5e8}{\index{Robot\-Simulator@{Robot\-Simulator}!Robot\-Simulator@{Robot\-Simulator}}
+\index{Robot\-Simulator@{Robot\-Simulator}!RobotSimulator@{Robot\-Simulator}}
+\subsubsection[{Robot\-Simulator}]{\setlength{\rightskip}{0pt plus 5cm}Robot\-Simulator\-::\-Robot\-Simulator (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}}\label{classRobotSimulator_a05c69560bba897588fef7567cb23d5e8}
+
+
+Default constructor. 
+
+Constructs the object. 
+\begin{DoxyParams}{Parameters}
+{\em none} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+none 
+\end{DoxyReturn}
+$<$ Initial robot position in x and y.
+
+$<$ \hyperlink{structRobotSimulator_1_1Robot}{Robot} length.
+
+$<$ \hyperlink{structRobotSimulator_1_1Robot}{Robot} height.
+
+$<$ Initial robot orientation.
+
+$<$ Maximum safe speed for the robot.
+
+$<$ Maximum safe acceleration for the robot.
+
+$<$ Maximum safe turning angle for the robot. 
+\begin{DoxyCode}
+55                                    \{
+56   \textcolor{comment}{// initialize robot position}
+57   \_robot.\hyperlink{structRobotSimulator_1_1Robot_ab86590932e31a8a7aad72e0173b8c0e8}{\_x} = \_robot.\hyperlink{structRobotSimulator_1_1Robot_a0b386e0cb1fcdbb0ed0fd0a42d362165}{\_y} = 50; 
+58   \_robot.\hyperlink{structRobotSimulator_1_1Robot_afc7eddc29b81662393361dc8ca24806a}{\_sizeX} = 10; 
+59   \_robot.\hyperlink{structRobotSimulator_1_1Robot_a15d2779576df86d973c42c12c1f3c2ba}{\_sizeY} = 10; 
+60   \_robot.\hyperlink{structRobotSimulator_1_1Robot_a9c91ff0ff4514da0c9cd56f45064032e}{\_theta} = 0;   
+61   \_robot.\hyperlink{structRobotSimulator_1_1Robot_a25f9d011ee0c6952950b63405286438b}{\_maxSpeed} = 10;  
+62   \_robot.\hyperlink{structRobotSimulator_1_1Robot_a34048992e382edb88e15cbee3741e7ed}{\_maxAccel} = 10;  
+63   \_robot.\hyperlink{structRobotSimulator_1_1Robot_af9967fd4b2e74e67e5b9d3bc45fd30d3}{\_maxTurn} = 10 * \hyperlink{Actor_8hpp_a598a3330b3c21701223ee0ca14316eca}{PI} /
+64                     180;  
+65   UpdateRobotVertices(\_robot);
+66   \textcolor{comment}{// initialize goal X}
+67   \hyperlink{classRobotSimulator_a3ce83e536763d1892fb099ba110be183}{\_circles}.push\_back(300);
+68   \textcolor{comment}{// initialize goal Y}
+69   \hyperlink{classRobotSimulator_a3ce83e536763d1892fb099ba110be183}{\_circles}.push\_back(300);
+70   \textcolor{comment}{// initialize goal Radius}
+71   \hyperlink{classRobotSimulator_a3ce83e536763d1892fb099ba110be183}{\_circles}.push\_back(30.0);
+72 \}
+\end{DoxyCode}
+\hypertarget{classRobotSimulator_a409ed4b76d901a102687a87933f512b9}{\index{Robot\-Simulator@{Robot\-Simulator}!$\sim$\-Robot\-Simulator@{$\sim$\-Robot\-Simulator}}
+\index{$\sim$\-Robot\-Simulator@{$\sim$\-Robot\-Simulator}!RobotSimulator@{Robot\-Simulator}}
+\subsubsection[{$\sim$\-Robot\-Simulator}]{\setlength{\rightskip}{0pt plus 5cm}Robot\-Simulator\-::$\sim$\-Robot\-Simulator (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}}\label{classRobotSimulator_a409ed4b76d901a102687a87933f512b9}
+
+
+Destroys the object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em none} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+none 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+78                                     \{
+79 \}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classRobotSimulator_a33390e3aa4106ca2e2ee8dd414bdcaea}{\index{Robot\-Simulator@{Robot\-Simulator}!Add\-To\-Robot\-Configuration@{Add\-To\-Robot\-Configuration}}
+\index{Add\-To\-Robot\-Configuration@{Add\-To\-Robot\-Configuration}!RobotSimulator@{Robot\-Simulator}}
+\subsubsection[{Add\-To\-Robot\-Configuration}]{\setlength{\rightskip}{0pt plus 5cm}void Robot\-Simulator\-::\-Add\-To\-Robot\-Configuration (
+\begin{DoxyParamCaption}
+\item[{const double}]{dx, }
+\item[{const double}]{dy, }
+\item[{const double}]{dtheta}
+\end{DoxyParamCaption}
+)}}\label{classRobotSimulator_a33390e3aa4106ca2e2ee8dd414bdcaea}
+
+
+Adds changes to robot configuration. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em dx} & move along x axis by dx \\
+\hline
+\mbox{\tt in}  & {\em dy} & move along y axis by dy \\
+\hline
+\mbox{\tt in}  & {\em dtheta} & rotate by dtheta \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+none 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+177                                           \{
+178   \_robot.\hyperlink{structRobotSimulator_1_1Robot_ab86590932e31a8a7aad72e0173b8c0e8}{\_x} += dx;
+179   \_robot.\hyperlink{structRobotSimulator_1_1Robot_a0b386e0cb1fcdbb0ed0fd0a42d362165}{\_y} += dy;
+180   \_robot.\hyperlink{structRobotSimulator_1_1Robot_a9c91ff0ff4514da0c9cd56f45064032e}{\_theta} += dtheta;
+181   \textcolor{keyword}{const} \textcolor{keywordtype}{double} ctheta = cos(\_robot.\hyperlink{structRobotSimulator_1_1Robot_a9c91ff0ff4514da0c9cd56f45064032e}{\_theta});
+182   \textcolor{keyword}{const} \textcolor{keywordtype}{double} stheta = sin(\_robot.\hyperlink{structRobotSimulator_1_1Robot_a9c91ff0ff4514da0c9cd56f45064032e}{\_theta});
+183   \textcolor{keyword}{const} \textcolor{keywordtype}{int}    n      = \_robot.\hyperlink{structRobotSimulator_1_1Robot_acc4b3b442e3739589a5b7a3597988df2}{\_currVertices}.size();
+184   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < n; i += 2)   \{
+185     \_robot.\hyperlink{structRobotSimulator_1_1Robot_acc4b3b442e3739589a5b7a3597988df2}{\_currVertices}[i] =
+186       ctheta * \_robot.\hyperlink{structRobotSimulator_1_1Robot_ab7ac2c4dd487006e5e563ad0341808fb}{\_initVertices}[i] -
+187       stheta * \_robot.\hyperlink{structRobotSimulator_1_1Robot_ab7ac2c4dd487006e5e563ad0341808fb}{\_initVertices}[i + 1] + \_robot.\hyperlink{structRobotSimulator_1_1Robot_ab86590932e31a8a7aad72e0173b8c0e8}{\_x};
+188     \_robot.\hyperlink{structRobotSimulator_1_1Robot_acc4b3b442e3739589a5b7a3597988df2}{\_currVertices}[i + 1] =
+189       stheta * \_robot.\hyperlink{structRobotSimulator_1_1Robot_ab7ac2c4dd487006e5e563ad0341808fb}{\_initVertices}[i] +
+190       ctheta * \_robot.\hyperlink{structRobotSimulator_1_1Robot_ab7ac2c4dd487006e5e563ad0341808fb}{\_initVertices}[i + 1] + \_robot.\hyperlink{structRobotSimulator_1_1Robot_a0b386e0cb1fcdbb0ed0fd0a42d362165}{\_y};
+191   \}
+192 \}
+\end{DoxyCode}
+\hypertarget{classRobotSimulator_aeac39519c3c9672bd4e43d9e9a1233bd}{\index{Robot\-Simulator@{Robot\-Simulator}!Closest\-Point\-On\-Obstacle@{Closest\-Point\-On\-Obstacle}}
+\index{Closest\-Point\-On\-Obstacle@{Closest\-Point\-On\-Obstacle}!RobotSimulator@{Robot\-Simulator}}
+\subsubsection[{Closest\-Point\-On\-Obstacle}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Point} Robot\-Simulator\-::\-Closest\-Point\-On\-Obstacle (
+\begin{DoxyParamCaption}
+\item[{const int}]{i, }
+\item[{const double}]{x, }
+\item[{const double}]{y}
+\end{DoxyParamCaption}
+)}}\label{classRobotSimulator_aeac39519c3c9672bd4e43d9e9a1233bd}
+
+
+Returns closest point from (x,y) for a given i'th obstacle. 
+
+Returns closest point on the obstacle i, from given point.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em i} & Obstacle number \\
+\hline
+\mbox{\tt in}  & {\em x} & x coordinate of the point of interest \\
+\hline
+\mbox{\tt in}  & {\em y} & y coordinate of the point of interest\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Returns a structure variable 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+91                     \{
+92   \textcolor{keyword}{const} \textcolor{keywordtype}{double} cx = \hyperlink{classRobotSimulator_a3ce83e536763d1892fb099ba110be183}{\_circles}[3 + 3 * i];
+93   \textcolor{keyword}{const} \textcolor{keywordtype}{double} cy = \hyperlink{classRobotSimulator_a3ce83e536763d1892fb099ba110be183}{\_circles}[4 + 3 * i];
+94   \textcolor{keyword}{const} \textcolor{keywordtype}{double} r  = \hyperlink{classRobotSimulator_a3ce83e536763d1892fb099ba110be183}{\_circles}[5 + 3 * i];
+95   \textcolor{keyword}{const} \textcolor{keywordtype}{double} d  = sqrt((cx - x) * (cx - x) + (cy - y) * (cy - y));
+96   \hyperlink{structPoint}{Point} p;
+97   p.\hyperlink{structPoint_a77b9bd094b57efb7c185fdb3fb781900}{\_x} = cx + r * (x - cx) / d;
+98   p.\hyperlink{structPoint_aa8be383c30dee092979999b523373658}{\_y} = cy + r * (y - cy) / d;
+99   \textcolor{keywordflow}{return} p;
+100 \}
+\end{DoxyCode}
+\hypertarget{classRobotSimulator_a7e26ec222d3524872e4e48f2188b385f}{\index{Robot\-Simulator@{Robot\-Simulator}!Get\-Goal\-Center\-X@{Get\-Goal\-Center\-X}}
+\index{Get\-Goal\-Center\-X@{Get\-Goal\-Center\-X}!RobotSimulator@{Robot\-Simulator}}
+\subsubsection[{Get\-Goal\-Center\-X}]{\setlength{\rightskip}{0pt plus 5cm}double Robot\-Simulator\-::\-Get\-Goal\-Center\-X (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classRobotSimulator_a7e26ec222d3524872e4e48f2188b385f}
+
+
+Returns the goal center x. 
+
+\begin{DoxyReturn}{Returns}
+The goal center x. 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+77                                 \{
+78       \textcolor{keywordflow}{return} \hyperlink{classRobotSimulator_a3ce83e536763d1892fb099ba110be183}{\_circles}[0];
+79     \}
+\end{DoxyCode}
+\hypertarget{classRobotSimulator_a11ef47f5c24415d1ae2422de45969910}{\index{Robot\-Simulator@{Robot\-Simulator}!Get\-Goal\-Center\-Y@{Get\-Goal\-Center\-Y}}
+\index{Get\-Goal\-Center\-Y@{Get\-Goal\-Center\-Y}!RobotSimulator@{Robot\-Simulator}}
+\subsubsection[{Get\-Goal\-Center\-Y}]{\setlength{\rightskip}{0pt plus 5cm}double Robot\-Simulator\-::\-Get\-Goal\-Center\-Y (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classRobotSimulator_a11ef47f5c24415d1ae2422de45969910}
+
+
+Returns the goal center y. 
+
+\begin{DoxyReturn}{Returns}
+The goal center y. 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+85                                 \{
+86       \textcolor{keywordflow}{return} \hyperlink{classRobotSimulator_a3ce83e536763d1892fb099ba110be183}{\_circles}[1];
+87     \}
+\end{DoxyCode}
+\hypertarget{classRobotSimulator_a69decfa495b2aa982bcb0b454e02a529}{\index{Robot\-Simulator@{Robot\-Simulator}!Get\-Goal\-Radius@{Get\-Goal\-Radius}}
+\index{Get\-Goal\-Radius@{Get\-Goal\-Radius}!RobotSimulator@{Robot\-Simulator}}
+\subsubsection[{Get\-Goal\-Radius}]{\setlength{\rightskip}{0pt plus 5cm}double Robot\-Simulator\-::\-Get\-Goal\-Radius (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classRobotSimulator_a69decfa495b2aa982bcb0b454e02a529}
+
+
+Returns the goal radius. 
+
+\begin{DoxyReturn}{Returns}
+The goal radius. 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+93                                 \{
+94       \textcolor{keywordflow}{return} \hyperlink{classRobotSimulator_a3ce83e536763d1892fb099ba110be183}{\_circles}[2];
+95     \}
+\end{DoxyCode}
+\hypertarget{classRobotSimulator_a5e2c13048d6e6c364019c07bf8bac220}{\index{Robot\-Simulator@{Robot\-Simulator}!Get\-Nr\-Obstacles@{Get\-Nr\-Obstacles}}
+\index{Get\-Nr\-Obstacles@{Get\-Nr\-Obstacles}!RobotSimulator@{Robot\-Simulator}}
+\subsubsection[{Get\-Nr\-Obstacles}]{\setlength{\rightskip}{0pt plus 5cm}int Robot\-Simulator\-::\-Get\-Nr\-Obstacles (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{classRobotSimulator_a5e2c13048d6e6c364019c07bf8bac220}
+
+
+Returns the number of obstacles. 
+
+\begin{DoxyReturn}{Returns}
+The number obstacles in the environment. 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+106                                    \{
+107       \textcolor{keywordflow}{return} \hyperlink{classRobotSimulator_a3ce83e536763d1892fb099ba110be183}{\_circles}.size() / 3 - 1;
+108     \}
+\end{DoxyCode}
+\hypertarget{classRobotSimulator_a28cb2c0a5c2b2f003def7fdcfa8971cf}{\index{Robot\-Simulator@{Robot\-Simulator}!Get\-Obstacles@{Get\-Obstacles}}
+\index{Get\-Obstacles@{Get\-Obstacles}!RobotSimulator@{Robot\-Simulator}}
+\subsubsection[{Get\-Obstacles}]{\setlength{\rightskip}{0pt plus 5cm}std\-::vector$<$double$>$ Robot\-Simulator\-::\-Get\-Obstacles (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{classRobotSimulator_a28cb2c0a5c2b2f003def7fdcfa8971cf}
+
+
+Returns the obstacles. 
+
+\begin{DoxyReturn}{Returns}
+The obstacles as a vector. 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+187                                                \{
+188       \textcolor{keywordflow}{return} \hyperlink{classRobotSimulator_a3ce83e536763d1892fb099ba110be183}{\_circles};
+189     \}
+\end{DoxyCode}
+\hypertarget{classRobotSimulator_a05fd185adb07605ab99da82a07028fb9}{\index{Robot\-Simulator@{Robot\-Simulator}!Get\-Robot\-Accel@{Get\-Robot\-Accel}}
+\index{Get\-Robot\-Accel@{Get\-Robot\-Accel}!RobotSimulator@{Robot\-Simulator}}
+\subsubsection[{Get\-Robot\-Accel}]{\setlength{\rightskip}{0pt plus 5cm}double Robot\-Simulator\-::\-Get\-Robot\-Accel (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classRobotSimulator_a05fd185adb07605ab99da82a07028fb9}
+
+
+Gets the robot accel. 
+
+\begin{DoxyReturn}{Returns}
+The robot accel. 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+163                                \{
+164       \textcolor{keywordflow}{return} \_robot.\hyperlink{structRobotSimulator_1_1Robot_a34048992e382edb88e15cbee3741e7ed}{\_maxAccel};
+165     \}
+\end{DoxyCode}
+\hypertarget{classRobotSimulator_ace930a7f7cbef97b82c08629a3319b05}{\index{Robot\-Simulator@{Robot\-Simulator}!Get\-Robot\-Size\-X@{Get\-Robot\-Size\-X}}
+\index{Get\-Robot\-Size\-X@{Get\-Robot\-Size\-X}!RobotSimulator@{Robot\-Simulator}}
+\subsubsection[{Get\-Robot\-Size\-X}]{\setlength{\rightskip}{0pt plus 5cm}double Robot\-Simulator\-::\-Get\-Robot\-Size\-X (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classRobotSimulator_ace930a7f7cbef97b82c08629a3319b05}
+
+
+Returns the robot length. 
+
+\begin{DoxyReturn}{Returns}
+The robot size x. 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+139                                \{
+140       \textcolor{keywordflow}{return} \_robot.\hyperlink{structRobotSimulator_1_1Robot_afc7eddc29b81662393361dc8ca24806a}{\_sizeX};
+141     \}
+\end{DoxyCode}
+\hypertarget{classRobotSimulator_ae2efdc2fbc4793f205b2f4c10d4a301d}{\index{Robot\-Simulator@{Robot\-Simulator}!Get\-Robot\-Size\-Y@{Get\-Robot\-Size\-Y}}
+\index{Get\-Robot\-Size\-Y@{Get\-Robot\-Size\-Y}!RobotSimulator@{Robot\-Simulator}}
+\subsubsection[{Get\-Robot\-Size\-Y}]{\setlength{\rightskip}{0pt plus 5cm}double Robot\-Simulator\-::\-Get\-Robot\-Size\-Y (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classRobotSimulator_ae2efdc2fbc4793f205b2f4c10d4a301d}
+
+
+Returns the robot height. 
+
+\begin{DoxyReturn}{Returns}
+The robot size y. 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+147                                \{
+148       \textcolor{keywordflow}{return} \_robot.\hyperlink{structRobotSimulator_1_1Robot_a15d2779576df86d973c42c12c1f3c2ba}{\_sizeY};
+149     \}
+\end{DoxyCode}
+\hypertarget{classRobotSimulator_a660a5fac6b81c87528aba1d3f978b75f}{\index{Robot\-Simulator@{Robot\-Simulator}!Get\-Robot\-Speed@{Get\-Robot\-Speed}}
+\index{Get\-Robot\-Speed@{Get\-Robot\-Speed}!RobotSimulator@{Robot\-Simulator}}
+\subsubsection[{Get\-Robot\-Speed}]{\setlength{\rightskip}{0pt plus 5cm}double Robot\-Simulator\-::\-Get\-Robot\-Speed (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classRobotSimulator_a660a5fac6b81c87528aba1d3f978b75f}
+
+
+Gets the robot speed. 
+
+\begin{DoxyReturn}{Returns}
+The robot speed. 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+155                                \{
+156       \textcolor{keywordflow}{return} \_robot.\hyperlink{structRobotSimulator_1_1Robot_a25f9d011ee0c6952950b63405286438b}{\_maxSpeed};
+157     \}
+\end{DoxyCode}
+\hypertarget{classRobotSimulator_ade2906f35ab46657323d354ba5c7ba50}{\index{Robot\-Simulator@{Robot\-Simulator}!Get\-Robot\-Theta@{Get\-Robot\-Theta}}
+\index{Get\-Robot\-Theta@{Get\-Robot\-Theta}!RobotSimulator@{Robot\-Simulator}}
+\subsubsection[{Get\-Robot\-Theta}]{\setlength{\rightskip}{0pt plus 5cm}double Robot\-Simulator\-::\-Get\-Robot\-Theta (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classRobotSimulator_ade2906f35ab46657323d354ba5c7ba50}
+
+
+Returns the robot's angle of orientation. 
+
+\begin{DoxyReturn}{Returns}
+The robot theta. 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+131                                \{
+132       \textcolor{keywordflow}{return} \_robot.\hyperlink{structRobotSimulator_1_1Robot_a9c91ff0ff4514da0c9cd56f45064032e}{\_theta};
+133     \}
+\end{DoxyCode}
+\hypertarget{classRobotSimulator_a3ca3ad525b38e5f0b2ee556916058775}{\index{Robot\-Simulator@{Robot\-Simulator}!Get\-Robot\-Turn@{Get\-Robot\-Turn}}
+\index{Get\-Robot\-Turn@{Get\-Robot\-Turn}!RobotSimulator@{Robot\-Simulator}}
+\subsubsection[{Get\-Robot\-Turn}]{\setlength{\rightskip}{0pt plus 5cm}double Robot\-Simulator\-::\-Get\-Robot\-Turn (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classRobotSimulator_a3ca3ad525b38e5f0b2ee556916058775}
+
+
+Gets the robot turn. 
+
+\begin{DoxyReturn}{Returns}
+The robot turn. 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+171                               \{
+172       \textcolor{keywordflow}{return} \_robot.\hyperlink{structRobotSimulator_1_1Robot_af9967fd4b2e74e67e5b9d3bc45fd30d3}{\_maxTurn};
+173     \}
+\end{DoxyCode}
+\hypertarget{classRobotSimulator_a46889428dbad6da706f451df859c5473}{\index{Robot\-Simulator@{Robot\-Simulator}!Get\-Robot\-Vertices@{Get\-Robot\-Vertices}}
+\index{Get\-Robot\-Vertices@{Get\-Robot\-Vertices}!RobotSimulator@{Robot\-Simulator}}
+\subsubsection[{Get\-Robot\-Vertices}]{\setlength{\rightskip}{0pt plus 5cm}std\-::vector$<$double$>$ Robot\-Simulator\-::\-Get\-Robot\-Vertices (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{classRobotSimulator_a46889428dbad6da706f451df859c5473}
+
+
+Returns the robot vertices. 
+
+\begin{DoxyReturn}{Returns}
+The robot vertices as a vector 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+179                                                    \{
+180       \textcolor{keywordflow}{return} \_robot.\hyperlink{structRobotSimulator_1_1Robot_acc4b3b442e3739589a5b7a3597988df2}{\_currVertices};
+181     \}
+\end{DoxyCode}
+\hypertarget{classRobotSimulator_ac7bea18d767ec267142fbc72391ca89b}{\index{Robot\-Simulator@{Robot\-Simulator}!Get\-Robot\-X@{Get\-Robot\-X}}
+\index{Get\-Robot\-X@{Get\-Robot\-X}!RobotSimulator@{Robot\-Simulator}}
+\subsubsection[{Get\-Robot\-X}]{\setlength{\rightskip}{0pt plus 5cm}double Robot\-Simulator\-::\-Get\-Robot\-X (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classRobotSimulator_ac7bea18d767ec267142fbc72391ca89b}
+
+
+Returns the robot's x coordinate. 
+
+\begin{DoxyReturn}{Returns}
+The robot x. 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+115                            \{
+116       \textcolor{keywordflow}{return} \_robot.\hyperlink{structRobotSimulator_1_1Robot_ab86590932e31a8a7aad72e0173b8c0e8}{\_x};
+117     \}
+\end{DoxyCode}
+\hypertarget{classRobotSimulator_a83e9060cfd1bab860ae56c80697d6de0}{\index{Robot\-Simulator@{Robot\-Simulator}!Get\-Robot\-Y@{Get\-Robot\-Y}}
+\index{Get\-Robot\-Y@{Get\-Robot\-Y}!RobotSimulator@{Robot\-Simulator}}
+\subsubsection[{Get\-Robot\-Y}]{\setlength{\rightskip}{0pt plus 5cm}double Robot\-Simulator\-::\-Get\-Robot\-Y (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classRobotSimulator_a83e9060cfd1bab860ae56c80697d6de0}
+
+
+Returns the robot's y coordinate. 
+
+\begin{DoxyReturn}{Returns}
+The robot y. 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+123                            \{
+124       \textcolor{keywordflow}{return} \_robot.\hyperlink{structRobotSimulator_1_1Robot_a0b386e0cb1fcdbb0ed0fd0a42d362165}{\_y};
+125     \}
+\end{DoxyCode}
+\hypertarget{classRobotSimulator_a2a4c5f6ce1c2388f02f9006811e6b6e0}{\index{Robot\-Simulator@{Robot\-Simulator}!Has\-Robot\-Reached\-Goal@{Has\-Robot\-Reached\-Goal}}
+\index{Has\-Robot\-Reached\-Goal@{Has\-Robot\-Reached\-Goal}!RobotSimulator@{Robot\-Simulator}}
+\subsubsection[{Has\-Robot\-Reached\-Goal}]{\setlength{\rightskip}{0pt plus 5cm}bool Robot\-Simulator\-::\-Has\-Robot\-Reached\-Goal (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}}\label{classRobotSimulator_a2a4c5f6ce1c2388f02f9006811e6b6e0}
+
+
+Determines if it has robot reached goal. 
+
+Determines if robot has reached goal.
+
+\begin{DoxyReturn}{Returns}
+True if has robot reached goal, False otherwise.
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em none} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if has robot reached goal, False otherwise. 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+160                                              \{
+161   \textcolor{keyword}{const} \textcolor{keywordtype}{double} gx = \hyperlink{classRobotSimulator_a7e26ec222d3524872e4e48f2188b385f}{GetGoalCenterX}();
+162   \textcolor{keyword}{const} \textcolor{keywordtype}{double} gy = \hyperlink{classRobotSimulator_a11ef47f5c24415d1ae2422de45969910}{GetGoalCenterY}();
+163   \textcolor{keyword}{const} \textcolor{keywordtype}{double} rx = \hyperlink{classRobotSimulator_ac7bea18d767ec267142fbc72391ca89b}{GetRobotX}();
+164   \textcolor{keyword}{const} \textcolor{keywordtype}{double} ry = \hyperlink{classRobotSimulator_a83e9060cfd1bab860ae56c80697d6de0}{GetRobotY}();
+165   \textcolor{keywordflow}{return}
+166     sqrt((gx - rx) * (gx - rx) + (gy - ry) * (gy - ry)) <= \hyperlink{classRobotSimulator_a69decfa495b2aa982bcb0b454e02a529}{GetGoalRadius}();
+167 \}
+\end{DoxyCode}
+\hypertarget{classRobotSimulator_a564d79ead199c034841eda1b3ebebfcd}{\index{Robot\-Simulator@{Robot\-Simulator}!is\-Colliding@{is\-Colliding}}
+\index{is\-Colliding@{is\-Colliding}!RobotSimulator@{Robot\-Simulator}}
+\subsubsection[{is\-Colliding}]{\setlength{\rightskip}{0pt plus 5cm}bool Robot\-Simulator\-::is\-Colliding (
+\begin{DoxyParamCaption}
+\item[{const double}]{x, }
+\item[{const double}]{y}
+\end{DoxyParamCaption}
+)}}\label{classRobotSimulator_a564d79ead199c034841eda1b3ebebfcd}
+
+
+Determines if given point lies in the obstacle region. 
+
+Determines if colliding.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em x} & x coordinate of P\-O\-I \\
+\hline
+\mbox{\tt in}  & {\em y} & y coordinate of P\-O\-I\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if colliding, False otherwise.
+\end{DoxyReturn}
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em x} & \{ parameter\-\_\-description \} \\
+\hline
+\mbox{\tt in}  & {\em y} & \{ parameter\-\_\-description \}\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if colliding, False otherwise. 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+109                                                                \{
+110   \textcolor{keywordtype}{bool} col = \textcolor{keyword}{false};
+111   \textcolor{keywordflow}{if} ( x < 1 || x > 500 || y < 1 || y > 500 ) \{
+112     col = \textcolor{keyword}{true};
+113   \}
+114   \textcolor{keywordflow}{else} \{
+115     \textcolor{keywordtype}{double} sizeDiag = sqrt(\_robot.\hyperlink{structRobotSimulator_1_1Robot_afc7eddc29b81662393361dc8ca24806a}{\_sizeX} * \_robot.\hyperlink{structRobotSimulator_1_1Robot_afc7eddc29b81662393361dc8ca24806a}{\_sizeX} + \_robot.
+      \hyperlink{structRobotSimulator_1_1Robot_a15d2779576df86d973c42c12c1f3c2ba}{\_sizeY} *
+116                            \_robot.\hyperlink{structRobotSimulator_1_1Robot_a15d2779576df86d973c42c12c1f3c2ba}{\_sizeY});
+117     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 3; i < \hyperlink{classRobotSimulator_a3ce83e536763d1892fb099ba110be183}{\_circles}.size(); i += 3) \{
+118       \textcolor{keyword}{const} \textcolor{keywordtype}{double} \_x = \hyperlink{classRobotSimulator_a3ce83e536763d1892fb099ba110be183}{\_circles}[i];
+119       \textcolor{keyword}{const} \textcolor{keywordtype}{double} \_y = \hyperlink{classRobotSimulator_a3ce83e536763d1892fb099ba110be183}{\_circles}[i + 1];
+120       \textcolor{keyword}{const} \textcolor{keywordtype}{double} \_r = \hyperlink{classRobotSimulator_a3ce83e536763d1892fb099ba110be183}{\_circles}[i + 2];
+121       \textcolor{keyword}{const} \textcolor{keywordtype}{double} dist = sqrt((x - \_x) * (x - \_x) + (y - \_y) * (y - \_y));
+122       \textcolor{keywordflow}{if} (dist <= (\_r + sizeDiag)) \{
+123         col = \textcolor{keyword}{true};
+124         \textcolor{keywordflow}{break};
+125       \}
+126     \}
+127     \textcolor{keywordflow}{return} col;
+128   \}
+129 \}
+\end{DoxyCode}
+
+
+\subsection{Member Data Documentation}
+\hypertarget{classRobotSimulator_a3ce83e536763d1892fb099ba110be183}{\index{Robot\-Simulator@{Robot\-Simulator}!\-\_\-circles@{\-\_\-circles}}
+\index{\-\_\-circles@{\-\_\-circles}!RobotSimulator@{Robot\-Simulator}}
+\subsubsection[{\-\_\-circles}]{\setlength{\rightskip}{0pt plus 5cm}std\-::vector$<$double$>$ Robot\-Simulator\-::\-\_\-circles}}\label{classRobotSimulator_a3ce83e536763d1892fb099ba110be183}
+A vector to store obstacles information 
+
+The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+includes/\hyperlink{Actor_8hpp}{Actor.\-hpp}\item 
+src/\hyperlink{Actor_8cpp}{Actor.\-cpp}\end{DoxyCompactItemize}
