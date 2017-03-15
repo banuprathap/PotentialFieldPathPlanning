@@ -30,21 +30,61 @@
  */
 /**
  * @file test.cpp
- * 
- * 
+ *
+ *
  * @brief Unit test for path planner project
  *
  *  This file contains implementation of unit tests for this project
- *  
+ *
  * @author Banuprathap Anandan
  * @version 1.0.1
  */
 
-
-
-#include <tuple>
 #include <gtest/gtest.h>
-#include <test.hpp>
-#include <assert.h>
+#include <Planner.hpp>
+
+TEST(NoObstacleCollisionTest, Collide) {
+  RobotSimulator t_simulator;
+  ASSERT_TRUE(t_simulator.isColliding(100, 501));
+  ASSERT_TRUE(t_simulator.isColliding(-1, 501));
+  ASSERT_TRUE(t_simulator.isColliding(-10, -10));
+  ASSERT_TRUE(t_simulator.isColliding(0, 0));
+  ASSERT_TRUE(t_simulator.isColliding(100, 5001));
+}
+
+TEST(NoObstacleCollisionTest, NotCollide) {
+  RobotSimulator t_simulator;
+  ASSERT_FALSE(t_simulator.isColliding(100, 101));
+  ASSERT_FALSE(t_simulator.isColliding(300, 101));
+  ASSERT_FALSE(t_simulator.isColliding(50, 16));
+  ASSERT_FALSE(t_simulator.isColliding(70, 120));
+  ASSERT_FALSE(t_simulator.isColliding(100, 51));
+}
+
+TEST(ObstacleCollisionTest, Collide) {
+  RobotSimulator t_simulator;
+  t_simulator._circles.push_back(50);
+  t_simulator._circles.push_back(50);
+  t_simulator._circles.push_back(50);
+  ASSERT_TRUE(t_simulator.isColliding(75, 75));
+  ASSERT_TRUE(t_simulator.isColliding(50, 50));
+  ASSERT_TRUE(t_simulator.isColliding(60, 50));
+}
 
 
+TEST(ReachedGoal, NotReach) {
+  RobotSimulator t_simulator;
+  ASSERT_FALSE(t_simulator.HasRobotReachedGoal());
+}
+
+
+TEST(ReachedGoal, Reach) {
+  RobotPlanner   *_planner;
+  RobotSimulator t_simulator;
+  // _planner = new RobotPlanner(&_simulator);
+  double dx =  t_simulator.GetGoalCenterX() - t_simulator.GetRobotX();
+  double dy = t_simulator.GetGoalCenterY() - t_simulator.GetRobotY();
+  double dtheta = 0;
+  t_simulator.AddToRobotConfiguration(dx, dy , dtheta);
+  ASSERT_TRUE(t_simulator.HasRobotReachedGoal());
+}

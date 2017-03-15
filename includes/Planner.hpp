@@ -23,34 +23,62 @@
  *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  *  SOFTWARE.
  *
- *   
+ *
  *
  *  Program: Potential field path planner
  *
  */
+/**
+ *  @file Planner.hpp
+ *  @brief Contains declarations of planner API
+ *
+ *  This file contains path planner's funtionalities.
+ *  Refer Planner.cpp for implementation of these functions.
+ *
+ *
+ *
+ *
+ *
+ *  @author Banuprathap Anandan
+ *  @date   03/14/2017
+*/
 
 #ifndef INCLUDES_PLANNER_HPP_
 #define INCLUDES_PLANNER_HPP_
-
+#include <limits>
 #include "Actor.hpp"
+
 /**
  * @brief      Structure to store a move command
  */
 struct RobotMove {
-  double m_dx;
-  double m_dy;
-  double m_dtheta;
+  double m_dx;  /**< Movement along X axis. */
+  double m_dy;  /**< Movement along Y axis. */
+  double m_dtheta;  /**< Rotation by dtheta. */
+  double m_speed;  /**< Linear speed of the robot. */
 };
 /**
- * @brief      Class for robot planner.
+ * @brief      Class for RobotPlanner.
  */
 class RobotPlanner {
- public:
-    RobotPlanner(void);
+  public:
+  	/**< Obstacles beyond this distance are omitted in calculating potentials. */
+    int distThreshold = 50;
+    int k = 3;  /**<  Degree of calculating potential. */
+    double attPotScaling = 50000;  /**< Scaling factor for attractive potential. */
+    double repPotScaling = 5000;  /**< Scaling factor for repulsive potential. */
+    double minAttPot = 5;  /**< Minimum attractive potential at any point. */
+    double maxturn = 10 * PI / 180;
+
+
+    explicit RobotPlanner(RobotSimulator * const simulator);
 
     ~RobotPlanner(void);
 
     RobotMove NextMove(void);
+
+  private:
+    RobotSimulator *p_simulator;
 };
 
 #endif  // INCLUDES_PLANNER_HPP_

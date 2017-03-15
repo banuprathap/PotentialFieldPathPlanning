@@ -28,12 +28,27 @@
  *  Program: Simulator for a rectangular robot
  *
  */
+/**
+*  @file Actor.hpp
+*  @brief Contains declarations of simulator API
+*
+*  This file contains simulators's funtionalities.
+*  Refer Actor.cpp for implementation of these functions.
+*
+*
+*
+*
+*
+*  @author Banuprathap Anandan
+*  @date   03/14/2017
+*/
 
 #ifndef INCLUDES_ACTOR_HPP_
 #define INCLUDES_ACTOR_HPP_
 #include <iostream>
 #include <cmath>
 #include <vector>
+#define PI 3.1415926535897932384626433832795
 /**
  * @brief      Structure to store a 2D point
  */
@@ -42,7 +57,7 @@ struct Point {
   double _y;
 };
 /**
- * @brief      Class for robot simulator.
+ * @brief      Class for RobotSimulator.
  */
 class RobotSimulator {
   public:
@@ -86,14 +101,14 @@ class RobotSimulator {
     /**
      * @brief      Returns the number of obstacles.
      *
-     * @return     The number obstacles.
+     * @return     The number obstacles in the environment.
      */
     int GetNrObstacles(void) const {
       return _circles.size() / 3 - 1;
     }
 
     /**
-     * @brief      Returns the robot x coordinate.
+     * @brief      Returns the robot's x coordinate.
      *
      * @return     The robot x.
      */
@@ -101,7 +116,7 @@ class RobotSimulator {
       return _robot._x;
     }
     /**
-     * @brief      Returns the robot y coordinate.
+     * @brief      Returns the robot's y coordinate.
      *
      * @return     The robot y.
      */
@@ -109,12 +124,52 @@ class RobotSimulator {
       return _robot._y;
     }
     /**
-     * @brief      Returns the robot angle.
+     * @brief      Returns the robot's angle of orientation.
      *
      * @return     The robot theta.
      */
     double GetRobotTheta(void) {
       return _robot._theta;
+    }
+    /**
+     * @brief      Returns the robot length.
+     *
+     * @return     The robot size x.
+     */
+    double GetRobotSizeX(void) {
+      return _robot._sizeX;
+    }
+    /**
+     * @brief      Returns the robot height.
+     *
+     * @return     The robot size y.
+     */
+    double GetRobotSizeY(void) {
+      return _robot._sizeY;
+    }
+    /**
+     * @brief      Gets the robot speed.
+     *
+     * @return     The robot speed.
+     */
+    double GetRobotSpeed(void) {
+      return _robot._maxSpeed;
+    }
+    /**
+     * @brief      Gets the robot accel.
+     *
+     * @return     The robot accel.
+     */
+    double GetRobotAccel(void) {
+      return _robot._maxAccel;
+    }
+    /**
+     * @brief      Gets the robot turn.
+     *
+     * @return     The robot turn.
+     */
+    double GetRobotTurn(void) {
+      return _robot._maxTurn;
     }
     /**
      * @brief      Returns the robot vertices.
@@ -132,30 +187,62 @@ class RobotSimulator {
     std::vector<double> GetObstacles(void) const {
       return _circles;
     }
-
-
-
     /**
-     * @brief      Determines if it has robot reached goal.
-     *
-     * @return     True if has robot reached goal, False otherwise.
-     */
+         * @brief      Determines if it has robot reached goal.
+         *
+         * @return     True if has robot reached goal, False otherwise.
+         */
     bool HasRobotReachedGoal(void);
+    /**
+     * @brief      Determines if given point lies in the obstacle region
+     *
+     * @param[in]  x     x coordinate of POI
+     * @param[in]  y     y coordinate of POI
+     *
+     * @return     True if colliding, False otherwise.
+     */
+    bool isColliding(const double x, const double y);
 
+
+    struct Robot {
+      std::vector<double> _initVertices; /**< Initial Robot vertices. */
+      std::vector<double> _currVertices; /**< Current Robot vertices. */
+      double              _x; /**< Robot position along X axis. */
+      double              _y;   /**< Robot position along Y axis. */
+      double              _theta;   /**< Robot orientation. */
+      double              _sizeX;  /**< Robot Length. */
+      double              _sizeY;   /**< Robot height. */
+      double              _maxSpeed;  /**< Maximum safe speed for the Robot. */
+      double              _maxAccel; /**< Maximum safe acceleration for the Robot. */
+      double              _maxTurn; /**< Maximum safe turning angle for the Robot. */
+    };
+    /**
+     * @brief      Adds changes to robot configuration.
+     *
+     * @param[in]  dx      move along x axis by dx
+     * @param[in]  dy      move along y axis by dy
+     * @param[in]  dtheta  rotate by  dtheta
+     * @return none
+     */
+    void AddToRobotConfiguration(const double dx, const double dy,
+                                 const double dtheta);
+    /**
+     * @brief      Renders robot corners for display
+     */
+    void RenderRobot();
 
   private:
-    void InitializeRobot();
-    
+    /**
+     * @brief      { function_description }
+     *
+     * @param[in]  _R    { parameter_description }
+     */
+    void UpdateRobotVertices(struct Robot _R);
+
     /**
      * @brief      Structure to store Robot information
      */
-    struct Robot {
-      std::vector<double> _initVertices;
-      std::vector<double> _currVertices;
-      double              _x;
-      double              _y;
-      double              _theta;
-    };
+
 
     Robot _robot;
 };

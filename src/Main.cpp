@@ -25,16 +25,29 @@
  *
  *
  *
- *  Program: Potentail field Path Planning in C++
+ *  Program: Potential field Path Planning in C++
  *
  */
+/**
+ *  @file Main.cpp
+ *  @brief Initial file of path planner program
+ *
+ *  This file contains path planner's
+ *  main() function. All GUI functions are implemented here.
+ *
+ *
+ *
+ *
+ *  @author Banuprathap Anandan
+ *  @date   03/14/2017
+*/
 #include <GL/glut.h>
 #include <Actor.hpp>
 #include <Planner.hpp>
-#define PI 3.1415926535897932384626433832795
 
+RobotPlanner   *_planner;
 RobotSimulator _simulator;
-RobotPlanner _planner;
+
 int _selectedCircle;
 bool _plan;
 /**
@@ -55,6 +68,8 @@ void DrawCircle(const double cx, const double cy, const double r) {
 
 /**
  * @brief      Handle for display call back
+ * @param  none
+ * @return none
  */
 void HandleEventOnDisplay(void) {
   std::vector<double> vert = _simulator.GetRobotVertices();
@@ -100,12 +115,14 @@ void HandleEventOnMouseClick(const int whichBtn, const double mousePosX,
   if (_selectedCircle == -1) {
     _simulator._circles.push_back(mousePosX);
     _simulator._circles.push_back(mousePosY);
-    _simulator._circles.push_back(20.0);
+    _simulator._circles.push_back(40.0);
   }
 }
 
 /**
  * @brief      Call back for an event on display
+ * @param  none
+ * @return none
  */
 void CallbackEventOnDisplay(void) {
   glClearColor(1.0f, 1.0f, 1.0f, 0.0f);
@@ -117,7 +134,7 @@ void CallbackEventOnDisplay(void) {
   glMatrixMode(GL_PROJECTION);
   glLoadIdentity();
   //  glOrtho(-22, 22, -14, 14, -1.0, 1.0);
-  glOrtho(0.0f, 1000, 600, 0.0f, 0.0f, 1.0f);
+  glOrtho(0.0f, 500, 500, 0.0f, 0.0f, 1.0f);
   glMatrixMode(GL_MODELVIEW);
   glLoadIdentity();
   HandleEventOnDisplay();
@@ -134,7 +151,7 @@ void CallbackEventOnDisplay(void) {
 void CallbackEventOnMouseClick(int whichBtn, int state, int mousePosX,
                                int mousePosY) {
   if (state == GLUT_DOWN) {
-    std::cout << mousePosX << "\t" << mousePosY << std::endl;
+    //  std::cout << mousePosX << "\t" << mousePosY << std::endl;
     HandleEventOnMouseClick(whichBtn, mousePosX , mousePosY);
     glutPostRedisplay();
   }
@@ -152,14 +169,30 @@ void CallbackEventOnMouseMove(int mousePosX, int mousePosY) {
   }
   glutPostRedisplay();
 }
-
+/**
+ * @brief      { function_description }
+ * @param  none
+ * @return none
+ */
+void HandleEventOnTimer(void) {
+  if (_plan && !_simulator.HasRobotReachedGoal()) {
+    RobotMove move = _planner->NextMove();
+    _simulator.AddToRobotConfiguration(move.m_dx, move.m_dy, move.m_dtheta);
+  }
+}
 /**
  * @brief      Call back for an event on timer overflow, for animation.
  *
  * @param[in]  dummy  I still don't understand the use of this, but it's required
  */
 void CallbackEventOnTimer(int dummy) {
+  HandleEventOnTimer();
+  glutTimerFunc(150, CallbackEventOnTimer, dummy);
+  glutPostRedisplay();
 }
+
+
+
 
 /**
  * @brief      Call back for an event on keyboard press
@@ -176,12 +209,22 @@ void CallbackEventOnKeyPress(const unsigned char key, const int mousePosX,
     exit(0);
   case 's':
     _plan = !_plan;
+    /*
+    for (int i = 3; i < _simulator._circles.size(); i += 3) {
+      const double _x = _simulator._circles[i];
+      const double _y = _simulator._circles[i + 1];
+      const double _r  = _simulator._circles[i + 2];
+      std::cout << _x << "\t" << _y << std::endl;
+    }
+    */
     break;
   }
 }
 
 /**
  * @brief      Main display loop
+ * @param  none
+ * @return nones
  */
 void DisplayLoop(void) {
 //  create window
@@ -189,7 +232,7 @@ void DisplayLoop(void) {
   static char  *args = const_cast<char*>("args");
   glutInit(&argc, &args);
   glutInitDisplayMode(GLUT_RGBA | GLUT_DOUBLE);
-  glutInitWindowSize(1000, 600);
+  glutInitWindowSize(500, 500);
   glutInitWindowPosition(100, 100);
   glutCreateWindow("Potenial Field Path Planner");
   // register callback functions
@@ -199,22 +242,25 @@ void DisplayLoop(void) {
   // Callback for mouse cursor movement
   glutMotionFunc(CallbackEventOnMouseMove);
   // Callback for timer. To refresh the window
-  glutTimerFunc(15, CallbackEventOnTimer, 0);
+  glutTimerFunc(150, CallbackEventOnTimer, 0);
   glutIdleFunc(NULL);
   glutKeyboardFunc(CallbackEventOnKeyPress);
   // enter GLUT event processing cycle
   glutMainLoop();
 }
 
+
 /**
- * @brief      Main function in the program. Execution starts here.
+ * @brief      program entrypoint
  *
  * @param[in]  argc  The argc
  * @param      argv  The argv
  *
- * @return     returns 0 upon sucessful execution
+ * @return     integer 0 upon exit success \n
+             integer -1 upon exit failure
  */
 int main(int argc, char **argv) {
+  _planner = new RobotPlanner(&_simulator);
   DisplayLoop();
   return 0;
 }
