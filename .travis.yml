@@ -1,12 +1,7 @@
 sudo: required
 dist: trusty
 
-before_install:
-  - sudo apt-get update 
-  - sudo apt-get install build-essential
-  - sudo apt-get install freeglut3-dev
-  - sudo apt-get install libxmu-dev libxi-dev  
-  - pip install --user cpp-coveralls
+
 # Enable C++ support
 # Modern cpp settings from
 #  http://genbattle.bitbucket.org/blog/2016/01/17/c++-travis-ci/
@@ -26,31 +21,24 @@ matrix:
             - cmake-data
       env: COMPILER=g++-5
 
+before_install:
+  - sudo apt-get update 
+  - sudo apt-get install build-essential
+  - sudo apt-get install freeglut3-dev
+  - sudo apt-get install libxmu-dev libxi-dev  
+  - pip install --user cpp-coveralls
 
-# Compiler selection
-compiler:
-  - gcc
   
 install:
-  - DEPS_DIR="${TRAVIS_BUILD_DIR}/deps"
-  - mkdir ${DEPS_DIR} && cd ${DEPS_DIR}
-  
-  - |
-    if [[ "${TRAVIS_OS_NAME}" == "linux" ]]; then
-      CMAKE_URL="http://www.cmake.org/files/v3.3/cmake-3.3.2-Linux-x86_64.tar.gz"
-      mkdir cmake && travis_retry wget --no-check-certificate --quiet -O - ${CMAKE_URL} | tar --strip-components=1 -xz -C cmake
-      export PATH=${DEPS_DIR}/cmake/bin:${PATH}
-    fi
-  
-  # Go to the Root directory  
-  - cd ..
-
+  - sudo apt-get install -y -qq lcov
 # Build steps
 script:
   - export CXX=$COMPILER;
   - mkdir build
   - cd build
-  - ${DEPS_DIR}/cmake/bin/cmake .. && make
+  - ${DEPS_DIR}/cmake/bin/cmake -DCOVERAGE=ON -DCMAKE_BUILD_TYPE=Debug ../  
+  - make
+  - make code_coverage
   - test/cpp-test
 
 after_success:
