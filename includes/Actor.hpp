@@ -61,7 +61,7 @@ struct Point {
  * @brief      Class for RobotSimulator.
  */
 class RobotSimulator {
-  public:
+ public:
     /**
      * A vector to store obstacles information
      */
@@ -203,8 +203,9 @@ class RobotSimulator {
      * @return     True if colliding, False otherwise.
      */
     bool isColliding(const double x, const double y);
-
-
+    /**
+     * @brief      Structure to store robot information
+     */
     struct Robot {
       std::vector<double> _initVertices; /**< Initial Robot vertices. */
       std::vector<double> _currVertices; /**< Current Robot vertices. */
@@ -214,8 +215,8 @@ class RobotSimulator {
       double              _sizeX;  /**< Robot Length. */
       double              _sizeY;   /**< Robot height. */
       double              _maxSpeed;  /**< Maximum safe speed for the Robot. */
-      double              _maxAccel; /**< Maximum safe acceleration for the Robot. */
-      double              _maxTurn; /**< Maximum safe turning angle for the Robot. */
+      double        _maxAccel; /**< Maximum safe acceleration for the Robot. */
+      double        _maxTurn; /**< Maximum safe turning angle for the Robot. */
     };
     /**
      * @brief      Adds changes to robot configuration.
@@ -232,13 +233,7 @@ class RobotSimulator {
      */
     void RenderRobot();
 
-  private:
-
-    /**
-     * @brief      Structure to store Robot information
-     */
-
-
+ private:
     Robot _robot;
 };
 

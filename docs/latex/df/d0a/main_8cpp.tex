@@ -3,38 +3,41 @@
 }
 
 
-Runs test cases for P\-I\-D controller.  
+main program to run tests  
 
 
-{\ttfamily \#include \char`\"{}test.\-hpp\char`\"{}}\\*
+{\ttfamily \#include $<$gtest/gtest.\-h$>$}\\*
 \subsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
-int \hyperlink{main_8cpp_ae66f6b31b5ad750f1fe042a706a4e3d4}{main} ()
+int \hyperlink{main_8cpp_a3c04138a5bfe5d72780bb7e82a18e627}{main} (int argc, char $\ast$$\ast$argv)
 \end{DoxyCompactItemize}
 
 
 \subsection{Detailed Description}
-Runs test cases for P\-I\-D controller. Code was written as part of Home\-Work 4 \begin{DoxyAuthor}{Author}
+main program to run tests This program performs all test cases defined in \hyperlink{test_8cpp}{test.\-cpp}
+
+\begin{DoxyAuthor}{Author}
 Banuprathap Anandan 
 \end{DoxyAuthor}
-\begin{DoxyVersion}{Version}
-1.\-0.\-1 
-\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+03/14/2017 
+\end{DoxyDate}
 
 
 \subsection{Function Documentation}
-\hypertarget{main_8cpp_ae66f6b31b5ad750f1fe042a706a4e3d4}{\index{main.\-cpp@{main.\-cpp}!main@{main}}
+\hypertarget{main_8cpp_a3c04138a5bfe5d72780bb7e82a18e627}{\index{main.\-cpp@{main.\-cpp}!main@{main}}
 \index{main@{main}!main.cpp@{main.\-cpp}}
 \subsubsection[{main}]{\setlength{\rightskip}{0pt plus 5cm}int main (
 \begin{DoxyParamCaption}
-{}
+\item[{int}]{argc, }
+\item[{char $\ast$$\ast$}]{argv}
 \end{DoxyParamCaption}
-)}}\label{main_8cpp_ae66f6b31b5ad750f1fe042a706a4e3d4}
+)}}\label{main_8cpp_a3c04138a5bfe5d72780bb7e82a18e627}
 
 \begin{DoxyCode}
-12            \{
-13     
-14 
-15     \textcolor{keywordflow}{return} 0;
-16 \}\end{DoxyCode}
+44                                 \{
+45   ::testing::InitGoogleTest(&argc, argv);
+46   \textcolor{keywordflow}{return} RUN\_ALL\_TESTS();
+47 \}
+\end{DoxyCode}

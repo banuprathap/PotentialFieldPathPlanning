@@ -1,6 +1,6 @@
 **/LaTeX/
 *~
-*.txt
+
 **/build/
-!CMakeLists.txt
+
 *.dia

@@ -14,7 +14,7 @@ Class for \hyperlink{classRobotSimulator}{Robot\-Simulator}.
 \begin{DoxyCompactItemize}
 \item 
 struct \hyperlink{structRobotSimulator_1_1Robot}{Robot}
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Structure to store robot information. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
@@ -57,7 +57,9 @@ bool \hyperlink{classRobotSimulator_a2a4c5f6ce1c2388f02f9006811e6b6e0}{Has\-Robo
 bool \hyperlink{classRobotSimulator_a564d79ead199c034841eda1b3ebebfcd}{is\-Colliding} (const double x, const double y)
 \begin{DoxyCompactList}\small\item\em Determines if given point lies in the obstacle region. \end{DoxyCompactList}\item 
 void \hyperlink{classRobotSimulator_a33390e3aa4106ca2e2ee8dd414bdcaea}{Add\-To\-Robot\-Configuration} (const double dx, const double dy, const double dtheta)
-\begin{DoxyCompactList}\small\item\em Adds changes to robot configuration. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Adds changes to robot configuration. \end{DoxyCompactList}\item 
+void \hyperlink{classRobotSimulator_a121de184441f83f4493ba77e78b0b78f}{Render\-Robot} ()
+\begin{DoxyCompactList}\small\item\em Renders robot corners for display. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsection*{Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
@@ -105,21 +107,43 @@ $<$ Maximum safe turning angle for the robot.
 55                                    \{
 56   \textcolor{comment}{// initialize robot position}
 57   \_robot.\hyperlink{structRobotSimulator_1_1Robot_ab86590932e31a8a7aad72e0173b8c0e8}{\_x} = \_robot.\hyperlink{structRobotSimulator_1_1Robot_a0b386e0cb1fcdbb0ed0fd0a42d362165}{\_y} = 50; 
-58   \_robot.\hyperlink{structRobotSimulator_1_1Robot_afc7eddc29b81662393361dc8ca24806a}{\_sizeX} = 10; 
-59   \_robot.\hyperlink{structRobotSimulator_1_1Robot_a15d2779576df86d973c42c12c1f3c2ba}{\_sizeY} = 10; 
+58   \_robot.\hyperlink{structRobotSimulator_1_1Robot_afc7eddc29b81662393361dc8ca24806a}{\_sizeX} = 20; 
+59   \_robot.\hyperlink{structRobotSimulator_1_1Robot_a15d2779576df86d973c42c12c1f3c2ba}{\_sizeY} = 20; 
 60   \_robot.\hyperlink{structRobotSimulator_1_1Robot_a9c91ff0ff4514da0c9cd56f45064032e}{\_theta} = 0;   
-61   \_robot.\hyperlink{structRobotSimulator_1_1Robot_a25f9d011ee0c6952950b63405286438b}{\_maxSpeed} = 10;  
-62   \_robot.\hyperlink{structRobotSimulator_1_1Robot_a34048992e382edb88e15cbee3741e7ed}{\_maxAccel} = 10;  
+61   \_robot.\hyperlink{structRobotSimulator_1_1Robot_a25f9d011ee0c6952950b63405286438b}{\_maxSpeed} = 0.75;  
+62   \_robot.\hyperlink{structRobotSimulator_1_1Robot_a34048992e382edb88e15cbee3741e7ed}{\_maxAccel} = 5;  
 63   \_robot.\hyperlink{structRobotSimulator_1_1Robot_af9967fd4b2e74e67e5b9d3bc45fd30d3}{\_maxTurn} = 10 * \hyperlink{Actor_8hpp_a598a3330b3c21701223ee0ca14316eca}{PI} /
 64                     180;  
-65   UpdateRobotVertices(\_robot);
-66   \textcolor{comment}{// initialize goal X}
-67   \hyperlink{classRobotSimulator_a3ce83e536763d1892fb099ba110be183}{\_circles}.push\_back(300);
-68   \textcolor{comment}{// initialize goal Y}
-69   \hyperlink{classRobotSimulator_a3ce83e536763d1892fb099ba110be183}{\_circles}.push\_back(300);
-70   \textcolor{comment}{// initialize goal Radius}
-71   \hyperlink{classRobotSimulator_a3ce83e536763d1892fb099ba110be183}{\_circles}.push\_back(30.0);
-72 \}
+65   \textcolor{keywordtype}{double} halfDiag = sqrt(\_robot.\hyperlink{structRobotSimulator_1_1Robot_afc7eddc29b81662393361dc8ca24806a}{\_sizeX} * \_robot.\hyperlink{structRobotSimulator_1_1Robot_afc7eddc29b81662393361dc8ca24806a}{\_sizeX} + \_robot.
+      \hyperlink{structRobotSimulator_1_1Robot_a15d2779576df86d973c42c12c1f3c2ba}{\_sizeY} *
+66                          \_robot.\hyperlink{structRobotSimulator_1_1Robot_a15d2779576df86d973c42c12c1f3c2ba}{\_sizeY}) / 2;
+67   \_robot.\hyperlink{structRobotSimulator_1_1Robot_acc4b3b442e3739589a5b7a3597988df2}{\_currVertices}.push\_back(\_robot.\hyperlink{structRobotSimulator_1_1Robot_ab86590932e31a8a7aad72e0173b8c0e8}{\_x} + halfDiag * cos(
+68                                    \_robot.\hyperlink{structRobotSimulator_1_1Robot_a9c91ff0ff4514da0c9cd56f45064032e}{\_theta} - \hyperlink{Actor_8hpp_a598a3330b3c21701223ee0ca14316eca}{PI} / 4));
+69   \_robot.\hyperlink{structRobotSimulator_1_1Robot_acc4b3b442e3739589a5b7a3597988df2}{\_currVertices}.push\_back(\_robot.\hyperlink{structRobotSimulator_1_1Robot_a0b386e0cb1fcdbb0ed0fd0a42d362165}{\_y} + halfDiag * sin(
+70                                    \_robot.\hyperlink{structRobotSimulator_1_1Robot_a9c91ff0ff4514da0c9cd56f45064032e}{\_theta} - \hyperlink{Actor_8hpp_a598a3330b3c21701223ee0ca14316eca}{PI} / 4));
+71   \_robot.\hyperlink{structRobotSimulator_1_1Robot_acc4b3b442e3739589a5b7a3597988df2}{\_currVertices}.push\_back(\_robot.\hyperlink{structRobotSimulator_1_1Robot_ab86590932e31a8a7aad72e0173b8c0e8}{\_x} + halfDiag * cos(
+72                                    \_robot.\hyperlink{structRobotSimulator_1_1Robot_a9c91ff0ff4514da0c9cd56f45064032e}{\_theta} + \hyperlink{Actor_8hpp_a598a3330b3c21701223ee0ca14316eca}{PI} / 4));
+73   \_robot.\hyperlink{structRobotSimulator_1_1Robot_acc4b3b442e3739589a5b7a3597988df2}{\_currVertices}.push\_back(\_robot.\hyperlink{structRobotSimulator_1_1Robot_a0b386e0cb1fcdbb0ed0fd0a42d362165}{\_y} + halfDiag * sin(
+74                                    \_robot.\hyperlink{structRobotSimulator_1_1Robot_a9c91ff0ff4514da0c9cd56f45064032e}{\_theta} + \hyperlink{Actor_8hpp_a598a3330b3c21701223ee0ca14316eca}{PI} / 4));
+75   \_robot.\hyperlink{structRobotSimulator_1_1Robot_acc4b3b442e3739589a5b7a3597988df2}{\_currVertices}.push\_back(\_robot.\hyperlink{structRobotSimulator_1_1Robot_ab86590932e31a8a7aad72e0173b8c0e8}{\_x} + halfDiag * cos(
+76                                    \_robot.\hyperlink{structRobotSimulator_1_1Robot_a9c91ff0ff4514da0c9cd56f45064032e}{\_theta} - \hyperlink{Actor_8hpp_a598a3330b3c21701223ee0ca14316eca}{PI} / 4 +
+77                                    \hyperlink{Actor_8hpp_a598a3330b3c21701223ee0ca14316eca}{PI}));
+78   \_robot.\hyperlink{structRobotSimulator_1_1Robot_acc4b3b442e3739589a5b7a3597988df2}{\_currVertices}.push\_back(\_robot.\hyperlink{structRobotSimulator_1_1Robot_a0b386e0cb1fcdbb0ed0fd0a42d362165}{\_y} + halfDiag * sin(
+79                                    \_robot.\hyperlink{structRobotSimulator_1_1Robot_a9c91ff0ff4514da0c9cd56f45064032e}{\_theta} - \hyperlink{Actor_8hpp_a598a3330b3c21701223ee0ca14316eca}{PI} / 4 +
+80                                    \hyperlink{Actor_8hpp_a598a3330b3c21701223ee0ca14316eca}{PI}));
+81   \_robot.\hyperlink{structRobotSimulator_1_1Robot_acc4b3b442e3739589a5b7a3597988df2}{\_currVertices}.push\_back(\_robot.\hyperlink{structRobotSimulator_1_1Robot_ab86590932e31a8a7aad72e0173b8c0e8}{\_x} + halfDiag * cos(
+82                                    \_robot.\hyperlink{structRobotSimulator_1_1Robot_a9c91ff0ff4514da0c9cd56f45064032e}{\_theta} + \hyperlink{Actor_8hpp_a598a3330b3c21701223ee0ca14316eca}{PI} / 4 +
+83                                    \hyperlink{Actor_8hpp_a598a3330b3c21701223ee0ca14316eca}{PI}));
+84   \_robot.\hyperlink{structRobotSimulator_1_1Robot_acc4b3b442e3739589a5b7a3597988df2}{\_currVertices}.push\_back(\_robot.\hyperlink{structRobotSimulator_1_1Robot_a0b386e0cb1fcdbb0ed0fd0a42d362165}{\_y} + halfDiag * sin(
+85                                    \_robot.\hyperlink{structRobotSimulator_1_1Robot_a9c91ff0ff4514da0c9cd56f45064032e}{\_theta} + \hyperlink{Actor_8hpp_a598a3330b3c21701223ee0ca14316eca}{PI} / 4 +
+86                                    \hyperlink{Actor_8hpp_a598a3330b3c21701223ee0ca14316eca}{PI}));
+87   \textcolor{comment}{// initialize goal X}
+88   \hyperlink{classRobotSimulator_a3ce83e536763d1892fb099ba110be183}{\_circles}.push\_back(300);
+89   \textcolor{comment}{// initialize goal Y}
+90   \hyperlink{classRobotSimulator_a3ce83e536763d1892fb099ba110be183}{\_circles}.push\_back(30);
+91   \textcolor{comment}{// initialize goal Radius}
+92   \hyperlink{classRobotSimulator_a3ce83e536763d1892fb099ba110be183}{\_circles}.push\_back(30.0);
+93 \}
 \end{DoxyCode}
 \hypertarget{classRobotSimulator_a409ed4b76d901a102687a87933f512b9}{\index{Robot\-Simulator@{Robot\-Simulator}!$\sim$\-Robot\-Simulator@{$\sim$\-Robot\-Simulator}}
 \index{$\sim$\-Robot\-Simulator@{$\sim$\-Robot\-Simulator}!RobotSimulator@{Robot\-Simulator}}
@@ -142,8 +166,8 @@ none
 \end{DoxyReturn}
 
 \begin{DoxyCode}
-78                                     \{
-79 \}
+99                                     \{
+100 \}
 \end{DoxyCode}
 
 
@@ -175,22 +199,12 @@ none
 \end{DoxyReturn}
 
 \begin{DoxyCode}
-177                                           \{
-178   \_robot.\hyperlink{structRobotSimulator_1_1Robot_ab86590932e31a8a7aad72e0173b8c0e8}{\_x} += dx;
-179   \_robot.\hyperlink{structRobotSimulator_1_1Robot_a0b386e0cb1fcdbb0ed0fd0a42d362165}{\_y} += dy;
-180   \_robot.\hyperlink{structRobotSimulator_1_1Robot_a9c91ff0ff4514da0c9cd56f45064032e}{\_theta} += dtheta;
-181   \textcolor{keyword}{const} \textcolor{keywordtype}{double} ctheta = cos(\_robot.\hyperlink{structRobotSimulator_1_1Robot_a9c91ff0ff4514da0c9cd56f45064032e}{\_theta});
-182   \textcolor{keyword}{const} \textcolor{keywordtype}{double} stheta = sin(\_robot.\hyperlink{structRobotSimulator_1_1Robot_a9c91ff0ff4514da0c9cd56f45064032e}{\_theta});
-183   \textcolor{keyword}{const} \textcolor{keywordtype}{int}    n      = \_robot.\hyperlink{structRobotSimulator_1_1Robot_acc4b3b442e3739589a5b7a3597988df2}{\_currVertices}.size();
-184   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < n; i += 2)   \{
-185     \_robot.\hyperlink{structRobotSimulator_1_1Robot_acc4b3b442e3739589a5b7a3597988df2}{\_currVertices}[i] =
-186       ctheta * \_robot.\hyperlink{structRobotSimulator_1_1Robot_ab7ac2c4dd487006e5e563ad0341808fb}{\_initVertices}[i] -
-187       stheta * \_robot.\hyperlink{structRobotSimulator_1_1Robot_ab7ac2c4dd487006e5e563ad0341808fb}{\_initVertices}[i + 1] + \_robot.\hyperlink{structRobotSimulator_1_1Robot_ab86590932e31a8a7aad72e0173b8c0e8}{\_x};
-188     \_robot.\hyperlink{structRobotSimulator_1_1Robot_acc4b3b442e3739589a5b7a3597988df2}{\_currVertices}[i + 1] =
-189       stheta * \_robot.\hyperlink{structRobotSimulator_1_1Robot_ab7ac2c4dd487006e5e563ad0341808fb}{\_initVertices}[i] +
-190       ctheta * \_robot.\hyperlink{structRobotSimulator_1_1Robot_ab7ac2c4dd487006e5e563ad0341808fb}{\_initVertices}[i + 1] + \_robot.\hyperlink{structRobotSimulator_1_1Robot_a0b386e0cb1fcdbb0ed0fd0a42d362165}{\_y};
-191   \}
-192 \}
+155                                           \{
+156   \_robot.\hyperlink{structRobotSimulator_1_1Robot_ab86590932e31a8a7aad72e0173b8c0e8}{\_x} += dx;
+157   \_robot.\hyperlink{structRobotSimulator_1_1Robot_a0b386e0cb1fcdbb0ed0fd0a42d362165}{\_y} += dy;
+158   \_robot.\hyperlink{structRobotSimulator_1_1Robot_a9c91ff0ff4514da0c9cd56f45064032e}{\_theta} += dtheta;
+159   \hyperlink{classRobotSimulator_a121de184441f83f4493ba77e78b0b78f}{RenderRobot}();
+160 \}
 \end{DoxyCode}
 \hypertarget{classRobotSimulator_aeac39519c3c9672bd4e43d9e9a1233bd}{\index{Robot\-Simulator@{Robot\-Simulator}!Closest\-Point\-On\-Obstacle@{Closest\-Point\-On\-Obstacle}}
 \index{Closest\-Point\-On\-Obstacle@{Closest\-Point\-On\-Obstacle}!RobotSimulator@{Robot\-Simulator}}
@@ -205,33 +219,6 @@ none
 
 Returns closest point from (x,y) for a given i'th obstacle. 
 
-Returns closest point on the obstacle i, from given point.
-
-
-\begin{DoxyParams}[1]{Parameters}
-\mbox{\tt in}  & {\em i} & Obstacle number \\
-\hline
-\mbox{\tt in}  & {\em x} & x coordinate of the point of interest \\
-\hline
-\mbox{\tt in}  & {\em y} & y coordinate of the point of interest\\
-\hline
-\end{DoxyParams}
-\begin{DoxyReturn}{Returns}
-Returns a structure variable 
-\end{DoxyReturn}
-
-\begin{DoxyCode}
-91                     \{
-92   \textcolor{keyword}{const} \textcolor{keywordtype}{double} cx = \hyperlink{classRobotSimulator_a3ce83e536763d1892fb099ba110be183}{\_circles}[3 + 3 * i];
-93   \textcolor{keyword}{const} \textcolor{keywordtype}{double} cy = \hyperlink{classRobotSimulator_a3ce83e536763d1892fb099ba110be183}{\_circles}[4 + 3 * i];
-94   \textcolor{keyword}{const} \textcolor{keywordtype}{double} r  = \hyperlink{classRobotSimulator_a3ce83e536763d1892fb099ba110be183}{\_circles}[5 + 3 * i];
-95   \textcolor{keyword}{const} \textcolor{keywordtype}{double} d  = sqrt((cx - x) * (cx - x) + (cy - y) * (cy - y));
-96   \hyperlink{structPoint}{Point} p;
-97   p.\hyperlink{structPoint_a77b9bd094b57efb7c185fdb3fb781900}{\_x} = cx + r * (x - cx) / d;
-98   p.\hyperlink{structPoint_aa8be383c30dee092979999b523373658}{\_y} = cy + r * (y - cy) / d;
-99   \textcolor{keywordflow}{return} p;
-100 \}
-\end{DoxyCode}
 \hypertarget{classRobotSimulator_a7e26ec222d3524872e4e48f2188b385f}{\index{Robot\-Simulator@{Robot\-Simulator}!Get\-Goal\-Center\-X@{Get\-Goal\-Center\-X}}
 \index{Get\-Goal\-Center\-X@{Get\-Goal\-Center\-X}!RobotSimulator@{Robot\-Simulator}}
 \subsubsection[{Get\-Goal\-Center\-X}]{\setlength{\rightskip}{0pt plus 5cm}double Robot\-Simulator\-::\-Get\-Goal\-Center\-X (
@@ -248,9 +235,9 @@ The goal center x.
 \end{DoxyReturn}
 
 \begin{DoxyCode}
-77                                 \{
-78       \textcolor{keywordflow}{return} \hyperlink{classRobotSimulator_a3ce83e536763d1892fb099ba110be183}{\_circles}[0];
-79     \}
+78                                 \{
+79       \textcolor{keywordflow}{return} \hyperlink{classRobotSimulator_a3ce83e536763d1892fb099ba110be183}{\_circles}[0];
+80     \}
 \end{DoxyCode}
 \hypertarget{classRobotSimulator_a11ef47f5c24415d1ae2422de45969910}{\index{Robot\-Simulator@{Robot\-Simulator}!Get\-Goal\-Center\-Y@{Get\-Goal\-Center\-Y}}
 \index{Get\-Goal\-Center\-Y@{Get\-Goal\-Center\-Y}!RobotSimulator@{Robot\-Simulator}}
@@ -268,9 +255,9 @@ The goal center y.
 \end{DoxyReturn}
 
 \begin{DoxyCode}
-85                                 \{
-86       \textcolor{keywordflow}{return} \hyperlink{classRobotSimulator_a3ce83e536763d1892fb099ba110be183}{\_circles}[1];
-87     \}
+86                                 \{
+87       \textcolor{keywordflow}{return} \hyperlink{classRobotSimulator_a3ce83e536763d1892fb099ba110be183}{\_circles}[1];
+88     \}
 \end{DoxyCode}
 \hypertarget{classRobotSimulator_a69decfa495b2aa982bcb0b454e02a529}{\index{Robot\-Simulator@{Robot\-Simulator}!Get\-Goal\-Radius@{Get\-Goal\-Radius}}
 \index{Get\-Goal\-Radius@{Get\-Goal\-Radius}!RobotSimulator@{Robot\-Simulator}}
@@ -288,9 +275,9 @@ The goal radius.
 \end{DoxyReturn}
 
 \begin{DoxyCode}
-93                                 \{
-94       \textcolor{keywordflow}{return} \hyperlink{classRobotSimulator_a3ce83e536763d1892fb099ba110be183}{\_circles}[2];
-95     \}
+94                                 \{
+95       \textcolor{keywordflow}{return} \hyperlink{classRobotSimulator_a3ce83e536763d1892fb099ba110be183}{\_circles}[2];
+96     \}
 \end{DoxyCode}
 \hypertarget{classRobotSimulator_a5e2c13048d6e6c364019c07bf8bac220}{\index{Robot\-Simulator@{Robot\-Simulator}!Get\-Nr\-Obstacles@{Get\-Nr\-Obstacles}}
 \index{Get\-Nr\-Obstacles@{Get\-Nr\-Obstacles}!RobotSimulator@{Robot\-Simulator}}
@@ -308,9 +295,9 @@ The number obstacles in the environment.
 \end{DoxyReturn}
 
 \begin{DoxyCode}
-106                                    \{
-107       \textcolor{keywordflow}{return} \hyperlink{classRobotSimulator_a3ce83e536763d1892fb099ba110be183}{\_circles}.size() / 3 - 1;
-108     \}
+107                                    \{
+108       \textcolor{keywordflow}{return} \hyperlink{classRobotSimulator_a3ce83e536763d1892fb099ba110be183}{\_circles}.size() / 3 - 1;
+109     \}
 \end{DoxyCode}
 \hypertarget{classRobotSimulator_a28cb2c0a5c2b2f003def7fdcfa8971cf}{\index{Robot\-Simulator@{Robot\-Simulator}!Get\-Obstacles@{Get\-Obstacles}}
 \index{Get\-Obstacles@{Get\-Obstacles}!RobotSimulator@{Robot\-Simulator}}
@@ -328,9 +315,9 @@ The obstacles as a vector.
 \end{DoxyReturn}
 
 \begin{DoxyCode}
-187                                                \{
-188       \textcolor{keywordflow}{return} \hyperlink{classRobotSimulator_a3ce83e536763d1892fb099ba110be183}{\_circles};
-189     \}
+188                                                \{
+189       \textcolor{keywordflow}{return} \hyperlink{classRobotSimulator_a3ce83e536763d1892fb099ba110be183}{\_circles};
+190     \}
 \end{DoxyCode}
 \hypertarget{classRobotSimulator_a05fd185adb07605ab99da82a07028fb9}{\index{Robot\-Simulator@{Robot\-Simulator}!Get\-Robot\-Accel@{Get\-Robot\-Accel}}
 \index{Get\-Robot\-Accel@{Get\-Robot\-Accel}!RobotSimulator@{Robot\-Simulator}}
@@ -348,9 +335,9 @@ The robot accel.
 \end{DoxyReturn}
 
 \begin{DoxyCode}
-163                                \{
-164       \textcolor{keywordflow}{return} \_robot.\hyperlink{structRobotSimulator_1_1Robot_a34048992e382edb88e15cbee3741e7ed}{\_maxAccel};
-165     \}
+164                                \{
+165       \textcolor{keywordflow}{return} \_robot.\hyperlink{structRobotSimulator_1_1Robot_a34048992e382edb88e15cbee3741e7ed}{\_maxAccel};
+166     \}
 \end{DoxyCode}
 \hypertarget{classRobotSimulator_ace930a7f7cbef97b82c08629a3319b05}{\index{Robot\-Simulator@{Robot\-Simulator}!Get\-Robot\-Size\-X@{Get\-Robot\-Size\-X}}
 \index{Get\-Robot\-Size\-X@{Get\-Robot\-Size\-X}!RobotSimulator@{Robot\-Simulator}}
@@ -368,9 +355,9 @@ The robot size x.
 \end{DoxyReturn}
 
 \begin{DoxyCode}
-139                                \{
-140       \textcolor{keywordflow}{return} \_robot.\hyperlink{structRobotSimulator_1_1Robot_afc7eddc29b81662393361dc8ca24806a}{\_sizeX};
-141     \}
+140                                \{
+141       \textcolor{keywordflow}{return} \_robot.\hyperlink{structRobotSimulator_1_1Robot_afc7eddc29b81662393361dc8ca24806a}{\_sizeX};
+142     \}
 \end{DoxyCode}
 \hypertarget{classRobotSimulator_ae2efdc2fbc4793f205b2f4c10d4a301d}{\index{Robot\-Simulator@{Robot\-Simulator}!Get\-Robot\-Size\-Y@{Get\-Robot\-Size\-Y}}
 \index{Get\-Robot\-Size\-Y@{Get\-Robot\-Size\-Y}!RobotSimulator@{Robot\-Simulator}}
@@ -388,9 +375,9 @@ The robot size y.
 \end{DoxyReturn}
 
 \begin{DoxyCode}
-147                                \{
-148       \textcolor{keywordflow}{return} \_robot.\hyperlink{structRobotSimulator_1_1Robot_a15d2779576df86d973c42c12c1f3c2ba}{\_sizeY};
-149     \}
+148                                \{
+149       \textcolor{keywordflow}{return} \_robot.\hyperlink{structRobotSimulator_1_1Robot_a15d2779576df86d973c42c12c1f3c2ba}{\_sizeY};
+150     \}
 \end{DoxyCode}
 \hypertarget{classRobotSimulator_a660a5fac6b81c87528aba1d3f978b75f}{\index{Robot\-Simulator@{Robot\-Simulator}!Get\-Robot\-Speed@{Get\-Robot\-Speed}}
 \index{Get\-Robot\-Speed@{Get\-Robot\-Speed}!RobotSimulator@{Robot\-Simulator}}
@@ -408,9 +395,9 @@ The robot speed.
 \end{DoxyReturn}
 
 \begin{DoxyCode}
-155                                \{
-156       \textcolor{keywordflow}{return} \_robot.\hyperlink{structRobotSimulator_1_1Robot_a25f9d011ee0c6952950b63405286438b}{\_maxSpeed};
-157     \}
+156                                \{
+157       \textcolor{keywordflow}{return} \_robot.\hyperlink{structRobotSimulator_1_1Robot_a25f9d011ee0c6952950b63405286438b}{\_maxSpeed};
+158     \}
 \end{DoxyCode}
 \hypertarget{classRobotSimulator_ade2906f35ab46657323d354ba5c7ba50}{\index{Robot\-Simulator@{Robot\-Simulator}!Get\-Robot\-Theta@{Get\-Robot\-Theta}}
 \index{Get\-Robot\-Theta@{Get\-Robot\-Theta}!RobotSimulator@{Robot\-Simulator}}
@@ -428,9 +415,9 @@ The robot theta.
 \end{DoxyReturn}
 
 \begin{DoxyCode}
-131                                \{
-132       \textcolor{keywordflow}{return} \_robot.\hyperlink{structRobotSimulator_1_1Robot_a9c91ff0ff4514da0c9cd56f45064032e}{\_theta};
-133     \}
+132                                \{
+133       \textcolor{keywordflow}{return} \_robot.\hyperlink{structRobotSimulator_1_1Robot_a9c91ff0ff4514da0c9cd56f45064032e}{\_theta};
+134     \}
 \end{DoxyCode}
 \hypertarget{classRobotSimulator_a3ca3ad525b38e5f0b2ee556916058775}{\index{Robot\-Simulator@{Robot\-Simulator}!Get\-Robot\-Turn@{Get\-Robot\-Turn}}
 \index{Get\-Robot\-Turn@{Get\-Robot\-Turn}!RobotSimulator@{Robot\-Simulator}}
@@ -448,9 +435,9 @@ The robot turn.
 \end{DoxyReturn}
 
 \begin{DoxyCode}
-171                               \{
-172       \textcolor{keywordflow}{return} \_robot.\hyperlink{structRobotSimulator_1_1Robot_af9967fd4b2e74e67e5b9d3bc45fd30d3}{\_maxTurn};
-173     \}
+172                               \{
+173       \textcolor{keywordflow}{return} \_robot.\hyperlink{structRobotSimulator_1_1Robot_af9967fd4b2e74e67e5b9d3bc45fd30d3}{\_maxTurn};
+174     \}
 \end{DoxyCode}
 \hypertarget{classRobotSimulator_a46889428dbad6da706f451df859c5473}{\index{Robot\-Simulator@{Robot\-Simulator}!Get\-Robot\-Vertices@{Get\-Robot\-Vertices}}
 \index{Get\-Robot\-Vertices@{Get\-Robot\-Vertices}!RobotSimulator@{Robot\-Simulator}}
@@ -468,9 +455,9 @@ The robot vertices as a vector
 \end{DoxyReturn}
 
 \begin{DoxyCode}
-179                                                    \{
-180       \textcolor{keywordflow}{return} \_robot.\hyperlink{structRobotSimulator_1_1Robot_acc4b3b442e3739589a5b7a3597988df2}{\_currVertices};
-181     \}
+180                                                    \{
+181       \textcolor{keywordflow}{return} \_robot.\hyperlink{structRobotSimulator_1_1Robot_acc4b3b442e3739589a5b7a3597988df2}{\_currVertices};
+182     \}
 \end{DoxyCode}
 \hypertarget{classRobotSimulator_ac7bea18d767ec267142fbc72391ca89b}{\index{Robot\-Simulator@{Robot\-Simulator}!Get\-Robot\-X@{Get\-Robot\-X}}
 \index{Get\-Robot\-X@{Get\-Robot\-X}!RobotSimulator@{Robot\-Simulator}}
@@ -488,9 +475,9 @@ The robot x.
 \end{DoxyReturn}
 
 \begin{DoxyCode}
-115                            \{
-116       \textcolor{keywordflow}{return} \_robot.\hyperlink{structRobotSimulator_1_1Robot_ab86590932e31a8a7aad72e0173b8c0e8}{\_x};
-117     \}
+116                            \{
+117       \textcolor{keywordflow}{return} \_robot.\hyperlink{structRobotSimulator_1_1Robot_ab86590932e31a8a7aad72e0173b8c0e8}{\_x};
+118     \}
 \end{DoxyCode}
 \hypertarget{classRobotSimulator_a83e9060cfd1bab860ae56c80697d6de0}{\index{Robot\-Simulator@{Robot\-Simulator}!Get\-Robot\-Y@{Get\-Robot\-Y}}
 \index{Get\-Robot\-Y@{Get\-Robot\-Y}!RobotSimulator@{Robot\-Simulator}}
@@ -508,9 +495,9 @@ The robot y.
 \end{DoxyReturn}
 
 \begin{DoxyCode}
-123                            \{
-124       \textcolor{keywordflow}{return} \_robot.\hyperlink{structRobotSimulator_1_1Robot_a0b386e0cb1fcdbb0ed0fd0a42d362165}{\_y};
-125     \}
+124                            \{
+125       \textcolor{keywordflow}{return} \_robot.\hyperlink{structRobotSimulator_1_1Robot_a0b386e0cb1fcdbb0ed0fd0a42d362165}{\_y};
+126     \}
 \end{DoxyCode}
 \hypertarget{classRobotSimulator_a2a4c5f6ce1c2388f02f9006811e6b6e0}{\index{Robot\-Simulator@{Robot\-Simulator}!Has\-Robot\-Reached\-Goal@{Has\-Robot\-Reached\-Goal}}
 \index{Has\-Robot\-Reached\-Goal@{Has\-Robot\-Reached\-Goal}!RobotSimulator@{Robot\-Simulator}}
@@ -538,14 +525,15 @@ True if has robot reached goal, False otherwise.
 \end{DoxyReturn}
 
 \begin{DoxyCode}
-160                                              \{
-161   \textcolor{keyword}{const} \textcolor{keywordtype}{double} gx = \hyperlink{classRobotSimulator_a7e26ec222d3524872e4e48f2188b385f}{GetGoalCenterX}();
-162   \textcolor{keyword}{const} \textcolor{keywordtype}{double} gy = \hyperlink{classRobotSimulator_a11ef47f5c24415d1ae2422de45969910}{GetGoalCenterY}();
-163   \textcolor{keyword}{const} \textcolor{keywordtype}{double} rx = \hyperlink{classRobotSimulator_ac7bea18d767ec267142fbc72391ca89b}{GetRobotX}();
-164   \textcolor{keyword}{const} \textcolor{keywordtype}{double} ry = \hyperlink{classRobotSimulator_a83e9060cfd1bab860ae56c80697d6de0}{GetRobotY}();
-165   \textcolor{keywordflow}{return}
-166     sqrt((gx - rx) * (gx - rx) + (gy - ry) * (gy - ry)) <= \hyperlink{classRobotSimulator_a69decfa495b2aa982bcb0b454e02a529}{GetGoalRadius}();
-167 \}
+137                                              \{
+138   \textcolor{keyword}{const} \textcolor{keywordtype}{double} gx = \hyperlink{classRobotSimulator_a7e26ec222d3524872e4e48f2188b385f}{GetGoalCenterX}();
+139   \textcolor{keyword}{const} \textcolor{keywordtype}{double} gy = \hyperlink{classRobotSimulator_a11ef47f5c24415d1ae2422de45969910}{GetGoalCenterY}();
+140   \textcolor{keyword}{const} \textcolor{keywordtype}{double} rx = \hyperlink{classRobotSimulator_ac7bea18d767ec267142fbc72391ca89b}{GetRobotX}();
+141   \textcolor{keyword}{const} \textcolor{keywordtype}{double} ry = \hyperlink{classRobotSimulator_a83e9060cfd1bab860ae56c80697d6de0}{GetRobotY}();
+142   \textcolor{keywordflow}{return}
+143     sqrt((gx - rx) * (gx - rx) + (gy - ry) * (gy - ry)) <
+144     \hyperlink{classRobotSimulator_a69decfa495b2aa982bcb0b454e02a529}{GetGoalRadius}() - \hyperlink{classRobotSimulator_ace930a7f7cbef97b82c08629a3319b05}{GetRobotSizeX}() / 2;
+145 \}
 \end{DoxyCode}
 \hypertarget{classRobotSimulator_a564d79ead199c034841eda1b3ebebfcd}{\index{Robot\-Simulator@{Robot\-Simulator}!is\-Colliding@{is\-Colliding}}
 \index{is\-Colliding@{is\-Colliding}!RobotSimulator@{Robot\-Simulator}}
@@ -583,29 +571,67 @@ True if colliding, False otherwise.
 \end{DoxyReturn}
 
 \begin{DoxyCode}
-109                                                                \{
-110   \textcolor{keywordtype}{bool} col = \textcolor{keyword}{false};
-111   \textcolor{keywordflow}{if} ( x < 1 || x > 500 || y < 1 || y > 500 ) \{
-112     col = \textcolor{keyword}{true};
-113   \}
-114   \textcolor{keywordflow}{else} \{
-115     \textcolor{keywordtype}{double} sizeDiag = sqrt(\_robot.\hyperlink{structRobotSimulator_1_1Robot_afc7eddc29b81662393361dc8ca24806a}{\_sizeX} * \_robot.\hyperlink{structRobotSimulator_1_1Robot_afc7eddc29b81662393361dc8ca24806a}{\_sizeX} + \_robot.
+110                                                                \{
+111   \textcolor{keywordtype}{double} sizeDiag = sqrt(\_robot.\hyperlink{structRobotSimulator_1_1Robot_afc7eddc29b81662393361dc8ca24806a}{\_sizeX} * \_robot.\hyperlink{structRobotSimulator_1_1Robot_afc7eddc29b81662393361dc8ca24806a}{\_sizeX} + \_robot.
       \hyperlink{structRobotSimulator_1_1Robot_a15d2779576df86d973c42c12c1f3c2ba}{\_sizeY} *
-116                            \_robot.\hyperlink{structRobotSimulator_1_1Robot_a15d2779576df86d973c42c12c1f3c2ba}{\_sizeY});
-117     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 3; i < \hyperlink{classRobotSimulator_a3ce83e536763d1892fb099ba110be183}{\_circles}.size(); i += 3) \{
-118       \textcolor{keyword}{const} \textcolor{keywordtype}{double} \_x = \hyperlink{classRobotSimulator_a3ce83e536763d1892fb099ba110be183}{\_circles}[i];
-119       \textcolor{keyword}{const} \textcolor{keywordtype}{double} \_y = \hyperlink{classRobotSimulator_a3ce83e536763d1892fb099ba110be183}{\_circles}[i + 1];
-120       \textcolor{keyword}{const} \textcolor{keywordtype}{double} \_r = \hyperlink{classRobotSimulator_a3ce83e536763d1892fb099ba110be183}{\_circles}[i + 2];
-121       \textcolor{keyword}{const} \textcolor{keywordtype}{double} dist = sqrt((x - \_x) * (x - \_x) + (y - \_y) * (y - \_y));
-122       \textcolor{keywordflow}{if} (dist <= (\_r + sizeDiag)) \{
-123         col = \textcolor{keyword}{true};
-124         \textcolor{keywordflow}{break};
-125       \}
-126     \}
-127     \textcolor{keywordflow}{return} col;
+112                          \_robot.\hyperlink{structRobotSimulator_1_1Robot_a15d2779576df86d973c42c12c1f3c2ba}{\_sizeY}) / 2;
+113   \textcolor{keywordtype}{bool} col = \textcolor{keyword}{false};
+114   \textcolor{keywordflow}{if} ( x < 1 + sizeDiag || x > 500 - sizeDiag || y < 1 +  sizeDiag
+115        || y > 500 - sizeDiag ) \{
+116     col = \textcolor{keyword}{true};
+117   \} \textcolor{keywordflow}{else} \{
+118     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{size\_t} i = 3; i < \hyperlink{classRobotSimulator_a3ce83e536763d1892fb099ba110be183}{\_circles}.size(); i += 3) \{
+119       \textcolor{keyword}{const} \textcolor{keywordtype}{double} \_x = \hyperlink{classRobotSimulator_a3ce83e536763d1892fb099ba110be183}{\_circles}[i];
+120       \textcolor{keyword}{const} \textcolor{keywordtype}{double} \_y = \hyperlink{classRobotSimulator_a3ce83e536763d1892fb099ba110be183}{\_circles}[i + 1];
+121       \textcolor{keyword}{const} \textcolor{keywordtype}{double} \_r = \hyperlink{classRobotSimulator_a3ce83e536763d1892fb099ba110be183}{\_circles}[i + 2];
+122       \textcolor{keyword}{const} \textcolor{keywordtype}{double} dist = sqrt((x - \_x) * (x - \_x) + (y - \_y) * (y - \_y));
+123       \textcolor{keywordflow}{if} (dist < \_r + sizeDiag) \{
+124         col = \textcolor{keyword}{true};
+125         \textcolor{keywordflow}{break};
+126       \}
+127     \}
 128   \}
-129 \}
+129   \textcolor{keywordflow}{return} col;
+130 \}
 \end{DoxyCode}
+\hypertarget{classRobotSimulator_a121de184441f83f4493ba77e78b0b78f}{\index{Robot\-Simulator@{Robot\-Simulator}!Render\-Robot@{Render\-Robot}}
+\index{Render\-Robot@{Render\-Robot}!RobotSimulator@{Robot\-Simulator}}
+\subsubsection[{Render\-Robot}]{\setlength{\rightskip}{0pt plus 5cm}void Robot\-Simulator\-::\-Render\-Robot (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classRobotSimulator_a121de184441f83f4493ba77e78b0b78f}
+
+
+Renders robot corners for display. 
+
+Renders robot vertices for display. 
+\begin{DoxyCode}
+164                                  \{
+165   \textcolor{keywordtype}{double} halfDiag = sqrt(\_robot.\hyperlink{structRobotSimulator_1_1Robot_afc7eddc29b81662393361dc8ca24806a}{\_sizeX} * \_robot.\hyperlink{structRobotSimulator_1_1Robot_afc7eddc29b81662393361dc8ca24806a}{\_sizeX} + \_robot.
+      \hyperlink{structRobotSimulator_1_1Robot_a15d2779576df86d973c42c12c1f3c2ba}{\_sizeY} *
+166                          \_robot.\hyperlink{structRobotSimulator_1_1Robot_a15d2779576df86d973c42c12c1f3c2ba}{\_sizeY}) / 2;
+167   \_robot.\hyperlink{structRobotSimulator_1_1Robot_acc4b3b442e3739589a5b7a3597988df2}{\_currVertices}[0] = \_robot.\hyperlink{structRobotSimulator_1_1Robot_ab86590932e31a8a7aad72e0173b8c0e8}{\_x} + halfDiag * cos(\_robot.
+      \hyperlink{structRobotSimulator_1_1Robot_a9c91ff0ff4514da0c9cd56f45064032e}{\_theta} - \hyperlink{Actor_8hpp_a598a3330b3c21701223ee0ca14316eca}{PI} / 4);
+168   \_robot.\hyperlink{structRobotSimulator_1_1Robot_acc4b3b442e3739589a5b7a3597988df2}{\_currVertices}[1] = \_robot.\hyperlink{structRobotSimulator_1_1Robot_a0b386e0cb1fcdbb0ed0fd0a42d362165}{\_y} + halfDiag * sin(\_robot.
+      \hyperlink{structRobotSimulator_1_1Robot_a9c91ff0ff4514da0c9cd56f45064032e}{\_theta} - \hyperlink{Actor_8hpp_a598a3330b3c21701223ee0ca14316eca}{PI} / 4);
+169   \_robot.\hyperlink{structRobotSimulator_1_1Robot_acc4b3b442e3739589a5b7a3597988df2}{\_currVertices}[2] = \_robot.\hyperlink{structRobotSimulator_1_1Robot_ab86590932e31a8a7aad72e0173b8c0e8}{\_x} + halfDiag * cos(\_robot.
+      \hyperlink{structRobotSimulator_1_1Robot_a9c91ff0ff4514da0c9cd56f45064032e}{\_theta} + \hyperlink{Actor_8hpp_a598a3330b3c21701223ee0ca14316eca}{PI} / 4);
+170   \_robot.\hyperlink{structRobotSimulator_1_1Robot_acc4b3b442e3739589a5b7a3597988df2}{\_currVertices}[3] = \_robot.\hyperlink{structRobotSimulator_1_1Robot_a0b386e0cb1fcdbb0ed0fd0a42d362165}{\_y} + halfDiag * sin(\_robot.
+      \hyperlink{structRobotSimulator_1_1Robot_a9c91ff0ff4514da0c9cd56f45064032e}{\_theta} + \hyperlink{Actor_8hpp_a598a3330b3c21701223ee0ca14316eca}{PI} / 4);
+171   \_robot.\hyperlink{structRobotSimulator_1_1Robot_acc4b3b442e3739589a5b7a3597988df2}{\_currVertices}[4] = \_robot.\hyperlink{structRobotSimulator_1_1Robot_ab86590932e31a8a7aad72e0173b8c0e8}{\_x} + halfDiag * cos(\_robot.
+      \hyperlink{structRobotSimulator_1_1Robot_a9c91ff0ff4514da0c9cd56f45064032e}{\_theta} - \hyperlink{Actor_8hpp_a598a3330b3c21701223ee0ca14316eca}{PI} / 4 +
+172                             \hyperlink{Actor_8hpp_a598a3330b3c21701223ee0ca14316eca}{PI});
+173   \_robot.\hyperlink{structRobotSimulator_1_1Robot_acc4b3b442e3739589a5b7a3597988df2}{\_currVertices}[5] = \_robot.\hyperlink{structRobotSimulator_1_1Robot_a0b386e0cb1fcdbb0ed0fd0a42d362165}{\_y} + halfDiag * sin(\_robot.
+      \hyperlink{structRobotSimulator_1_1Robot_a9c91ff0ff4514da0c9cd56f45064032e}{\_theta} - \hyperlink{Actor_8hpp_a598a3330b3c21701223ee0ca14316eca}{PI} / 4 +
+174                             \hyperlink{Actor_8hpp_a598a3330b3c21701223ee0ca14316eca}{PI});
+175   \_robot.\hyperlink{structRobotSimulator_1_1Robot_acc4b3b442e3739589a5b7a3597988df2}{\_currVertices}[6] = \_robot.\hyperlink{structRobotSimulator_1_1Robot_ab86590932e31a8a7aad72e0173b8c0e8}{\_x} + halfDiag * cos(\_robot.
+      \hyperlink{structRobotSimulator_1_1Robot_a9c91ff0ff4514da0c9cd56f45064032e}{\_theta} + \hyperlink{Actor_8hpp_a598a3330b3c21701223ee0ca14316eca}{PI} / 4 +
+176                             \hyperlink{Actor_8hpp_a598a3330b3c21701223ee0ca14316eca}{PI});
+177   \_robot.\hyperlink{structRobotSimulator_1_1Robot_acc4b3b442e3739589a5b7a3597988df2}{\_currVertices}[7] = \_robot.\hyperlink{structRobotSimulator_1_1Robot_a0b386e0cb1fcdbb0ed0fd0a42d362165}{\_y} + halfDiag * sin(\_robot.
+      \hyperlink{structRobotSimulator_1_1Robot_a9c91ff0ff4514da0c9cd56f45064032e}{\_theta} + \hyperlink{Actor_8hpp_a598a3330b3c21701223ee0ca14316eca}{PI} / 4 +
+178                             \hyperlink{Actor_8hpp_a598a3330b3c21701223ee0ca14316eca}{PI});
+179 \}\end{DoxyCode}
 
 
 \subsection{Member Data Documentation}

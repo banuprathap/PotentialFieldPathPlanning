@@ -6,10 +6,21 @@
 Unit test for path planner project.  
 
 
-{\ttfamily \#include $<$tuple$>$}\\*
 {\ttfamily \#include $<$gtest/gtest.\-h$>$}\\*
-{\ttfamily \#include $<$test.\-hpp$>$}\\*
-{\ttfamily \#include $<$assert.\-h$>$}\\*
+{\ttfamily \#include $<$Planner.\-hpp$>$}\\*
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{test_8cpp_a0f3cfca1680e60ef81ab687b32be8f53}{T\-E\-S\-T} (No\-Obstacle\-Collision\-Test, Collide)
+\begin{DoxyCompactList}\small\item\em Check if collision test works. This method tests for case when there are no obstacles and robot lies outside the grid. \end{DoxyCompactList}\item 
+\hyperlink{test_8cpp_a98d5cfb80e5b5018743ced3b3951c73b}{T\-E\-S\-T} (No\-Obstacle\-Collision\-Test, Not\-Collide)
+\begin{DoxyCompactList}\small\item\em Check if collision test works. This method tests for case when there are no obstacles and robot lies inside the grid. \end{DoxyCompactList}\item 
+\hyperlink{test_8cpp_af1a79cf9637e090c541a6c756662d8c5}{T\-E\-S\-T} (Obstacle\-Collision\-Test, Collide)
+\begin{DoxyCompactList}\small\item\em Check if collision test works. This method tests for case when there are obstacles and robot lies inside the obstacle region. \end{DoxyCompactList}\item 
+\hyperlink{test_8cpp_a2b81994b38068b5c66ea1b8096e5719e}{T\-E\-S\-T} (Reached\-Goal, Not\-Reach)
+\begin{DoxyCompactList}\small\item\em Check if Has\-Robot\-Reached\-Goal() function works. This method tests for the case when robot lies outside the goal region. \end{DoxyCompactList}\item 
+\hyperlink{test_8cpp_a5d6454bc7bfec80afe305cf9dead11d8}{T\-E\-S\-T} (Reached\-Goal, Reach)
+\begin{DoxyCompactList}\small\item\em Check if Has\-Robot\-Reached\-Goal() function works. This method tests for the case when robot lies inside the goal region. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \subsection{Detailed Description}
@@ -21,3 +32,120 @@ Banuprathap Anandan
 \begin{DoxyVersion}{Version}
 1.\-0.\-1 
 \end{DoxyVersion}
+
+
+\subsection{Function Documentation}
+\hypertarget{test_8cpp_a0f3cfca1680e60ef81ab687b32be8f53}{\index{test.\-cpp@{test.\-cpp}!T\-E\-S\-T@{T\-E\-S\-T}}
+\index{T\-E\-S\-T@{T\-E\-S\-T}!test.cpp@{test.\-cpp}}
+\subsubsection[{T\-E\-S\-T}]{\setlength{\rightskip}{0pt plus 5cm}T\-E\-S\-T (
+\begin{DoxyParamCaption}
+\item[{No\-Obstacle\-Collision\-Test}]{, }
+\item[{Collide}]{}
+\end{DoxyParamCaption}
+)}}\label{test_8cpp_a0f3cfca1680e60ef81ab687b32be8f53}
+
+
+Check if collision test works. This method tests for case when there are no obstacles and robot lies outside the grid. 
+
+
+\begin{DoxyCode}
+52                                        \{
+53   \hyperlink{classRobotSimulator}{RobotSimulator} t\_simulator;
+54   ASSERT\_TRUE(t\_simulator.\hyperlink{classRobotSimulator_a564d79ead199c034841eda1b3ebebfcd}{isColliding}(100, 501));
+55   ASSERT\_TRUE(t\_simulator.\hyperlink{classRobotSimulator_a564d79ead199c034841eda1b3ebebfcd}{isColliding}(-1, 501));
+56   ASSERT\_TRUE(t\_simulator.\hyperlink{classRobotSimulator_a564d79ead199c034841eda1b3ebebfcd}{isColliding}(-10, -10));
+57   ASSERT\_TRUE(t\_simulator.\hyperlink{classRobotSimulator_a564d79ead199c034841eda1b3ebebfcd}{isColliding}(0, 0));
+58   ASSERT\_TRUE(t\_simulator.\hyperlink{classRobotSimulator_a564d79ead199c034841eda1b3ebebfcd}{isColliding}(100, 5001));
+59 \}
+\end{DoxyCode}
+\hypertarget{test_8cpp_a98d5cfb80e5b5018743ced3b3951c73b}{\index{test.\-cpp@{test.\-cpp}!T\-E\-S\-T@{T\-E\-S\-T}}
+\index{T\-E\-S\-T@{T\-E\-S\-T}!test.cpp@{test.\-cpp}}
+\subsubsection[{T\-E\-S\-T}]{\setlength{\rightskip}{0pt plus 5cm}T\-E\-S\-T (
+\begin{DoxyParamCaption}
+\item[{No\-Obstacle\-Collision\-Test}]{, }
+\item[{Not\-Collide}]{}
+\end{DoxyParamCaption}
+)}}\label{test_8cpp_a98d5cfb80e5b5018743ced3b3951c73b}
+
+
+Check if collision test works. This method tests for case when there are no obstacles and robot lies inside the grid. 
+
+
+\begin{DoxyCode}
+67                                           \{
+68   \hyperlink{classRobotSimulator}{RobotSimulator} t\_simulator;
+69   ASSERT\_FALSE(t\_simulator.\hyperlink{classRobotSimulator_a564d79ead199c034841eda1b3ebebfcd}{isColliding}(100, 101));
+70   ASSERT\_FALSE(t\_simulator.\hyperlink{classRobotSimulator_a564d79ead199c034841eda1b3ebebfcd}{isColliding}(300, 101));
+71   ASSERT\_FALSE(t\_simulator.\hyperlink{classRobotSimulator_a564d79ead199c034841eda1b3ebebfcd}{isColliding}(50, 16));
+72   ASSERT\_FALSE(t\_simulator.\hyperlink{classRobotSimulator_a564d79ead199c034841eda1b3ebebfcd}{isColliding}(70, 120));
+73   ASSERT\_FALSE(t\_simulator.\hyperlink{classRobotSimulator_a564d79ead199c034841eda1b3ebebfcd}{isColliding}(100, 51));
+74 \}
+\end{DoxyCode}
+\hypertarget{test_8cpp_af1a79cf9637e090c541a6c756662d8c5}{\index{test.\-cpp@{test.\-cpp}!T\-E\-S\-T@{T\-E\-S\-T}}
+\index{T\-E\-S\-T@{T\-E\-S\-T}!test.cpp@{test.\-cpp}}
+\subsubsection[{T\-E\-S\-T}]{\setlength{\rightskip}{0pt plus 5cm}T\-E\-S\-T (
+\begin{DoxyParamCaption}
+\item[{Obstacle\-Collision\-Test}]{, }
+\item[{Collide}]{}
+\end{DoxyParamCaption}
+)}}\label{test_8cpp_af1a79cf9637e090c541a6c756662d8c5}
+
+
+Check if collision test works. This method tests for case when there are obstacles and robot lies inside the obstacle region. 
+
+
+\begin{DoxyCode}
+82                                      \{
+83   \hyperlink{classRobotSimulator}{RobotSimulator} t\_simulator;
+84   t\_simulator.\hyperlink{classRobotSimulator_a3ce83e536763d1892fb099ba110be183}{\_circles}.push\_back(50);
+85   t\_simulator.\hyperlink{classRobotSimulator_a3ce83e536763d1892fb099ba110be183}{\_circles}.push\_back(50);
+86   t\_simulator.\hyperlink{classRobotSimulator_a3ce83e536763d1892fb099ba110be183}{\_circles}.push\_back(50);
+87   ASSERT\_TRUE(t\_simulator.\hyperlink{classRobotSimulator_a564d79ead199c034841eda1b3ebebfcd}{isColliding}(75, 75));
+88   ASSERT\_TRUE(t\_simulator.\hyperlink{classRobotSimulator_a564d79ead199c034841eda1b3ebebfcd}{isColliding}(50, 50));
+89   ASSERT\_TRUE(t\_simulator.\hyperlink{classRobotSimulator_a564d79ead199c034841eda1b3ebebfcd}{isColliding}(60, 50));
+90 \}
+\end{DoxyCode}
+\hypertarget{test_8cpp_a2b81994b38068b5c66ea1b8096e5719e}{\index{test.\-cpp@{test.\-cpp}!T\-E\-S\-T@{T\-E\-S\-T}}
+\index{T\-E\-S\-T@{T\-E\-S\-T}!test.cpp@{test.\-cpp}}
+\subsubsection[{T\-E\-S\-T}]{\setlength{\rightskip}{0pt plus 5cm}T\-E\-S\-T (
+\begin{DoxyParamCaption}
+\item[{Reached\-Goal}]{, }
+\item[{Not\-Reach}]{}
+\end{DoxyParamCaption}
+)}}\label{test_8cpp_a2b81994b38068b5c66ea1b8096e5719e}
+
+
+Check if Has\-Robot\-Reached\-Goal() function works. This method tests for the case when robot lies outside the goal region. 
+
+
+\begin{DoxyCode}
+99                             \{
+100   \hyperlink{classRobotSimulator}{RobotSimulator} t\_simulator;
+101   ASSERT\_FALSE(t\_simulator.\hyperlink{classRobotSimulator_a2a4c5f6ce1c2388f02f9006811e6b6e0}{HasRobotReachedGoal}());
+102 \}
+\end{DoxyCode}
+\hypertarget{test_8cpp_a5d6454bc7bfec80afe305cf9dead11d8}{\index{test.\-cpp@{test.\-cpp}!T\-E\-S\-T@{T\-E\-S\-T}}
+\index{T\-E\-S\-T@{T\-E\-S\-T}!test.cpp@{test.\-cpp}}
+\subsubsection[{T\-E\-S\-T}]{\setlength{\rightskip}{0pt plus 5cm}T\-E\-S\-T (
+\begin{DoxyParamCaption}
+\item[{Reached\-Goal}]{, }
+\item[{Reach}]{}
+\end{DoxyParamCaption}
+)}}\label{test_8cpp_a5d6454bc7bfec80afe305cf9dead11d8}
+
+
+Check if Has\-Robot\-Reached\-Goal() function works. This method tests for the case when robot lies inside the goal region. 
+
+
+\begin{DoxyCode}
+110                          \{
+111   \hyperlink{classRobotSimulator}{RobotSimulator} t\_simulator;
+112   \textcolor{comment}{// \_planner = new RobotPlanner(&\_simulator);}
+113   \textcolor{keywordtype}{double} dx =  t\_simulator.\hyperlink{classRobotSimulator_a7e26ec222d3524872e4e48f2188b385f}{GetGoalCenterX}() - t\_simulator.
+      \hyperlink{classRobotSimulator_ac7bea18d767ec267142fbc72391ca89b}{GetRobotX}();
+114   \textcolor{keywordtype}{double} dy = t\_simulator.\hyperlink{classRobotSimulator_a11ef47f5c24415d1ae2422de45969910}{GetGoalCenterY}() - t\_simulator.\hyperlink{classRobotSimulator_a83e9060cfd1bab860ae56c80697d6de0}{GetRobotY}();
+115   \textcolor{keywordtype}{double} dtheta = 0;
+116   t\_simulator.\hyperlink{classRobotSimulator_a33390e3aa4106ca2e2ee8dd414bdcaea}{AddToRobotConfiguration}(dx, dy , dtheta);
+117   ASSERT\_TRUE(t\_simulator.\hyperlink{classRobotSimulator_a2a4c5f6ce1c2388f02f9006811e6b6e0}{HasRobotReachedGoal}());
+118 \}
+\end{DoxyCode}

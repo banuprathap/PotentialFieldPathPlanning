@@ -1,5 +1,6 @@
 var searchData=
 [
+  ['renderrobot',['RenderRobot',['../d8/df9/classRobotSimulator.html#a121de184441f83f4493ba77e78b0b78f',1,'RobotSimulator']]],
   ['reppotscaling',['repPotScaling',['../dd/d86/classRobotPlanner.html#a0b056d74826bddeb6dbd5a458aad0758',1,'RobotPlanner']]],
   ['robot',['Robot',['../de/d10/structRobotSimulator_1_1Robot.html',1,'RobotSimulator']]],
   ['robotmove',['RobotMove',['../d4/df4/structRobotMove.html',1,'']]],

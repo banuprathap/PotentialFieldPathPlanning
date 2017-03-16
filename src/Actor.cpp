@@ -158,6 +158,9 @@ void RobotSimulator::AddToRobotConfiguration(const double dx,
   _robot._theta += dtheta;
   RenderRobot();
 }
+/**
+ * @brief      Renders robot vertices for display
+ */
 void RobotSimulator::RenderRobot() {
   double halfDiag = sqrt(_robot._sizeX * _robot._sizeX + _robot._sizeY *
                          _robot._sizeY) / 2;

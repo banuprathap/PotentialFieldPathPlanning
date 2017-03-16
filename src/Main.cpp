@@ -173,7 +173,7 @@ void CallbackEventOnMouseMove(int mousePosX, int mousePosY) {
   glutPostRedisplay();
 }
 /**
- * @brief      { function_description }
+ * @brief      Handle for Timer Overflow
  * @param  none
  * @return none
  */
@@ -193,7 +193,8 @@ void HandleEventOnTimer(void) {
 /**
  * @brief      Call back for an event on timer overflow, for animation.
  *
- * @param[in]  dummy  I still don't understand the use of this, but it's required
+ * @param[in]  dummy  It's required to match timers, when multiple timers
+ *                    are in use
  */
 void CallbackEventOnTimer(int dummy) {
   HandleEventOnTimer();

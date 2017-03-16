@@ -65,7 +65,11 @@ double Distance(Point One, Point Two) {
   return sqrt((One._x - Two._x) * (One._x - Two._x) + (One._y - Two._y) *
               (One._y - Two._y));
 }
-
+/**
+ * @brief      This function computes the next move for the robot
+ *
+ * @return     Returns the next move dx, dy and dtheta as a structure
+ */
 RobotMove RobotPlanner::NextMove(void) {
   RobotMove move;
   if (!p_simulator->HasRobotReachedGoal()) {
@@ -192,7 +196,7 @@ RobotMove RobotPlanner::NextMove(void) {
     if (robotSpeed == 0)
       std::cout << "robot had to stop to avoid collission" << std::endl;
     if (!p_simulator->isColliding(R._x + robotSpeed * sin(currDirection),
-                     R._y + robotSpeed * cos(currDirection))) {
+                                  R._y + robotSpeed * cos(currDirection))) {
       move.m_dx = robotSpeed * sin(currDirection);
       move.m_dy = robotSpeed * cos(currDirection);
       move.m_dtheta = steer;

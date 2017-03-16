@@ -18,7 +18,7 @@ Class for \hyperlink{classRobotPlanner}{Robot\-Planner}.
 \hyperlink{classRobotPlanner_a8dfdfeb05b468c1427a3157c6467d2cd}{$\sim$\-Robot\-Planner} (void)
 \begin{DoxyCompactList}\small\item\em Destroys the object. \end{DoxyCompactList}\item 
 \hyperlink{structRobotMove}{Robot\-Move} \hyperlink{classRobotPlanner_a6540d24f5f096465009b18b42320bd1f}{Next\-Move} (void)
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em This function computes the next move for the robot. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsection*{Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
@@ -26,13 +26,11 @@ int \hyperlink{classRobotPlanner_aa7d1571a5f12412daa58d79c518c946c}{dist\-Thresh
 \item 
 int \hyperlink{classRobotPlanner_a18ebcf4ba23a817db1a2fda878120eb4}{k} = 3
 \item 
-double \hyperlink{classRobotPlanner_aa68f0bb24256b470a8a4d13d858aef7f}{att\-Pot\-Scaling} = 5000
+double \hyperlink{classRobotPlanner_aa68f0bb24256b470a8a4d13d858aef7f}{att\-Pot\-Scaling} = 20000
 \item 
-double \hyperlink{classRobotPlanner_a0b056d74826bddeb6dbd5a458aad0758}{rep\-Pot\-Scaling} = 500
+double \hyperlink{classRobotPlanner_a0b056d74826bddeb6dbd5a458aad0758}{rep\-Pot\-Scaling} = 30000
 \item 
 double \hyperlink{classRobotPlanner_a199d479764e8e96c37654486ddc1ef7d}{min\-Att\-Pot} = 0.\-5
-\item 
-double \hyperlink{classRobotPlanner_a8535bc45d397cf2b10e42c6ac30ddd19}{maxturn} = 10 $\ast$ \hyperlink{Actor_8hpp_a598a3330b3c21701223ee0ca14316eca}{P\-I} / 180
 \end{DoxyCompactItemize}
 
 
@@ -84,169 +82,173 @@ Destroys the object.
 \end{DoxyParamCaption}
 )}}\label{classRobotPlanner_a6540d24f5f096465009b18b42320bd1f}
 
+
+This function computes the next move for the robot. 
+
+\begin{DoxyReturn}{Returns}
+Returns the next move dx, dy and dtheta as a structure 
+\end{DoxyReturn}
+
 \begin{DoxyCode}
-91                                      \{
-92   \hyperlink{structRobotMove}{RobotMove} move;
-93   \textcolor{keywordtype}{double} distanceGoal, currDirection, angleGoal;
-94   \textcolor{keywordtype}{double} steer, robotSpeed, speed;
-95   \textcolor{keywordtype}{double} maxTurn, maxAcceleration, maxRobotSpeed;
-96   \textcolor{keywordtype}{double} sizeX, sizeY, sizeHalfDiag;
-97   \textcolor{keywordtype}{double} i;
-98   \textcolor{keywordtype}{double} repPotX, repPotY, attPotX, attPotY, totPotX, totPotY;
-99   \hyperlink{structPoint}{Point} R, G;
-100   R.\hyperlink{structPoint_a77b9bd094b57efb7c185fdb3fb781900}{\_x} = p\_simulator->\hyperlink{classRobotSimulator_ac7bea18d767ec267142fbc72391ca89b}{GetRobotX}();
-101   R.\hyperlink{structPoint_aa8be383c30dee092979999b523373658}{\_y} = p\_simulator->\hyperlink{classRobotSimulator_a83e9060cfd1bab860ae56c80697d6de0}{GetRobotY}();
-102   currDirection = p\_simulator->\hyperlink{classRobotSimulator_ade2906f35ab46657323d354ba5c7ba50}{GetRobotTheta}();
-103   maxTurn = p\_simulator->\hyperlink{classRobotSimulator_a3ca3ad525b38e5f0b2ee556916058775}{GetRobotTurn}();
-104   maxAcceleration = p\_simulator->\hyperlink{classRobotSimulator_a05fd185adb07605ab99da82a07028fb9}{GetRobotAccel}();
-105   maxRobotSpeed = p\_simulator->\hyperlink{classRobotSimulator_a660a5fac6b81c87528aba1d3f978b75f}{GetRobotSpeed}();
-106   G.\hyperlink{structPoint_a77b9bd094b57efb7c185fdb3fb781900}{\_x} = p\_simulator->\hyperlink{classRobotSimulator_a7e26ec222d3524872e4e48f2188b385f}{GetGoalCenterX}();
-107   G.\hyperlink{structPoint_aa8be383c30dee092979999b523373658}{\_y} = p\_simulator->\hyperlink{classRobotSimulator_a11ef47f5c24415d1ae2422de45969910}{GetGoalCenterY}();
-108   sizeX  = p\_simulator->\hyperlink{classRobotSimulator_ace930a7f7cbef97b82c08629a3319b05}{GetRobotSizeX}();
-109   sizeY = p\_simulator->\hyperlink{classRobotSimulator_ae2efdc2fbc4793f205b2f4c10d4a301d}{GetRobotSizeY}();
-110   sizeHalfDiag = sqrt(pow(sizeX / 2, 2) + pow(sizeY / 2, 2));
-111   \textcolor{comment}{//  speed}
-112   robotSpeed = 10;
-113   \textcolor{comment}{//  Calculate distance from obstacle at front}
-114   i = sizeX / 2 + 1;
-115   \textcolor{keywordflow}{while} (1) \{
-116     \textcolor{comment}{//  std::cout << i << std::endl;}
-117     \textcolor{keywordtype}{double} \_x = (R.\hyperlink{structPoint_a77b9bd094b57efb7c185fdb3fb781900}{\_x} + i * sin(currDirection));
-118     \textcolor{keywordtype}{double} \_y = (R.\hyperlink{structPoint_aa8be383c30dee092979999b523373658}{\_y} + i * cos(currDirection));
-119     std::cout << \_x << \textcolor{stringliteral}{"\(\backslash\)t"} << \_y << std::endl;
-120     \textcolor{keywordflow}{if} (p\_simulator->\hyperlink{classRobotSimulator_a564d79ead199c034841eda1b3ebebfcd}{isColliding}(\_x, \_y)) \{
-121       \textcolor{comment}{//  std::cout << \_x << "\(\backslash\)t" << \_y << std::endl;}
-122       \textcolor{keywordflow}{break};
-123     \}
-124     i++;
-125   \} std::cout << \textcolor{stringliteral}{"check 1"} << std::endl;
-126   \textcolor{keywordtype}{double} distanceFront = i - sizeX / 2;
-127   \textcolor{comment}{//  std::cout << distanceFront << std::endl;}
-128   \textcolor{comment}{//  Calculate distance from obstacle at left}
-129   i = sizeY / 2 + 1;
-130   \textcolor{keywordflow}{while} (1) \{
-131     \textcolor{keywordtype}{double} \_x = (R.\hyperlink{structPoint_a77b9bd094b57efb7c185fdb3fb781900}{\_x} + i * sin(currDirection - \hyperlink{Actor_8hpp_a598a3330b3c21701223ee0ca14316eca}{PI} / 2));
-132     \textcolor{keywordtype}{double} \_y = (R.\hyperlink{structPoint_aa8be383c30dee092979999b523373658}{\_y} + i * cos(currDirection - \hyperlink{Actor_8hpp_a598a3330b3c21701223ee0ca14316eca}{PI} / 2));
-133     \textcolor{keywordflow}{if} (p\_simulator->\hyperlink{classRobotSimulator_a564d79ead199c034841eda1b3ebebfcd}{isColliding}(\_x, \_y)) \{
-134       std::cout << \_x << \textcolor{stringliteral}{"\(\backslash\)t"} << \_y << std::endl;
-135       \textcolor{keywordflow}{break};
-136     \}
-137     i++;
-138   \} std::cout << \textcolor{stringliteral}{"check 2"} << std::endl;
-139   \textcolor{keywordtype}{double} distanceLeft = i - sizeY / 2;
-140   \textcolor{comment}{//  std::cout << distanceLeft << std::endl;}
-141   \textcolor{comment}{//  Calculate distance from obstacle at Right}
-142   i = sizeY / 2 + 1;
-143   \textcolor{keywordflow}{while} (1) \{
-144     \textcolor{keywordtype}{double} \_x = (R.\hyperlink{structPoint_a77b9bd094b57efb7c185fdb3fb781900}{\_x} + i * sin(currDirection + \hyperlink{Actor_8hpp_a598a3330b3c21701223ee0ca14316eca}{PI} / 2));
-145     \textcolor{keywordtype}{double} \_y = (R.\hyperlink{structPoint_aa8be383c30dee092979999b523373658}{\_y} + i * cos(currDirection + \hyperlink{Actor_8hpp_a598a3330b3c21701223ee0ca14316eca}{PI} / 2));
-146     std::cout << \_x << \textcolor{stringliteral}{"\(\backslash\)t"} << \_y << std::endl;
-147     \textcolor{keywordflow}{if} (p\_simulator->\hyperlink{classRobotSimulator_a564d79ead199c034841eda1b3ebebfcd}{isColliding}(\_x, \_y)) \{
-148       \textcolor{keywordflow}{break};
+73                                      \{
+74   \hyperlink{structRobotMove}{RobotMove} move;
+75   \textcolor{keywordflow}{if} (!p\_simulator->\hyperlink{classRobotSimulator_a2a4c5f6ce1c2388f02f9006811e6b6e0}{HasRobotReachedGoal}()) \{
+76     \textcolor{keywordtype}{double} distanceGoal, currDirection, angleGoal;
+77     \textcolor{keywordtype}{double} steer, robotSpeed, speed;
+78     \textcolor{keywordtype}{double} maxTurn, maxAcceleration, maxRobotSpeed;
+79     \textcolor{keywordtype}{double} sizeX, sizeY, sizeHalfDiag;
+80     \textcolor{keywordtype}{double} i;
+81     \textcolor{keywordtype}{double} repPotX, repPotY, attPotX, attPotY, totPotX, totPotY;
+82     \hyperlink{structPoint}{Point} R, G;
+83     R.\hyperlink{structPoint_a77b9bd094b57efb7c185fdb3fb781900}{\_x} = p\_simulator->\hyperlink{classRobotSimulator_ac7bea18d767ec267142fbc72391ca89b}{GetRobotX}();
+84     R.\hyperlink{structPoint_aa8be383c30dee092979999b523373658}{\_y} = p\_simulator->\hyperlink{classRobotSimulator_a83e9060cfd1bab860ae56c80697d6de0}{GetRobotY}();
+85     currDirection = p\_simulator->\hyperlink{classRobotSimulator_ade2906f35ab46657323d354ba5c7ba50}{GetRobotTheta}();
+86     maxTurn = p\_simulator->\hyperlink{classRobotSimulator_a3ca3ad525b38e5f0b2ee556916058775}{GetRobotTurn}();
+87     maxAcceleration = p\_simulator->\hyperlink{classRobotSimulator_a05fd185adb07605ab99da82a07028fb9}{GetRobotAccel}();
+88     maxRobotSpeed = p\_simulator->\hyperlink{classRobotSimulator_a660a5fac6b81c87528aba1d3f978b75f}{GetRobotSpeed}();
+89     G.\hyperlink{structPoint_a77b9bd094b57efb7c185fdb3fb781900}{\_x} = p\_simulator->\hyperlink{classRobotSimulator_a7e26ec222d3524872e4e48f2188b385f}{GetGoalCenterX}();
+90     G.\hyperlink{structPoint_aa8be383c30dee092979999b523373658}{\_y} = p\_simulator->\hyperlink{classRobotSimulator_a11ef47f5c24415d1ae2422de45969910}{GetGoalCenterY}();
+91     sizeX  = p\_simulator->\hyperlink{classRobotSimulator_ace930a7f7cbef97b82c08629a3319b05}{GetRobotSizeX}();
+92     sizeY = p\_simulator->\hyperlink{classRobotSimulator_ae2efdc2fbc4793f205b2f4c10d4a301d}{GetRobotSizeY}();
+93     sizeHalfDiag = sqrt(pow(sizeX / 2, 2) + pow(sizeY / 2, 2));
+94     \textcolor{comment}{//  speed}
+95     robotSpeed = 5;
+96     \textcolor{comment}{//  Calculate distance from obstacle at front}
+97     i = sizeX / 2 + 1;
+98     \textcolor{keywordflow}{while} (1) \{
+99       \textcolor{keywordtype}{double} \_x = (R.\hyperlink{structPoint_a77b9bd094b57efb7c185fdb3fb781900}{\_x} + i * cos(currDirection));
+100       \textcolor{keywordtype}{double} \_y = (R.\hyperlink{structPoint_aa8be383c30dee092979999b523373658}{\_y} + i * sin(currDirection));
+101       \textcolor{keywordflow}{if} (p\_simulator->\hyperlink{classRobotSimulator_a564d79ead199c034841eda1b3ebebfcd}{isColliding}(\_x, \_y)) \{
+102         \textcolor{keywordflow}{break};
+103       \}
+104       i++;
+105     \}
+106     \textcolor{keywordtype}{double} distanceFront = i - sizeX / 2;
+107     \textcolor{comment}{//  Calculate distance from obstacle at left}
+108     i = sizeY / 2 + 1;
+109     \textcolor{keywordflow}{while} (1) \{
+110       \textcolor{keywordtype}{double} \_x = (R.\hyperlink{structPoint_a77b9bd094b57efb7c185fdb3fb781900}{\_x} + i * cos(currDirection - \hyperlink{Actor_8hpp_a598a3330b3c21701223ee0ca14316eca}{PI} / 2));
+111       \textcolor{keywordtype}{double} \_y = (R.\hyperlink{structPoint_aa8be383c30dee092979999b523373658}{\_y} + i * sin(currDirection - \hyperlink{Actor_8hpp_a598a3330b3c21701223ee0ca14316eca}{PI} / 2));
+112       \textcolor{keywordflow}{if} (p\_simulator->\hyperlink{classRobotSimulator_a564d79ead199c034841eda1b3ebebfcd}{isColliding}(\_x, \_y)) \{
+113         \textcolor{keywordflow}{break};
+114       \}
+115       i++;
+116     \}
+117     \textcolor{keywordtype}{double} distanceLeft = i - sizeY / 2;
+118     \textcolor{comment}{//  Calculate distance from obstacle at Right}
+119     i = sizeY / 2 + 1;
+120     \textcolor{keywordflow}{while} (1) \{
+121       \textcolor{keywordtype}{double} \_x = (R.\hyperlink{structPoint_a77b9bd094b57efb7c185fdb3fb781900}{\_x} + i * cos(currDirection + \hyperlink{Actor_8hpp_a598a3330b3c21701223ee0ca14316eca}{PI} / 2));
+122       \textcolor{keywordtype}{double} \_y = (R.\hyperlink{structPoint_aa8be383c30dee092979999b523373658}{\_y} + i * sin(currDirection + \hyperlink{Actor_8hpp_a598a3330b3c21701223ee0ca14316eca}{PI} / 2));
+123       \textcolor{keywordflow}{if} (p\_simulator->\hyperlink{classRobotSimulator_a564d79ead199c034841eda1b3ebebfcd}{isColliding}(\_x, \_y)) \{
+124         \textcolor{keywordflow}{break};
+125       \}
+126       i++;
+127     \}
+128     \textcolor{keywordtype}{double} distanceRight = i - sizeY / 2;
+129     \textcolor{comment}{//  Calculate distance from obstacle at Front-left-diagonal}
+130     i = sizeHalfDiag  + 1;
+131     \textcolor{keywordflow}{while} (1) \{
+132       \textcolor{keywordtype}{double} \_x = (R.\hyperlink{structPoint_a77b9bd094b57efb7c185fdb3fb781900}{\_x} + i * cos(currDirection - \hyperlink{Actor_8hpp_a598a3330b3c21701223ee0ca14316eca}{PI} / 4));
+133       \textcolor{keywordtype}{double} \_y = (R.\hyperlink{structPoint_aa8be383c30dee092979999b523373658}{\_y} + i * sin(currDirection - \hyperlink{Actor_8hpp_a598a3330b3c21701223ee0ca14316eca}{PI} / 4));
+134       \textcolor{keywordflow}{if} (p\_simulator->\hyperlink{classRobotSimulator_a564d79ead199c034841eda1b3ebebfcd}{isColliding}(\_x, \_y)) \{
+135         \textcolor{keywordflow}{break};
+136       \}
+137       i++;
+138     \}
+139     \textcolor{keywordtype}{double} distanceFrontLeftDiagonal = i - sizeHalfDiag;
+140     \textcolor{comment}{//  Calculate distance from obstacle at Front-left-diagonal}
+141     i = sizeHalfDiag + 1;
+142     \textcolor{keywordflow}{while} (1) \{
+143       \textcolor{keywordtype}{double} \_x = (R.\hyperlink{structPoint_a77b9bd094b57efb7c185fdb3fb781900}{\_x} + i * cos(currDirection + \hyperlink{Actor_8hpp_a598a3330b3c21701223ee0ca14316eca}{PI} / 4));
+144       \textcolor{keywordtype}{double} \_y = (R.\hyperlink{structPoint_aa8be383c30dee092979999b523373658}{\_y} + i * sin(currDirection + \hyperlink{Actor_8hpp_a598a3330b3c21701223ee0ca14316eca}{PI} / 4));
+145       \textcolor{keywordflow}{if} (p\_simulator->\hyperlink{classRobotSimulator_a564d79ead199c034841eda1b3ebebfcd}{isColliding}(\_x, \_y)) \{
+146         \textcolor{keywordflow}{break};
+147       \}
+148       i++;
 149     \}
-150     i++;
-151   \} std::cout << \textcolor{stringliteral}{"check 3"} << std::endl;
-152   \textcolor{keywordtype}{double} distanceRight = i - sizeY / 2;
-153   \textcolor{comment}{//  std::cout << distanceRight << std::endl;}
-154   \textcolor{comment}{//  Calculate distance from obstacle at Front-left-diagonal}
-155   i = sizeHalfDiag  + 1;
-156   \textcolor{keywordflow}{while} (1) \{
-157     \textcolor{keywordtype}{double} \_x = (R.\hyperlink{structPoint_a77b9bd094b57efb7c185fdb3fb781900}{\_x} + i * sin(currDirection - \hyperlink{Actor_8hpp_a598a3330b3c21701223ee0ca14316eca}{PI} / 4));
-158     \textcolor{keywordtype}{double} \_y = (R.\hyperlink{structPoint_aa8be383c30dee092979999b523373658}{\_y} + i * cos(currDirection - \hyperlink{Actor_8hpp_a598a3330b3c21701223ee0ca14316eca}{PI} / 4));
-159     \textcolor{keywordflow}{if} (p\_simulator->\hyperlink{classRobotSimulator_a564d79ead199c034841eda1b3ebebfcd}{isColliding}(\_x, \_y)) \{
-160       std::cout << \_x << \textcolor{stringliteral}{"\(\backslash\)t"} << \_y << std::endl;
-161       \textcolor{keywordflow}{break};
-162     \}
-163     i++;
-164   \} std::cout << \textcolor{stringliteral}{"check 4"} << std::endl;
-165   \textcolor{keywordtype}{double} distanceFrontLeftDiagonal = i - sizeHalfDiag ;
-166   \textcolor{comment}{//  std::cout << distanceFrontLeftDiagonal << std::endl;}
-167   \textcolor{comment}{//  Calculate distance from obstacle at Front-left-diagonal}
-168   i = sizeHalfDiag + 1;
-169   \textcolor{keywordflow}{while} (1) \{
-170     \textcolor{keywordtype}{double} \_x = (R.\hyperlink{structPoint_a77b9bd094b57efb7c185fdb3fb781900}{\_x} + i * sin(currDirection + \hyperlink{Actor_8hpp_a598a3330b3c21701223ee0ca14316eca}{PI} / 4));
-171     \textcolor{keywordtype}{double} \_y = (R.\hyperlink{structPoint_aa8be383c30dee092979999b523373658}{\_y} + i * cos(currDirection + \hyperlink{Actor_8hpp_a598a3330b3c21701223ee0ca14316eca}{PI} / 4));
-172     \textcolor{keywordflow}{if} (p\_simulator->\hyperlink{classRobotSimulator_a564d79ead199c034841eda1b3ebebfcd}{isColliding}(\_x, \_y)) \{
-173       std::cout << \_x << \textcolor{stringliteral}{"\(\backslash\)t"} << \_y << std::endl;
-174       \textcolor{keywordflow}{break};
-175     \}
-176     i++;
-177   \} std::cout << \textcolor{stringliteral}{"check 5"} << std::endl;
-178   \textcolor{keywordtype}{double} distanceFrontRightDiagonal = i -  sizeHalfDiag;
-179   \textcolor{comment}{//  std::cout << distanceFrontRightDiagonal << std::endl;}
-180   \textcolor{comment}{//  Goal}
-181   distanceGoal = sqrt((R.\hyperlink{structPoint_a77b9bd094b57efb7c185fdb3fb781900}{\_x} - G.\hyperlink{structPoint_a77b9bd094b57efb7c185fdb3fb781900}{\_x}) * (R.\hyperlink{structPoint_a77b9bd094b57efb7c185fdb3fb781900}{\_x} - G.\hyperlink{structPoint_a77b9bd094b57efb7c185fdb3fb781900}{\_x}) + (R.\hyperlink{structPoint_aa8be383c30dee092979999b523373658}{\_y} - G. \_y) *
-182                       (R.\hyperlink{structPoint_aa8be383c30dee092979999b523373658}{\_y} - G.\hyperlink{structPoint_aa8be383c30dee092979999b523373658}{\_y}));
-183   std::cout << distanceGoal << std::endl;
-184   angleGoal = atan2(G.\hyperlink{structPoint_aa8be383c30dee092979999b523373658}{\_y} - R.\hyperlink{structPoint_aa8be383c30dee092979999b523373658}{\_y}, G.\hyperlink{structPoint_a77b9bd094b57efb7c185fdb3fb781900}{\_x} - R.\hyperlink{structPoint_a77b9bd094b57efb7c185fdb3fb781900}{\_x});
-185   \textcolor{comment}{//  Potential}
-186   repPotX = pow((1.0 / distanceFront), \hyperlink{classRobotPlanner_a18ebcf4ba23a817db1a2fda878120eb4}{k}) * sin(currDirection) +
-187             pow((1.0 / distanceLeft), \hyperlink{classRobotPlanner_a18ebcf4ba23a817db1a2fda878120eb4}{k}) * sin(currDirection - \hyperlink{Actor_8hpp_a598a3330b3c21701223ee0ca14316eca}{PI} / 2) +
-188             pow((1.0 / distanceRight), \hyperlink{classRobotPlanner_a18ebcf4ba23a817db1a2fda878120eb4}{k}) * sin(currDirection + \hyperlink{Actor_8hpp_a598a3330b3c21701223ee0ca14316eca}{PI} / 2) +
-189             pow((1.0 / distanceFrontLeftDiagonal), \hyperlink{classRobotPlanner_a18ebcf4ba23a817db1a2fda878120eb4}{k}) * sin(currDirection - \hyperlink{Actor_8hpp_a598a3330b3c21701223ee0ca14316eca}{PI} / 4) +
-190             pow((1.0 / distanceFrontRightDiagonal), \hyperlink{classRobotPlanner_a18ebcf4ba23a817db1a2fda878120eb4}{k}) * sin(currDirection + \hyperlink{Actor_8hpp_a598a3330b3c21701223ee0ca14316eca}{PI} / 4);
-191   repPotY = pow((1.0 / distanceFront), \hyperlink{classRobotPlanner_a18ebcf4ba23a817db1a2fda878120eb4}{k}) * cos(currDirection) +
-192             pow((1.0 / distanceLeft), \hyperlink{classRobotPlanner_a18ebcf4ba23a817db1a2fda878120eb4}{k}) * cos(currDirection - \hyperlink{Actor_8hpp_a598a3330b3c21701223ee0ca14316eca}{PI} / 2) +
-193             pow((1.0 / distanceRight), \hyperlink{classRobotPlanner_a18ebcf4ba23a817db1a2fda878120eb4}{k}) * cos(currDirection + \hyperlink{Actor_8hpp_a598a3330b3c21701223ee0ca14316eca}{PI} / 2) +
-194             pow((1.0 / distanceFrontLeftDiagonal), \hyperlink{classRobotPlanner_a18ebcf4ba23a817db1a2fda878120eb4}{k}) * cos(currDirection - \hyperlink{Actor_8hpp_a598a3330b3c21701223ee0ca14316eca}{PI} / 4) +
-195             pow((1.0 / distanceFrontRightDiagonal), \hyperlink{classRobotPlanner_a18ebcf4ba23a817db1a2fda878120eb4}{k}) * cos(currDirection + \hyperlink{Actor_8hpp_a598a3330b3c21701223ee0ca14316eca}{PI} / 4);
-196   attPotX = std::max(pow((1.0 / distanceGoal), \hyperlink{classRobotPlanner_a18ebcf4ba23a817db1a2fda878120eb4}{k}) * \hyperlink{classRobotPlanner_aa68f0bb24256b470a8a4d13d858aef7f}{attPotScaling},
-197                      \hyperlink{classRobotPlanner_a199d479764e8e96c37654486ddc1ef7d}{minAttPot}) * sin(angleGoal);
-198   attPotY = std::max(pow((1.0 / distanceGoal), \hyperlink{classRobotPlanner_a18ebcf4ba23a817db1a2fda878120eb4}{k}) * \hyperlink{classRobotPlanner_aa68f0bb24256b470a8a4d13d858aef7f}{attPotScaling},
-199                      \hyperlink{classRobotPlanner_a199d479764e8e96c37654486ddc1ef7d}{minAttPot}) * cos(angleGoal);
-200   totPotX = attPotX - \hyperlink{classRobotPlanner_a0b056d74826bddeb6dbd5a458aad0758}{repPotScaling} * repPotX;
-201   totPotY = attPotY - \hyperlink{classRobotPlanner_a0b056d74826bddeb6dbd5a458aad0758}{repPotScaling} * repPotY;
-202   \textcolor{comment}{//  dTheta}
-203   steer = atan2(robotSpeed * sin(currDirection) + totPotX,
-204                 robotSpeed * cos(currDirection) + totPotY) - currDirection;
-205   \textcolor{keywordflow}{while} (steer > \hyperlink{Actor_8hpp_a598a3330b3c21701223ee0ca14316eca}{PI}) \{
-206     steer -= 2 * \hyperlink{Actor_8hpp_a598a3330b3c21701223ee0ca14316eca}{PI};
-207   \}  \textcolor{comment}{//  check to get the angle between -pi and pi}
-208   \textcolor{keywordflow}{while} (steer < -\hyperlink{Actor_8hpp_a598a3330b3c21701223ee0ca14316eca}{PI}) \{
-209     steer += 2 * \hyperlink{Actor_8hpp_a598a3330b3c21701223ee0ca14316eca}{PI};
-210   \}  \textcolor{comment}{//  check to get the angle between - pi and pi}
-211   steer = std::min(maxTurn, steer);
-212   steer = std::max(-maxTurn, steer);
-213 \textcolor{comment}{//  set new speed}
-214   speed = sqrt((robotSpeed * sin(currDirection) + totPotX) *
-215                (robotSpeed * sin(currDirection) + totPotX) +
-216                (robotSpeed * cos(currDirection) + totPotY) *
-217                (robotSpeed * cos(currDirection) + totPotY));
-218   speed = std::min(robotSpeed + maxAcceleration, speed);
-219   robotSpeed = std::max(robotSpeed - maxAcceleration, speed);
-220   robotSpeed = std::min(robotSpeed, maxRobotSpeed);
-221   robotSpeed = std::max(robotSpeed, 0.0);
-222   \textcolor{keywordflow}{if} (robotSpeed == 0)
-223     std::cout << \textcolor{stringliteral}{"robot had to stop to avoid collission"} << std::endl;
-224   move.\hyperlink{structRobotMove_aeb93adca1b150538c56a548fb3a060f7}{m\_dx} = robotSpeed * sin(currDirection);
-225   move.\hyperlink{structRobotMove_a8da71ddc10ffe34d3cc0f9d0cb26e33c}{m\_dy} = robotSpeed * cos(currDirection);
-226   move.\hyperlink{structRobotMove_a9b6595c240cc17c54b4436c592c5c6b9}{m\_speed} = robotSpeed;
-227   move.\hyperlink{structRobotMove_a667d60a557ec5177f77cd0bcf98ba84b}{m\_dtheta} = steer;
-228   \textcolor{keywordflow}{return} move;
-229 \}
+150     \textcolor{keywordtype}{double} distanceFrontRightDiagonal = i -  sizeHalfDiag;
+151     \textcolor{comment}{//  Goal}
+152     distanceGoal = sqrt((R.\hyperlink{structPoint_a77b9bd094b57efb7c185fdb3fb781900}{\_x} - G.\hyperlink{structPoint_a77b9bd094b57efb7c185fdb3fb781900}{\_x}) * (R.\hyperlink{structPoint_a77b9bd094b57efb7c185fdb3fb781900}{\_x} - G.\hyperlink{structPoint_a77b9bd094b57efb7c185fdb3fb781900}{\_x}) + (R.\hyperlink{structPoint_aa8be383c30dee092979999b523373658}{\_y} - G. \_y) *
+153                         (R.\hyperlink{structPoint_aa8be383c30dee092979999b523373658}{\_y} - G.\hyperlink{structPoint_aa8be383c30dee092979999b523373658}{\_y}));
+154     angleGoal = atan2(G.\hyperlink{structPoint_aa8be383c30dee092979999b523373658}{\_y} - R.\hyperlink{structPoint_aa8be383c30dee092979999b523373658}{\_y}, G.\hyperlink{structPoint_a77b9bd094b57efb7c185fdb3fb781900}{\_x} - R.\hyperlink{structPoint_a77b9bd094b57efb7c185fdb3fb781900}{\_x});
+155     \textcolor{comment}{//  Potential}
+156     repPotY = 1.0 / pow(distanceFront, \hyperlink{classRobotPlanner_a18ebcf4ba23a817db1a2fda878120eb4}{k}) * sin(currDirection) +
+157               1.0 / pow((distanceLeft), \hyperlink{classRobotPlanner_a18ebcf4ba23a817db1a2fda878120eb4}{k}) * sin(currDirection - \hyperlink{Actor_8hpp_a598a3330b3c21701223ee0ca14316eca}{PI} / 2) +
+158               1.0 / pow((distanceRight), \hyperlink{classRobotPlanner_a18ebcf4ba23a817db1a2fda878120eb4}{k}) * sin(currDirection + \hyperlink{Actor_8hpp_a598a3330b3c21701223ee0ca14316eca}{PI} / 2) +
+159               1.0 / pow((distanceFrontLeftDiagonal), \hyperlink{classRobotPlanner_a18ebcf4ba23a817db1a2fda878120eb4}{k}) *
+160               sin(currDirection - \hyperlink{Actor_8hpp_a598a3330b3c21701223ee0ca14316eca}{PI} / 4) +
+161               1.0 / pow((distanceFrontRightDiagonal), \hyperlink{classRobotPlanner_a18ebcf4ba23a817db1a2fda878120eb4}{k}) *
+162               sin(currDirection + \hyperlink{Actor_8hpp_a598a3330b3c21701223ee0ca14316eca}{PI} / 4);
+163     repPotX = 1.0 / pow((distanceFront), \hyperlink{classRobotPlanner_a18ebcf4ba23a817db1a2fda878120eb4}{k}) * cos(currDirection) +
+164               1.0 / pow((distanceLeft), \hyperlink{classRobotPlanner_a18ebcf4ba23a817db1a2fda878120eb4}{k}) * cos(currDirection - \hyperlink{Actor_8hpp_a598a3330b3c21701223ee0ca14316eca}{PI} / 2) +
+165               1.0 / pow((distanceRight), \hyperlink{classRobotPlanner_a18ebcf4ba23a817db1a2fda878120eb4}{k}) * cos(currDirection + \hyperlink{Actor_8hpp_a598a3330b3c21701223ee0ca14316eca}{PI} / 2) +
+166               1.0 / pow((distanceFrontLeftDiagonal), \hyperlink{classRobotPlanner_a18ebcf4ba23a817db1a2fda878120eb4}{k}) *
+167               cos(currDirection - \hyperlink{Actor_8hpp_a598a3330b3c21701223ee0ca14316eca}{PI} / 4) +
+168               1.0 / pow((distanceFrontRightDiagonal), \hyperlink{classRobotPlanner_a18ebcf4ba23a817db1a2fda878120eb4}{k}) *
+169               cos(currDirection + \hyperlink{Actor_8hpp_a598a3330b3c21701223ee0ca14316eca}{PI} / 4);
+170     attPotY = std::max(pow((1.0 / distanceGoal), \hyperlink{classRobotPlanner_a18ebcf4ba23a817db1a2fda878120eb4}{k}),
+171                        \hyperlink{classRobotPlanner_a199d479764e8e96c37654486ddc1ef7d}{minAttPot}) * sin(angleGoal)  * \hyperlink{classRobotPlanner_aa68f0bb24256b470a8a4d13d858aef7f}{attPotScaling};
+172     attPotX = std::max(pow((1.0 / distanceGoal), \hyperlink{classRobotPlanner_a18ebcf4ba23a817db1a2fda878120eb4}{k}) ,
+173                        \hyperlink{classRobotPlanner_a199d479764e8e96c37654486ddc1ef7d}{minAttPot}) * cos(angleGoal) * \hyperlink{classRobotPlanner_aa68f0bb24256b470a8a4d13d858aef7f}{attPotScaling};
+174     totPotX = attPotX - (\hyperlink{classRobotPlanner_a0b056d74826bddeb6dbd5a458aad0758}{repPotScaling} * repPotX);
+175     totPotY = attPotY - (\hyperlink{classRobotPlanner_a0b056d74826bddeb6dbd5a458aad0758}{repPotScaling} * repPotY);
+176     \textcolor{comment}{//  dTheta}
+177     steer = atan2(robotSpeed * cos(currDirection) + totPotX,
+178                   robotSpeed * sin(currDirection) + totPotY) - currDirection;
+179     \textcolor{keywordflow}{while} (steer > \hyperlink{Actor_8hpp_a598a3330b3c21701223ee0ca14316eca}{PI}) \{
+180       steer -= 2 * \hyperlink{Actor_8hpp_a598a3330b3c21701223ee0ca14316eca}{PI};
+181     \}  \textcolor{comment}{//  check to get the angle between -pi and pi}
+182     \textcolor{keywordflow}{while} (steer < -\hyperlink{Actor_8hpp_a598a3330b3c21701223ee0ca14316eca}{PI}) \{
+183       steer += 2 * \hyperlink{Actor_8hpp_a598a3330b3c21701223ee0ca14316eca}{PI};
+184     \}  \textcolor{comment}{//  check to get the angle between - pi and pi}
+185     steer = std::min(maxTurn, steer);
+186     steer = std::max(-maxTurn, steer);
+187     \textcolor{comment}{//  set new speed}
+188     speed = sqrt((robotSpeed * sin(currDirection) + totPotY) *
+189                  (robotSpeed * sin(currDirection) + totPotY) +
+190                  (robotSpeed * cos(currDirection) + totPotX) *
+191                  (robotSpeed * cos(currDirection) + totPotX));
+192     speed = std::min(robotSpeed + maxAcceleration, speed);
+193     robotSpeed = std::max(robotSpeed - maxAcceleration, speed);
+194     robotSpeed = std::min(robotSpeed, maxRobotSpeed);
+195     robotSpeed = std::max(robotSpeed, 0.0);
+196     \textcolor{keywordflow}{if} (robotSpeed == 0)
+197       std::cout << \textcolor{stringliteral}{"robot had to stop to avoid collission"} << std::endl;
+198     \textcolor{keywordflow}{if} (!p\_simulator->\hyperlink{classRobotSimulator_a564d79ead199c034841eda1b3ebebfcd}{isColliding}(R.\hyperlink{structPoint_a77b9bd094b57efb7c185fdb3fb781900}{\_x} + robotSpeed * sin(currDirection),
+199                                   R.\hyperlink{structPoint_aa8be383c30dee092979999b523373658}{\_y} + robotSpeed * cos(currDirection))) \{
+200       move.\hyperlink{structRobotMove_aeb93adca1b150538c56a548fb3a060f7}{m\_dx} = robotSpeed * sin(currDirection);
+201       move.\hyperlink{structRobotMove_a8da71ddc10ffe34d3cc0f9d0cb26e33c}{m\_dy} = robotSpeed * cos(currDirection);
+202       move.\hyperlink{structRobotMove_a667d60a557ec5177f77cd0bcf98ba84b}{m\_dtheta} = steer;
+203     \} \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (!p\_simulator->\hyperlink{classRobotSimulator_a564d79ead199c034841eda1b3ebebfcd}{isColliding}(R.\hyperlink{structPoint_a77b9bd094b57efb7c185fdb3fb781900}{\_x} + 1, R.\hyperlink{structPoint_aa8be383c30dee092979999b523373658}{\_y} + 1)) \{
+204       move.\hyperlink{structRobotMove_aeb93adca1b150538c56a548fb3a060f7}{m\_dx} = 1;
+205       move.\hyperlink{structRobotMove_a8da71ddc10ffe34d3cc0f9d0cb26e33c}{m\_dy} = 1;
+206       move.\hyperlink{structRobotMove_a667d60a557ec5177f77cd0bcf98ba84b}{m\_dtheta} = \hyperlink{Actor_8hpp_a598a3330b3c21701223ee0ca14316eca}{PI} * 0.75;
+207     \}
+208     move.\hyperlink{structRobotMove_a9b6595c240cc17c54b4436c592c5c6b9}{m\_speed} = robotSpeed;
+209   \}
+210   \textcolor{keywordflow}{return} move;
+211 \}
 \end{DoxyCode}
 
 
 \subsection{Member Data Documentation}
 \hypertarget{classRobotPlanner_aa68f0bb24256b470a8a4d13d858aef7f}{\index{Robot\-Planner@{Robot\-Planner}!att\-Pot\-Scaling@{att\-Pot\-Scaling}}
 \index{att\-Pot\-Scaling@{att\-Pot\-Scaling}!RobotPlanner@{Robot\-Planner}}
-\subsubsection[{att\-Pot\-Scaling}]{\setlength{\rightskip}{0pt plus 5cm}double Robot\-Planner\-::att\-Pot\-Scaling = 5000}}\label{classRobotPlanner_aa68f0bb24256b470a8a4d13d858aef7f}
-Scaling factor for attractive potential. \hypertarget{classRobotPlanner_aa7d1571a5f12412daa58d79c518c946c}{\index{Robot\-Planner@{Robot\-Planner}!dist\-Threshold@{dist\-Threshold}}
+\subsubsection[{att\-Pot\-Scaling}]{\setlength{\rightskip}{0pt plus 5cm}double Robot\-Planner\-::att\-Pot\-Scaling = 20000}}\label{classRobotPlanner_aa68f0bb24256b470a8a4d13d858aef7f}
+Scaling factor for repulsive potential. \hypertarget{classRobotPlanner_aa7d1571a5f12412daa58d79c518c946c}{\index{Robot\-Planner@{Robot\-Planner}!dist\-Threshold@{dist\-Threshold}}
 \index{dist\-Threshold@{dist\-Threshold}!RobotPlanner@{Robot\-Planner}}
 \subsubsection[{dist\-Threshold}]{\setlength{\rightskip}{0pt plus 5cm}int Robot\-Planner\-::dist\-Threshold = 50}}\label{classRobotPlanner_aa7d1571a5f12412daa58d79c518c946c}
-$<$ Obstacles beyond this distance are omitted in calculating potentials. \hypertarget{classRobotPlanner_a18ebcf4ba23a817db1a2fda878120eb4}{\index{Robot\-Planner@{Robot\-Planner}!k@{k}}
+$<$ Obstacles beyond this are omitted in calculating potentials. Degree of calculating potential. \hypertarget{classRobotPlanner_a18ebcf4ba23a817db1a2fda878120eb4}{\index{Robot\-Planner@{Robot\-Planner}!k@{k}}
 \index{k@{k}!RobotPlanner@{Robot\-Planner}}
 \subsubsection[{k}]{\setlength{\rightskip}{0pt plus 5cm}int Robot\-Planner\-::k = 3}}\label{classRobotPlanner_a18ebcf4ba23a817db1a2fda878120eb4}
-Degree of calculating potential. \hypertarget{classRobotPlanner_a8535bc45d397cf2b10e42c6ac30ddd19}{\index{Robot\-Planner@{Robot\-Planner}!maxturn@{maxturn}}
-\index{maxturn@{maxturn}!RobotPlanner@{Robot\-Planner}}
-\subsubsection[{maxturn}]{\setlength{\rightskip}{0pt plus 5cm}double Robot\-Planner\-::maxturn = 10 $\ast$ {\bf P\-I} / 180}}\label{classRobotPlanner_a8535bc45d397cf2b10e42c6ac30ddd19}
-\hypertarget{classRobotPlanner_a199d479764e8e96c37654486ddc1ef7d}{\index{Robot\-Planner@{Robot\-Planner}!min\-Att\-Pot@{min\-Att\-Pot}}
+Scaling factor for attractive potential. \hypertarget{classRobotPlanner_a199d479764e8e96c37654486ddc1ef7d}{\index{Robot\-Planner@{Robot\-Planner}!min\-Att\-Pot@{min\-Att\-Pot}}
 \index{min\-Att\-Pot@{min\-Att\-Pot}!RobotPlanner@{Robot\-Planner}}
 \subsubsection[{min\-Att\-Pot}]{\setlength{\rightskip}{0pt plus 5cm}double Robot\-Planner\-::min\-Att\-Pot = 0.\-5}}\label{classRobotPlanner_a199d479764e8e96c37654486ddc1ef7d}
-Minimum attractive potential at any point. \hypertarget{classRobotPlanner_a0b056d74826bddeb6dbd5a458aad0758}{\index{Robot\-Planner@{Robot\-Planner}!rep\-Pot\-Scaling@{rep\-Pot\-Scaling}}
+\hypertarget{classRobotPlanner_a0b056d74826bddeb6dbd5a458aad0758}{\index{Robot\-Planner@{Robot\-Planner}!rep\-Pot\-Scaling@{rep\-Pot\-Scaling}}
 \index{rep\-Pot\-Scaling@{rep\-Pot\-Scaling}!RobotPlanner@{Robot\-Planner}}
-\subsubsection[{rep\-Pot\-Scaling}]{\setlength{\rightskip}{0pt plus 5cm}double Robot\-Planner\-::rep\-Pot\-Scaling = 500}}\label{classRobotPlanner_a0b056d74826bddeb6dbd5a458aad0758}
-Scaling factor for repulsive potential. 
+\subsubsection[{rep\-Pot\-Scaling}]{\setlength{\rightskip}{0pt plus 5cm}double Robot\-Planner\-::rep\-Pot\-Scaling = 30000}}\label{classRobotPlanner_a0b056d74826bddeb6dbd5a458aad0758}
+Minimum attractive potential at any point. 
 
 The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
 \item 

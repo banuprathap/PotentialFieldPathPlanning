@@ -42,7 +42,13 @@
 
 #include <gtest/gtest.h>
 #include <Planner.hpp>
-
+/**
+ * @brief      Check if collision test works.
+ *             This method tests for case when there are no obstacles
+ *             and robot lies outside the grid
+ *
+ *
+ */
 TEST(NoObstacleCollisionTest, Collide) {
   RobotSimulator t_simulator;
   ASSERT_TRUE(t_simulator.isColliding(100, 501));
@@ -51,7 +57,13 @@ TEST(NoObstacleCollisionTest, Collide) {
   ASSERT_TRUE(t_simulator.isColliding(0, 0));
   ASSERT_TRUE(t_simulator.isColliding(100, 5001));
 }
-
+/**
+ * @brief      Check if collision test works.
+ *             This method tests for case when there are no obstacles
+ *             and robot lies inside the grid
+ *
+ *
+ */
 TEST(NoObstacleCollisionTest, NotCollide) {
   RobotSimulator t_simulator;
   ASSERT_FALSE(t_simulator.isColliding(100, 101));
@@ -60,7 +72,13 @@ TEST(NoObstacleCollisionTest, NotCollide) {
   ASSERT_FALSE(t_simulator.isColliding(70, 120));
   ASSERT_FALSE(t_simulator.isColliding(100, 51));
 }
-
+/**
+ * @brief      Check if collision test works.
+ *             This method tests for case when there are obstacles
+ *             and robot lies inside the obstacle region
+ *
+ *
+ */
 TEST(ObstacleCollisionTest, Collide) {
   RobotSimulator t_simulator;
   t_simulator._circles.push_back(50);
@@ -70,13 +88,24 @@ TEST(ObstacleCollisionTest, Collide) {
   ASSERT_TRUE(t_simulator.isColliding(50, 50));
   ASSERT_TRUE(t_simulator.isColliding(60, 50));
 }
-
+/**
+ * @brief      Check if HasRobotReachedGoal() function
+ *             works. This method tests for the case when
+ *             robot lies outside the goal region
+ *
+ *
+ */
 
 TEST(ReachedGoal, NotReach) {
   RobotSimulator t_simulator;
   ASSERT_FALSE(t_simulator.HasRobotReachedGoal());
 }
-
+/**
+ * @brief      Check if HasRobotReachedGoal() function
+ *             works. This method tests for the case when
+ *             robot lies inside the goal region
+ *
+ */
 
 TEST(ReachedGoal, Reach) {
   RobotSimulator t_simulator;

@@ -85,6 +85,8 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Search');
 </div>
 </div><!-- top -->
 <div class="header">
+  <div class="summary">
+<a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
 <div class="title">test.cpp File Reference</div>  </div>
 </div><!--header-->
@@ -92,19 +94,231 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Search');
 
 <p>Unit test for path planner project.  
 <a href="#details">More...</a></p>
-<div class="textblock"><code>#include &lt;tuple&gt;</code><br/>
-<code>#include &lt;gtest/gtest.h&gt;</code><br/>
-<code>#include &lt;<a class="el" href="../../d6/d11/test_8hpp_source.html">test.hpp</a>&gt;</code><br/>
-<code>#include &lt;assert.h&gt;</code><br/>
-</div><a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><code>#include &lt;gtest/gtest.h&gt;</code><br/>
+<code>#include &lt;<a class="el" href="../../d4/d09/Planner_8hpp_source.html">Planner.hpp</a>&gt;</code><br/>
+</div><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:a0f3cfca1680e60ef81ab687b32be8f53"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../df/dac/test_8cpp.html#a0f3cfca1680e60ef81ab687b32be8f53">TEST</a> (NoObstacleCollisionTest, Collide)</td></tr>
+<tr class="memdesc:a0f3cfca1680e60ef81ab687b32be8f53"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if collision test works. This method tests for case when there are no obstacles and robot lies outside the grid.  <a href="#a0f3cfca1680e60ef81ab687b32be8f53">More...</a><br/></td></tr>
+<tr class="separator:a0f3cfca1680e60ef81ab687b32be8f53"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a98d5cfb80e5b5018743ced3b3951c73b"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../df/dac/test_8cpp.html#a98d5cfb80e5b5018743ced3b3951c73b">TEST</a> (NoObstacleCollisionTest, NotCollide)</td></tr>
+<tr class="memdesc:a98d5cfb80e5b5018743ced3b3951c73b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if collision test works. This method tests for case when there are no obstacles and robot lies inside the grid.  <a href="#a98d5cfb80e5b5018743ced3b3951c73b">More...</a><br/></td></tr>
+<tr class="separator:a98d5cfb80e5b5018743ced3b3951c73b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af1a79cf9637e090c541a6c756662d8c5"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../df/dac/test_8cpp.html#af1a79cf9637e090c541a6c756662d8c5">TEST</a> (ObstacleCollisionTest, Collide)</td></tr>
+<tr class="memdesc:af1a79cf9637e090c541a6c756662d8c5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if collision test works. This method tests for case when there are obstacles and robot lies inside the obstacle region.  <a href="#af1a79cf9637e090c541a6c756662d8c5">More...</a><br/></td></tr>
+<tr class="separator:af1a79cf9637e090c541a6c756662d8c5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2b81994b38068b5c66ea1b8096e5719e"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../df/dac/test_8cpp.html#a2b81994b38068b5c66ea1b8096e5719e">TEST</a> (ReachedGoal, NotReach)</td></tr>
+<tr class="memdesc:a2b81994b38068b5c66ea1b8096e5719e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if HasRobotReachedGoal() function works. This method tests for the case when robot lies outside the goal region.  <a href="#a2b81994b38068b5c66ea1b8096e5719e">More...</a><br/></td></tr>
+<tr class="separator:a2b81994b38068b5c66ea1b8096e5719e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5d6454bc7bfec80afe305cf9dead11d8"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../df/dac/test_8cpp.html#a5d6454bc7bfec80afe305cf9dead11d8">TEST</a> (ReachedGoal, Reach)</td></tr>
+<tr class="memdesc:a5d6454bc7bfec80afe305cf9dead11d8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if HasRobotReachedGoal() function works. This method tests for the case when robot lies inside the goal region.  <a href="#a5d6454bc7bfec80afe305cf9dead11d8">More...</a><br/></td></tr>
+<tr class="separator:a5d6454bc7bfec80afe305cf9dead11d8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Unit test for path planner project. </p>
 <p>This file contains implementation of unit tests for this project</p>
 <dl class="section author"><dt>Author</dt><dd>Banuprathap Anandan </dd></dl>
 <dl class="section version"><dt>Version</dt><dd>1.0.1 </dd></dl>
-</div></div><!-- contents -->
+</div><h2 class="groupheader">Function Documentation</h2>
+<a class="anchor" id="a0f3cfca1680e60ef81ab687b32be8f53"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">TEST </td>
+          <td>(</td>
+          <td class="paramtype">NoObstacleCollisionTest&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Collide&#160;</td>
+          <td class="paramname">&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Check if collision test works. This method tests for case when there are no obstacles and robot lies outside the grid. </p>
+<div class="fragment"><div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;                                       {</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;  <a class="code" href="../../d8/df9/classRobotSimulator.html">RobotSimulator</a> t_simulator;</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;  ASSERT_TRUE(t_simulator.<a class="code" href="../../d8/df9/classRobotSimulator.html#a564d79ead199c034841eda1b3ebebfcd">isColliding</a>(100, 501));</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;  ASSERT_TRUE(t_simulator.<a class="code" href="../../d8/df9/classRobotSimulator.html#a564d79ead199c034841eda1b3ebebfcd">isColliding</a>(-1, 501));</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;  ASSERT_TRUE(t_simulator.<a class="code" href="../../d8/df9/classRobotSimulator.html#a564d79ead199c034841eda1b3ebebfcd">isColliding</a>(-10, -10));</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;  ASSERT_TRUE(t_simulator.<a class="code" href="../../d8/df9/classRobotSimulator.html#a564d79ead199c034841eda1b3ebebfcd">isColliding</a>(0, 0));</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;  ASSERT_TRUE(t_simulator.<a class="code" href="../../d8/df9/classRobotSimulator.html#a564d79ead199c034841eda1b3ebebfcd">isColliding</a>(100, 5001));</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;}</div>
+<div class="ttc" id="classRobotSimulator_html"><div class="ttname"><a href="../../d8/df9/classRobotSimulator.html">RobotSimulator</a></div><div class="ttdoc">Class for RobotSimulator. </div><div class="ttdef"><b>Definition:</b> Actor.hpp:63</div></div>
+<div class="ttc" id="classRobotSimulator_html_a564d79ead199c034841eda1b3ebebfcd"><div class="ttname"><a href="../../d8/df9/classRobotSimulator.html#a564d79ead199c034841eda1b3ebebfcd">RobotSimulator::isColliding</a></div><div class="ttdeci">bool isColliding(const double x, const double y)</div><div class="ttdoc">Determines if given point lies in the obstacle region. </div><div class="ttdef"><b>Definition:</b> Actor.cpp:110</div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a class="anchor" id="a98d5cfb80e5b5018743ced3b3951c73b"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">TEST </td>
+          <td>(</td>
+          <td class="paramtype">NoObstacleCollisionTest&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">NotCollide&#160;</td>
+          <td class="paramname">&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Check if collision test works. This method tests for case when there are no obstacles and robot lies inside the grid. </p>
+<div class="fragment"><div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;                                          {</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;  <a class="code" href="../../d8/df9/classRobotSimulator.html">RobotSimulator</a> t_simulator;</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;  ASSERT_FALSE(t_simulator.<a class="code" href="../../d8/df9/classRobotSimulator.html#a564d79ead199c034841eda1b3ebebfcd">isColliding</a>(100, 101));</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;  ASSERT_FALSE(t_simulator.<a class="code" href="../../d8/df9/classRobotSimulator.html#a564d79ead199c034841eda1b3ebebfcd">isColliding</a>(300, 101));</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;  ASSERT_FALSE(t_simulator.<a class="code" href="../../d8/df9/classRobotSimulator.html#a564d79ead199c034841eda1b3ebebfcd">isColliding</a>(50, 16));</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;  ASSERT_FALSE(t_simulator.<a class="code" href="../../d8/df9/classRobotSimulator.html#a564d79ead199c034841eda1b3ebebfcd">isColliding</a>(70, 120));</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;  ASSERT_FALSE(t_simulator.<a class="code" href="../../d8/df9/classRobotSimulator.html#a564d79ead199c034841eda1b3ebebfcd">isColliding</a>(100, 51));</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;}</div>
+<div class="ttc" id="classRobotSimulator_html"><div class="ttname"><a href="../../d8/df9/classRobotSimulator.html">RobotSimulator</a></div><div class="ttdoc">Class for RobotSimulator. </div><div class="ttdef"><b>Definition:</b> Actor.hpp:63</div></div>
+<div class="ttc" id="classRobotSimulator_html_a564d79ead199c034841eda1b3ebebfcd"><div class="ttname"><a href="../../d8/df9/classRobotSimulator.html#a564d79ead199c034841eda1b3ebebfcd">RobotSimulator::isColliding</a></div><div class="ttdeci">bool isColliding(const double x, const double y)</div><div class="ttdoc">Determines if given point lies in the obstacle region. </div><div class="ttdef"><b>Definition:</b> Actor.cpp:110</div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a class="anchor" id="af1a79cf9637e090c541a6c756662d8c5"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">TEST </td>
+          <td>(</td>
+          <td class="paramtype">ObstacleCollisionTest&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Collide&#160;</td>
+          <td class="paramname">&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Check if collision test works. This method tests for case when there are obstacles and robot lies inside the obstacle region. </p>
+<div class="fragment"><div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;                                     {</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;  <a class="code" href="../../d8/df9/classRobotSimulator.html">RobotSimulator</a> t_simulator;</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;  t_simulator.<a class="code" href="../../d8/df9/classRobotSimulator.html#a3ce83e536763d1892fb099ba110be183">_circles</a>.push_back(50);</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;  t_simulator.<a class="code" href="../../d8/df9/classRobotSimulator.html#a3ce83e536763d1892fb099ba110be183">_circles</a>.push_back(50);</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;  t_simulator.<a class="code" href="../../d8/df9/classRobotSimulator.html#a3ce83e536763d1892fb099ba110be183">_circles</a>.push_back(50);</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;  ASSERT_TRUE(t_simulator.<a class="code" href="../../d8/df9/classRobotSimulator.html#a564d79ead199c034841eda1b3ebebfcd">isColliding</a>(75, 75));</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;  ASSERT_TRUE(t_simulator.<a class="code" href="../../d8/df9/classRobotSimulator.html#a564d79ead199c034841eda1b3ebebfcd">isColliding</a>(50, 50));</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;  ASSERT_TRUE(t_simulator.<a class="code" href="../../d8/df9/classRobotSimulator.html#a564d79ead199c034841eda1b3ebebfcd">isColliding</a>(60, 50));</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;}</div>
+<div class="ttc" id="classRobotSimulator_html"><div class="ttname"><a href="../../d8/df9/classRobotSimulator.html">RobotSimulator</a></div><div class="ttdoc">Class for RobotSimulator. </div><div class="ttdef"><b>Definition:</b> Actor.hpp:63</div></div>
+<div class="ttc" id="classRobotSimulator_html_a3ce83e536763d1892fb099ba110be183"><div class="ttname"><a href="../../d8/df9/classRobotSimulator.html#a3ce83e536763d1892fb099ba110be183">RobotSimulator::_circles</a></div><div class="ttdeci">std::vector&lt; double &gt; _circles</div><div class="ttdef"><b>Definition:</b> Actor.hpp:69</div></div>
+<div class="ttc" id="classRobotSimulator_html_a564d79ead199c034841eda1b3ebebfcd"><div class="ttname"><a href="../../d8/df9/classRobotSimulator.html#a564d79ead199c034841eda1b3ebebfcd">RobotSimulator::isColliding</a></div><div class="ttdeci">bool isColliding(const double x, const double y)</div><div class="ttdoc">Determines if given point lies in the obstacle region. </div><div class="ttdef"><b>Definition:</b> Actor.cpp:110</div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a class="anchor" id="a2b81994b38068b5c66ea1b8096e5719e"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">TEST </td>
+          <td>(</td>
+          <td class="paramtype">ReachedGoal&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">NotReach&#160;</td>
+          <td class="paramname">&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Check if HasRobotReachedGoal() function works. This method tests for the case when robot lies outside the goal region. </p>
+<div class="fragment"><div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;                            {</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;  <a class="code" href="../../d8/df9/classRobotSimulator.html">RobotSimulator</a> t_simulator;</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;  ASSERT_FALSE(t_simulator.<a class="code" href="../../d8/df9/classRobotSimulator.html#a2a4c5f6ce1c2388f02f9006811e6b6e0">HasRobotReachedGoal</a>());</div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;}</div>
+<div class="ttc" id="classRobotSimulator_html_a2a4c5f6ce1c2388f02f9006811e6b6e0"><div class="ttname"><a href="../../d8/df9/classRobotSimulator.html#a2a4c5f6ce1c2388f02f9006811e6b6e0">RobotSimulator::HasRobotReachedGoal</a></div><div class="ttdeci">bool HasRobotReachedGoal(void)</div><div class="ttdoc">Determines if it has robot reached goal. </div><div class="ttdef"><b>Definition:</b> Actor.cpp:137</div></div>
+<div class="ttc" id="classRobotSimulator_html"><div class="ttname"><a href="../../d8/df9/classRobotSimulator.html">RobotSimulator</a></div><div class="ttdoc">Class for RobotSimulator. </div><div class="ttdef"><b>Definition:</b> Actor.hpp:63</div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a class="anchor" id="a5d6454bc7bfec80afe305cf9dead11d8"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">TEST </td>
+          <td>(</td>
+          <td class="paramtype">ReachedGoal&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Reach&#160;</td>
+          <td class="paramname">&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Check if HasRobotReachedGoal() function works. This method tests for the case when robot lies inside the goal region. </p>
+<div class="fragment"><div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;                         {</div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;  <a class="code" href="../../d8/df9/classRobotSimulator.html">RobotSimulator</a> t_simulator;</div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;  <span class="comment">// _planner = new RobotPlanner(&amp;_simulator);</span></div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;  <span class="keywordtype">double</span> dx =  t_simulator.<a class="code" href="../../d8/df9/classRobotSimulator.html#a7e26ec222d3524872e4e48f2188b385f">GetGoalCenterX</a>() - t_simulator.<a class="code" href="../../d8/df9/classRobotSimulator.html#ac7bea18d767ec267142fbc72391ca89b">GetRobotX</a>();</div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;  <span class="keywordtype">double</span> dy = t_simulator.<a class="code" href="../../d8/df9/classRobotSimulator.html#a11ef47f5c24415d1ae2422de45969910">GetGoalCenterY</a>() - t_simulator.<a class="code" href="../../d8/df9/classRobotSimulator.html#a83e9060cfd1bab860ae56c80697d6de0">GetRobotY</a>();</div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;  <span class="keywordtype">double</span> dtheta = 0;</div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;  t_simulator.<a class="code" href="../../d8/df9/classRobotSimulator.html#a33390e3aa4106ca2e2ee8dd414bdcaea">AddToRobotConfiguration</a>(dx, dy , dtheta);</div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;  ASSERT_TRUE(t_simulator.<a class="code" href="../../d8/df9/classRobotSimulator.html#a2a4c5f6ce1c2388f02f9006811e6b6e0">HasRobotReachedGoal</a>());</div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;}</div>
+<div class="ttc" id="classRobotSimulator_html_a33390e3aa4106ca2e2ee8dd414bdcaea"><div class="ttname"><a href="../../d8/df9/classRobotSimulator.html#a33390e3aa4106ca2e2ee8dd414bdcaea">RobotSimulator::AddToRobotConfiguration</a></div><div class="ttdeci">void AddToRobotConfiguration(const double dx, const double dy, const double dtheta)</div><div class="ttdoc">Adds changes to robot configuration. </div><div class="ttdef"><b>Definition:</b> Actor.cpp:154</div></div>
+<div class="ttc" id="classRobotSimulator_html_a2a4c5f6ce1c2388f02f9006811e6b6e0"><div class="ttname"><a href="../../d8/df9/classRobotSimulator.html#a2a4c5f6ce1c2388f02f9006811e6b6e0">RobotSimulator::HasRobotReachedGoal</a></div><div class="ttdeci">bool HasRobotReachedGoal(void)</div><div class="ttdoc">Determines if it has robot reached goal. </div><div class="ttdef"><b>Definition:</b> Actor.cpp:137</div></div>
+<div class="ttc" id="classRobotSimulator_html_ac7bea18d767ec267142fbc72391ca89b"><div class="ttname"><a href="../../d8/df9/classRobotSimulator.html#ac7bea18d767ec267142fbc72391ca89b">RobotSimulator::GetRobotX</a></div><div class="ttdeci">double GetRobotX(void)</div><div class="ttdoc">Returns the robot&#39;s x coordinate. </div><div class="ttdef"><b>Definition:</b> Actor.hpp:116</div></div>
+<div class="ttc" id="classRobotSimulator_html_a11ef47f5c24415d1ae2422de45969910"><div class="ttname"><a href="../../d8/df9/classRobotSimulator.html#a11ef47f5c24415d1ae2422de45969910">RobotSimulator::GetGoalCenterY</a></div><div class="ttdeci">double GetGoalCenterY(void)</div><div class="ttdoc">Returns the goal center y. </div><div class="ttdef"><b>Definition:</b> Actor.hpp:86</div></div>
+<div class="ttc" id="classRobotSimulator_html_a7e26ec222d3524872e4e48f2188b385f"><div class="ttname"><a href="../../d8/df9/classRobotSimulator.html#a7e26ec222d3524872e4e48f2188b385f">RobotSimulator::GetGoalCenterX</a></div><div class="ttdeci">double GetGoalCenterX(void)</div><div class="ttdoc">Returns the goal center x. </div><div class="ttdef"><b>Definition:</b> Actor.hpp:78</div></div>
+<div class="ttc" id="classRobotSimulator_html"><div class="ttname"><a href="../../d8/df9/classRobotSimulator.html">RobotSimulator</a></div><div class="ttdoc">Class for RobotSimulator. </div><div class="ttdef"><b>Definition:</b> Actor.hpp:63</div></div>
+<div class="ttc" id="classRobotSimulator_html_a83e9060cfd1bab860ae56c80697d6de0"><div class="ttname"><a href="../../d8/df9/classRobotSimulator.html#a83e9060cfd1bab860ae56c80697d6de0">RobotSimulator::GetRobotY</a></div><div class="ttdeci">double GetRobotY(void)</div><div class="ttdoc">Returns the robot&#39;s y coordinate. </div><div class="ttdef"><b>Definition:</b> Actor.hpp:124</div></div>
+</div><!-- fragment -->
+</div>
+</div>
+</div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Mar 14 2017 23:56:51 for Potential Field Path Planner Project by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Mar 15 2017 21:18:00 for Potential Field Path Planner Project by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="../../doxygen.png" alt="doxygen"/>
 </a> 1.8.6
 </small></address>

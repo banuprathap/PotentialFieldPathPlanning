@@ -9,6 +9,11 @@ Initial file of path planner program.
 {\ttfamily \#include $<$G\-L/glut.\-h$>$}\\*
 {\ttfamily \#include $<$Actor.\-hpp$>$}\\*
 {\ttfamily \#include $<$Planner.\-hpp$>$}\\*
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{Main_8cpp_a8c730a41dcccce68039aea9f991e1868}{A\-T\-T\-E\-M\-P\-T\-S}~50000
+\end{DoxyCompactItemize}
 \subsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
@@ -25,14 +30,14 @@ void \hyperlink{Main_8cpp_a478d011b9c27253b43011101f14ee14f}{Callback\-Event\-On
 void \hyperlink{Main_8cpp_ad66d65a7c96963ee783216455ed80da1}{Callback\-Event\-On\-Mouse\-Move} (int mouse\-Pos\-X, int mouse\-Pos\-Y)
 \begin{DoxyCompactList}\small\item\em Call back for an event on mouse movement with a click. \end{DoxyCompactList}\item 
 void \hyperlink{Main_8cpp_a148391bd47bc66d909351b14aed2f524}{Handle\-Event\-On\-Timer} (void)
-\begin{DoxyCompactList}\small\item\em \{ function\-\_\-description \} \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Handle for Timer Overflow. \end{DoxyCompactList}\item 
 void \hyperlink{Main_8cpp_a549941c79d6c094252c678efbdfb2af1}{Callback\-Event\-On\-Timer} (int dummy)
 \begin{DoxyCompactList}\small\item\em Call back for an event on timer overflow, for animation. \end{DoxyCompactList}\item 
 void \hyperlink{Main_8cpp_aad171a037371010636ae52cdbe204747}{Callback\-Event\-On\-Key\-Press} (const unsigned char key, const int mouse\-Pos\-X, const int mouse\-Pos\-Y)
 \begin{DoxyCompactList}\small\item\em Call back for an event on keyboard press. \end{DoxyCompactList}\item 
 void \hyperlink{Main_8cpp_ad491929288f4c6a9d207f9703e3d6795}{Display\-Loop} (void)
 \begin{DoxyCompactList}\small\item\em Main display loop. \end{DoxyCompactList}\item 
-int \hyperlink{Main_8cpp_a3c04138a5bfe5d72780bb7e82a18e627}{main} (int argc, char $\ast$$\ast$argv)
+int \hyperlink{Main_8cpp_ae66f6b31b5ad750f1fe042a706a4e3d4}{main} ()
 \begin{DoxyCompactList}\small\item\em program entrypoint \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsection*{Variables}
 \begin{DoxyCompactItemize}
@@ -43,12 +48,14 @@ int \hyperlink{Main_8cpp_a3c04138a5bfe5d72780bb7e82a18e627}{main} (int argc, cha
 \item 
 int \hyperlink{Main_8cpp_a1808237327922f53b18e2aedcc276321}{\-\_\-selected\-Circle}
 \item 
+int \hyperlink{Main_8cpp_a2e0c451bdb326fc276979768c86734d4}{attempt}
+\item 
 bool \hyperlink{Main_8cpp_acb8d75a5b852585e8244cf2ff5f32b4a}{\-\_\-plan}
 \end{DoxyCompactItemize}
 
 
 \subsection{Detailed Description}
-Initial file of path planner program. This file contains path planner's \hyperlink{Main_8cpp_a3c04138a5bfe5d72780bb7e82a18e627}{main()} function. All G\-U\-I functions are implemented here.
+Initial file of path planner program. This file contains path planner's \hyperlink{Main_8cpp_ae66f6b31b5ad750f1fe042a706a4e3d4}{main()} function. All G\-U\-I functions are implemented here.
 
 \begin{DoxyAuthor}{Author}
 Banuprathap Anandan 
@@ -56,6 +63,12 @@ Banuprathap Anandan
 \begin{DoxyDate}{Date}
 03/14/2017 
 \end{DoxyDate}
+
+
+\subsection{Macro Definition Documentation}
+\hypertarget{Main_8cpp_a8c730a41dcccce68039aea9f991e1868}{\index{Main.\-cpp@{Main.\-cpp}!A\-T\-T\-E\-M\-P\-T\-S@{A\-T\-T\-E\-M\-P\-T\-S}}
+\index{A\-T\-T\-E\-M\-P\-T\-S@{A\-T\-T\-E\-M\-P\-T\-S}!Main.cpp@{Main.\-cpp}}
+\subsubsection[{A\-T\-T\-E\-M\-P\-T\-S}]{\setlength{\rightskip}{0pt plus 5cm}\#define A\-T\-T\-E\-M\-P\-T\-S~50000}}\label{Main_8cpp_a8c730a41dcccce68039aea9f991e1868}
 
 
 \subsection{Function Documentation}
@@ -80,22 +93,22 @@ none
 \end{DoxyReturn}
 
 \begin{DoxyCode}
-127                                   \{
-128   glClearColor(1.0f, 1.0f, 1.0f, 0.0f);
-129   glClearDepth(1.0);
-130   glClear(GL\_COLOR\_BUFFER\_BIT | GL\_DEPTH\_BUFFER\_BIT);
-131   glEnable(GL\_DEPTH\_TEST);
-132   glShadeModel(GL\_SMOOTH);
-133   glViewport(0, 0, glutGet(GLUT\_WINDOW\_WIDTH), glutGet(GLUT\_WINDOW\_HEIGHT));
-134   glMatrixMode(GL\_PROJECTION);
-135   glLoadIdentity();
-136   \textcolor{comment}{//  glOrtho(-22, 22, -14, 14, -1.0, 1.0);}
-137   glOrtho(0.0f, 500, 500, 0.0f, 0.0f, 1.0f);
-138   glMatrixMode(GL\_MODELVIEW);
+131                                   \{
+132   glClearColor(1.0f, 1.0f, 1.0f, 0.0f);
+133   glClearDepth(1.0);
+134   glClear(GL\_COLOR\_BUFFER\_BIT | GL\_DEPTH\_BUFFER\_BIT);
+135   glEnable(GL\_DEPTH\_TEST);
+136   glShadeModel(GL\_SMOOTH);
+137   glViewport(0, 0, glutGet(GLUT\_WINDOW\_WIDTH), glutGet(GLUT\_WINDOW\_HEIGHT));
+138   glMatrixMode(GL\_PROJECTION);
 139   glLoadIdentity();
-140   \hyperlink{Main_8cpp_aa1391be559f06582d82090e39965e990}{HandleEventOnDisplay}();
-141   glutSwapBuffers();
-142 \}
+140   \textcolor{comment}{//  glOrtho(-22, 22, -14, 14, -1.0, 1.0);}
+141   glOrtho(0.0f, 500, 500, 0.0f, 0.0f, 1.0f);
+142   glMatrixMode(GL\_MODELVIEW);
+143   glLoadIdentity();
+144   \hyperlink{Main_8cpp_aa1391be559f06582d82090e39965e990}{HandleEventOnDisplay}();
+145   glutSwapBuffers();
+146 \}
 \end{DoxyCode}
 \hypertarget{Main_8cpp_aad171a037371010636ae52cdbe204747}{\index{Main.\-cpp@{Main.\-cpp}!Callback\-Event\-On\-Key\-Press@{Callback\-Event\-On\-Key\-Press}}
 \index{Callback\-Event\-On\-Key\-Press@{Callback\-Event\-On\-Key\-Press}!Main.cpp@{Main.\-cpp}}
@@ -121,24 +134,24 @@ Call back for an event on keyboard press.
 \end{DoxyParams}
 
 \begin{DoxyCode}
-205                                                   \{
-206   std::cout << \textcolor{stringliteral}{"pressed key = "} << key << std::endl;
-207   \textcolor{keywordflow}{switch} (key) \{
-208   \textcolor{keywordflow}{case} 27:  \textcolor{comment}{//  escape key}
-209     exit(0);
-210   \textcolor{keywordflow}{case} \textcolor{charliteral}{'s'}:
-211     \hyperlink{Main_8cpp_acb8d75a5b852585e8244cf2ff5f32b4a}{\_plan} = !\hyperlink{Main_8cpp_acb8d75a5b852585e8244cf2ff5f32b4a}{\_plan};
-212     \textcolor{comment}{/*}
-213 \textcolor{comment}{    for (int i = 3; i < \_simulator.\_circles.size(); i += 3) \{}
-214 \textcolor{comment}{      const double \_x = \_simulator.\_circles[i];}
-215 \textcolor{comment}{      const double \_y = \_simulator.\_circles[i + 1];}
-216 \textcolor{comment}{      const double \_r  = \_simulator.\_circles[i + 2];}
-217 \textcolor{comment}{      std::cout << \_x << "\(\backslash\)t" << \_y << std::endl;}
-218 \textcolor{comment}{    \}}
-219 \textcolor{comment}{    */}
-220     \textcolor{keywordflow}{break};
-221   \}
-222 \}
+212                                                   \{
+213   \hyperlink{Actor_8hpp_a86d500a34c624c2cae56bc25a31b12f3}{UNUSED}(mousePosX);
+214   \hyperlink{Actor_8hpp_a86d500a34c624c2cae56bc25a31b12f3}{UNUSED}(mousePosY);
+215   std::cout << \textcolor{stringliteral}{"pressed key = "} << key << std::endl;
+216   \textcolor{keywordflow}{switch} (key) \{
+217   \textcolor{keywordflow}{case} 27:  \textcolor{comment}{//  escape key}
+218     exit(0);
+219   \textcolor{keywordflow}{case} \textcolor{charliteral}{'s'}:
+220     \hyperlink{Main_8cpp_acb8d75a5b852585e8244cf2ff5f32b4a}{\_plan} = !\hyperlink{Main_8cpp_acb8d75a5b852585e8244cf2ff5f32b4a}{\_plan};
+221     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{size\_t} i = 3; i < \hyperlink{Main_8cpp_a8b4387365f7dd4433217d448711f1c5b}{\_simulator}.\hyperlink{classRobotSimulator_a3ce83e536763d1892fb099ba110be183}{\_circles}.size(); i += 3) \{
+222       \textcolor{keyword}{const} \textcolor{keywordtype}{double} \_x = \hyperlink{Main_8cpp_a8b4387365f7dd4433217d448711f1c5b}{\_simulator}.\hyperlink{classRobotSimulator_a3ce83e536763d1892fb099ba110be183}{\_circles}[i];
+223       \textcolor{keyword}{const} \textcolor{keywordtype}{double} \_y = \hyperlink{Main_8cpp_a8b4387365f7dd4433217d448711f1c5b}{\_simulator}.\hyperlink{classRobotSimulator_a3ce83e536763d1892fb099ba110be183}{\_circles}[i + 1];
+224       \textcolor{comment}{//  const double \_r  = \_simulator.\_circles[i + 2];}
+225       std::cout << \_x << \textcolor{stringliteral}{"\(\backslash\)t"} << \_y << std::endl;
+226     \}
+227     \textcolor{keywordflow}{break};
+228   \}
+229 \}
 \end{DoxyCode}
 \hypertarget{Main_8cpp_a478d011b9c27253b43011101f14ee14f}{\index{Main.\-cpp@{Main.\-cpp}!Callback\-Event\-On\-Mouse\-Click@{Callback\-Event\-On\-Mouse\-Click}}
 \index{Callback\-Event\-On\-Mouse\-Click@{Callback\-Event\-On\-Mouse\-Click}!Main.cpp@{Main.\-cpp}}
@@ -167,13 +180,12 @@ Call back for an event on mouse click.
 \end{DoxyParams}
 
 \begin{DoxyCode}
-152                                               \{
-153   \textcolor{keywordflow}{if} (state == GLUT\_DOWN) \{
-154     \textcolor{comment}{//  std::cout << mousePosX << "\(\backslash\)t" << mousePosY << std::endl;}
-155     \hyperlink{Main_8cpp_a63616476cc05aab76d9ebb09b7baf68b}{HandleEventOnMouseClick}(whichBtn, mousePosX , mousePosY);
-156     glutPostRedisplay();
-157   \}
-158 \}
+156                                               \{
+157   \textcolor{keywordflow}{if} (state == GLUT\_DOWN) \{
+158     \hyperlink{Main_8cpp_a63616476cc05aab76d9ebb09b7baf68b}{HandleEventOnMouseClick}(whichBtn, mousePosX , mousePosY);
+159     glutPostRedisplay();
+160   \}
+161 \}
 \end{DoxyCode}
 \hypertarget{Main_8cpp_ad66d65a7c96963ee783216455ed80da1}{\index{Main.\-cpp@{Main.\-cpp}!Callback\-Event\-On\-Mouse\-Move@{Callback\-Event\-On\-Mouse\-Move}}
 \index{Callback\-Event\-On\-Mouse\-Move@{Callback\-Event\-On\-Mouse\-Move}!Main.cpp@{Main.\-cpp}}
@@ -196,13 +208,13 @@ Call back for an event on mouse movement with a click.
 \end{DoxyParams}
 
 \begin{DoxyCode}
-165                                                             \{
-166   \textcolor{keywordflow}{if} (\hyperlink{Main_8cpp_a1808237327922f53b18e2aedcc276321}{\_selectedCircle} >= 0) \{
-167     \hyperlink{Main_8cpp_a8b4387365f7dd4433217d448711f1c5b}{\_simulator}.\hyperlink{classRobotSimulator_a3ce83e536763d1892fb099ba110be183}{\_circles}[3 * \hyperlink{Main_8cpp_a1808237327922f53b18e2aedcc276321}{\_selectedCircle}] = mousePosX;
-168     \hyperlink{Main_8cpp_a8b4387365f7dd4433217d448711f1c5b}{\_simulator}.\hyperlink{classRobotSimulator_a3ce83e536763d1892fb099ba110be183}{\_circles}[3 * \hyperlink{Main_8cpp_a1808237327922f53b18e2aedcc276321}{\_selectedCircle} + 1] = mousePosY;
-169   \}
-170   glutPostRedisplay();
-171 \}
+168                                                             \{
+169   \textcolor{keywordflow}{if} (\hyperlink{Main_8cpp_a1808237327922f53b18e2aedcc276321}{\_selectedCircle} >= 0) \{
+170     \hyperlink{Main_8cpp_a8b4387365f7dd4433217d448711f1c5b}{\_simulator}.\hyperlink{classRobotSimulator_a3ce83e536763d1892fb099ba110be183}{\_circles}[3 * \hyperlink{Main_8cpp_a1808237327922f53b18e2aedcc276321}{\_selectedCircle}] = mousePosX;
+171     \hyperlink{Main_8cpp_a8b4387365f7dd4433217d448711f1c5b}{\_simulator}.\hyperlink{classRobotSimulator_a3ce83e536763d1892fb099ba110be183}{\_circles}[3 * \hyperlink{Main_8cpp_a1808237327922f53b18e2aedcc276321}{\_selectedCircle} + 1] = mousePosY;
+172   \}
+173   glutPostRedisplay();
+174 \}
 \end{DoxyCode}
 \hypertarget{Main_8cpp_a549941c79d6c094252c678efbdfb2af1}{\index{Main.\-cpp@{Main.\-cpp}!Callback\-Event\-On\-Timer@{Callback\-Event\-On\-Timer}}
 \index{Callback\-Event\-On\-Timer@{Callback\-Event\-On\-Timer}!Main.cpp@{Main.\-cpp}}
@@ -217,16 +229,16 @@ Call back for an event on timer overflow, for animation.
 
 
 \begin{DoxyParams}[1]{Parameters}
-\mbox{\tt in}  & {\em dummy} & I still don't understand the use of this, but it's required \\
+\mbox{\tt in}  & {\em dummy} & It's required to match timers, when multiple timers are in use \\
 \hline
 \end{DoxyParams}
 
 \begin{DoxyCode}
-188                                      \{
-189   \hyperlink{Main_8cpp_a148391bd47bc66d909351b14aed2f524}{HandleEventOnTimer}();
-190   glutTimerFunc(150, \hyperlink{Main_8cpp_a549941c79d6c094252c678efbdfb2af1}{CallbackEventOnTimer}, dummy);
-191   glutPostRedisplay();
-192 \}
+199                                      \{
+200   \hyperlink{Main_8cpp_a148391bd47bc66d909351b14aed2f524}{HandleEventOnTimer}();
+201   glutTimerFunc(30, \hyperlink{Main_8cpp_a549941c79d6c094252c678efbdfb2af1}{CallbackEventOnTimer}, dummy);
+202   glutPostRedisplay();
+203 \}
 \end{DoxyCode}
 \hypertarget{Main_8cpp_ad491929288f4c6a9d207f9703e3d6795}{\index{Main.\-cpp@{Main.\-cpp}!Display\-Loop@{Display\-Loop}}
 \index{Display\-Loop@{Display\-Loop}!Main.cpp@{Main.\-cpp}}
@@ -249,28 +261,28 @@ nones
 \end{DoxyReturn}
 
 \begin{DoxyCode}
-229                        \{
-230 \textcolor{comment}{//  create window}
-231   \textcolor{keyword}{static} \textcolor{keywordtype}{int}    argc = 1;
-232   \textcolor{keyword}{static} \textcolor{keywordtype}{char}  *args = \textcolor{keyword}{const\_cast<}\textcolor{keywordtype}{char}*\textcolor{keyword}{>}(\textcolor{stringliteral}{"args"});
-233   glutInit(&argc, &args);
-234   glutInitDisplayMode(GLUT\_RGBA | GLUT\_DOUBLE);
-235   glutInitWindowSize(500, 500);
-236   glutInitWindowPosition(100, 100);
-237   glutCreateWindow(\textcolor{stringliteral}{"Potenial Field Path Planner"});
-238   \textcolor{comment}{// register callback functions}
-239   glutDisplayFunc(\hyperlink{Main_8cpp_a035082ebbe3cbffcc3c5c1513ad61798}{CallbackEventOnDisplay});
-240   \textcolor{comment}{// Callback for mouse click}
-241   glutMouseFunc(\hyperlink{Main_8cpp_a478d011b9c27253b43011101f14ee14f}{CallbackEventOnMouseClick});
-242   \textcolor{comment}{// Callback for mouse cursor movement}
-243   glutMotionFunc(\hyperlink{Main_8cpp_ad66d65a7c96963ee783216455ed80da1}{CallbackEventOnMouseMove});
-244   \textcolor{comment}{// Callback for timer. To refresh the window}
-245   glutTimerFunc(150, \hyperlink{Main_8cpp_a549941c79d6c094252c678efbdfb2af1}{CallbackEventOnTimer}, 0);
-246   glutIdleFunc(NULL);
-247   glutKeyboardFunc(\hyperlink{Main_8cpp_aad171a037371010636ae52cdbe204747}{CallbackEventOnKeyPress});
-248   \textcolor{comment}{// enter GLUT event processing cycle}
-249   glutMainLoop();
-250 \}
+235                        \{
+236 \textcolor{comment}{//  create window}
+237   \textcolor{keyword}{static} \textcolor{keywordtype}{int}    argc = 1;
+238   \textcolor{keyword}{static} \textcolor{keywordtype}{char}  *args = \textcolor{keyword}{const\_cast<}\textcolor{keywordtype}{char}*\textcolor{keyword}{>}(\textcolor{stringliteral}{"args"});
+239   glutInit(&argc, &args);
+240   glutInitDisplayMode(GLUT\_RGBA | GLUT\_DOUBLE);
+241   glutInitWindowSize(500, 500);
+242   glutInitWindowPosition(100, 100);
+243   glutCreateWindow(\textcolor{stringliteral}{"Potenial Field Path Planner"});
+244   \textcolor{comment}{// register callback functions}
+245   glutDisplayFunc(\hyperlink{Main_8cpp_a035082ebbe3cbffcc3c5c1513ad61798}{CallbackEventOnDisplay});
+246   \textcolor{comment}{// Callback for mouse click}
+247   glutMouseFunc(\hyperlink{Main_8cpp_a478d011b9c27253b43011101f14ee14f}{CallbackEventOnMouseClick});
+248   \textcolor{comment}{// Callback for mouse cursor movement}
+249   glutMotionFunc(\hyperlink{Main_8cpp_ad66d65a7c96963ee783216455ed80da1}{CallbackEventOnMouseMove});
+250   \textcolor{comment}{// Callback for timer. To refresh the window}
+251   glutTimerFunc(30, \hyperlink{Main_8cpp_a549941c79d6c094252c678efbdfb2af1}{CallbackEventOnTimer}, 0);
+252   glutIdleFunc(NULL);
+253   glutKeyboardFunc(\hyperlink{Main_8cpp_aad171a037371010636ae52cdbe204747}{CallbackEventOnKeyPress});
+254   \textcolor{comment}{// enter GLUT event processing cycle}
+255   glutMainLoop();
+256 \}
 \end{DoxyCode}
 \hypertarget{Main_8cpp_a5b3d68b5608f2f8214dfd5cda6b7f0da}{\index{Main.\-cpp@{Main.\-cpp}!Draw\-Circle@{Draw\-Circle}}
 \index{Draw\-Circle@{Draw\-Circle}!Main.cpp@{Main.\-cpp}}
@@ -296,14 +308,14 @@ Draws a circle.
 \end{DoxyParams}
 
 \begin{DoxyCode}
-60                                                                   \{
-61   \textcolor{keyword}{const} \textcolor{keywordtype}{int}    nsides = 50;
-62   \textcolor{keyword}{const} \textcolor{keywordtype}{double} angle  = 2 * \hyperlink{Actor_8hpp_a598a3330b3c21701223ee0ca14316eca}{PI} / nsides;
-63   glBegin(GL\_POLYGON);
-64   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i <= nsides; i++)
-65     glVertex2d(cx + r * cos(i * angle), cy + r * sin(i * angle));
-66   glEnd();
-67 \}
+63                                                                   \{
+64   \textcolor{keyword}{const} \textcolor{keywordtype}{int}    nsides = 50;
+65   \textcolor{keyword}{const} \textcolor{keywordtype}{double} angle  = 2 * \hyperlink{Actor_8hpp_a598a3330b3c21701223ee0ca14316eca}{PI} / nsides;
+66   glBegin(GL\_POLYGON);
+67   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i <= nsides; i++)
+68     glVertex2d(cx + r * cos(i * angle), cy + r * sin(i * angle));
+69   glEnd();
+70 \}
 \end{DoxyCode}
 \hypertarget{Main_8cpp_aa1391be559f06582d82090e39965e990}{\index{Main.\-cpp@{Main.\-cpp}!Handle\-Event\-On\-Display@{Handle\-Event\-On\-Display}}
 \index{Handle\-Event\-On\-Display@{Handle\-Event\-On\-Display}!Main.cpp@{Main.\-cpp}}
@@ -326,27 +338,27 @@ none
 \end{DoxyReturn}
 
 \begin{DoxyCode}
-74                                 \{
-75   std::vector<double> vert = \hyperlink{Main_8cpp_a8b4387365f7dd4433217d448711f1c5b}{\_simulator}.\hyperlink{classRobotSimulator_a46889428dbad6da706f451df859c5473}{GetRobotVertices}();
-76   glColor3f(0, 0.5, 1);
-77   glPolygonMode(GL\_FRONT\_AND\_BACK, GL\_FILL);
-78   glBegin(GL\_QUADS);
-79   glVertex2f(vert[0], vert[1]);
-80   glVertex2f(vert[2], vert[3]);
-81   glVertex2f(vert[4], vert[5]);
-82   glVertex2f(vert[6], vert[7]);
-83   glEnd();
-84   glColor3f(0, 1, 0);
-85   \hyperlink{Main_8cpp_a5b3d68b5608f2f8214dfd5cda6b7f0da}{DrawCircle}(\hyperlink{Main_8cpp_a8b4387365f7dd4433217d448711f1c5b}{\_simulator}.\hyperlink{classRobotSimulator_a7e26ec222d3524872e4e48f2188b385f}{GetGoalCenterX}(), 
+77                                 \{
+78   std::vector<double> vert = \hyperlink{Main_8cpp_a8b4387365f7dd4433217d448711f1c5b}{\_simulator}.\hyperlink{classRobotSimulator_a46889428dbad6da706f451df859c5473}{GetRobotVertices}();
+79   glColor3f(0, 0.5, 1);
+80   glPolygonMode(GL\_FRONT\_AND\_BACK, GL\_FILL);
+81   glBegin(GL\_QUADS);
+82   glVertex2f(vert[0], vert[1]);
+83   glVertex2f(vert[2], vert[3]);
+84   glVertex2f(vert[4], vert[5]);
+85   glVertex2f(vert[6], vert[7]);
+86   glEnd();
+87   glColor3f(0, 1, 0);
+88   \hyperlink{Main_8cpp_a5b3d68b5608f2f8214dfd5cda6b7f0da}{DrawCircle}(\hyperlink{Main_8cpp_a8b4387365f7dd4433217d448711f1c5b}{\_simulator}.\hyperlink{classRobotSimulator_a7e26ec222d3524872e4e48f2188b385f}{GetGoalCenterX}(), 
       \hyperlink{Main_8cpp_a8b4387365f7dd4433217d448711f1c5b}{\_simulator}.\hyperlink{classRobotSimulator_a11ef47f5c24415d1ae2422de45969910}{GetGoalCenterY}(),
-86              \hyperlink{Main_8cpp_a8b4387365f7dd4433217d448711f1c5b}{\_simulator}.\hyperlink{classRobotSimulator_a69decfa495b2aa982bcb0b454e02a529}{GetGoalRadius}());
-87   glColor3f(1, 0, 0);
-88   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < \hyperlink{Main_8cpp_a8b4387365f7dd4433217d448711f1c5b}{\_simulator}.\hyperlink{classRobotSimulator_a5e2c13048d6e6c364019c07bf8bac220}{GetNrObstacles}(); ++i)
-89     \hyperlink{Main_8cpp_a5b3d68b5608f2f8214dfd5cda6b7f0da}{DrawCircle}(\hyperlink{Main_8cpp_a8b4387365f7dd4433217d448711f1c5b}{\_simulator}.\hyperlink{classRobotSimulator_a3ce83e536763d1892fb099ba110be183}{\_circles}[3 + 3 * i],
-90                \hyperlink{Main_8cpp_a8b4387365f7dd4433217d448711f1c5b}{\_simulator}.\hyperlink{classRobotSimulator_a3ce83e536763d1892fb099ba110be183}{\_circles}[4 + 3 * i],
-91                \hyperlink{Main_8cpp_a8b4387365f7dd4433217d448711f1c5b}{\_simulator}.\hyperlink{classRobotSimulator_a3ce83e536763d1892fb099ba110be183}{\_circles}[5 + 3 * i]);
-92   glutSwapBuffers();
-93 \}
+89              \hyperlink{Main_8cpp_a8b4387365f7dd4433217d448711f1c5b}{\_simulator}.\hyperlink{classRobotSimulator_a69decfa495b2aa982bcb0b454e02a529}{GetGoalRadius}());
+90   glColor3f(1, 0, 0);
+91   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < \hyperlink{Main_8cpp_a8b4387365f7dd4433217d448711f1c5b}{\_simulator}.\hyperlink{classRobotSimulator_a5e2c13048d6e6c364019c07bf8bac220}{GetNrObstacles}(); ++i)
+92     \hyperlink{Main_8cpp_a5b3d68b5608f2f8214dfd5cda6b7f0da}{DrawCircle}(\hyperlink{Main_8cpp_a8b4387365f7dd4433217d448711f1c5b}{\_simulator}.\hyperlink{classRobotSimulator_a3ce83e536763d1892fb099ba110be183}{\_circles}[3 + 3 * i],
+93                \hyperlink{Main_8cpp_a8b4387365f7dd4433217d448711f1c5b}{\_simulator}.\hyperlink{classRobotSimulator_a3ce83e536763d1892fb099ba110be183}{\_circles}[4 + 3 * i],
+94                \hyperlink{Main_8cpp_a8b4387365f7dd4433217d448711f1c5b}{\_simulator}.\hyperlink{classRobotSimulator_a3ce83e536763d1892fb099ba110be183}{\_circles}[5 + 3 * i]);
+95   glutSwapBuffers();
+96 \}
 \end{DoxyCode}
 \hypertarget{Main_8cpp_a63616476cc05aab76d9ebb09b7baf68b}{\index{Main.\-cpp@{Main.\-cpp}!Handle\-Event\-On\-Mouse\-Click@{Handle\-Event\-On\-Mouse\-Click}}
 \index{Handle\-Event\-On\-Mouse\-Click@{Handle\-Event\-On\-Mouse\-Click}!Main.cpp@{Main.\-cpp}}
@@ -372,24 +384,26 @@ Function to handle an event on mouse click. It also checks if the cursor is insi
 \end{DoxyParams}
 
 \begin{DoxyCode}
-103                                                      \{
-104   \hyperlink{Main_8cpp_a1808237327922f53b18e2aedcc276321}{\_selectedCircle} = -1;
-105   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < \hyperlink{Main_8cpp_a8b4387365f7dd4433217d448711f1c5b}{\_simulator}.\hyperlink{classRobotSimulator_a3ce83e536763d1892fb099ba110be183}{\_circles}.size()
-106        && \hyperlink{Main_8cpp_a1808237327922f53b18e2aedcc276321}{\_selectedCircle} == -1; i += 3) \{
-107     \textcolor{keyword}{const} \textcolor{keywordtype}{double} \_x = \hyperlink{Main_8cpp_a8b4387365f7dd4433217d448711f1c5b}{\_simulator}.\hyperlink{classRobotSimulator_a3ce83e536763d1892fb099ba110be183}{\_circles}[i];
-108     \textcolor{keyword}{const} \textcolor{keywordtype}{double} \_y = \hyperlink{Main_8cpp_a8b4387365f7dd4433217d448711f1c5b}{\_simulator}.\hyperlink{classRobotSimulator_a3ce83e536763d1892fb099ba110be183}{\_circles}[i + 1];
-109     \textcolor{keyword}{const} \textcolor{keywordtype}{double} \_r  = \hyperlink{Main_8cpp_a8b4387365f7dd4433217d448711f1c5b}{\_simulator}.\hyperlink{classRobotSimulator_a3ce83e536763d1892fb099ba110be183}{\_circles}[i + 2];
-110     \textcolor{keyword}{const} \textcolor{keywordtype}{double} \_d  = sqrt((mousePosX - \_x) * (mousePosX - \_x) +
-111                             (mousePosY - \_y) * (mousePosY - \_y));
-112     \textcolor{keywordflow}{if} (\_d <= \_r)
-113       \hyperlink{Main_8cpp_a1808237327922f53b18e2aedcc276321}{\_selectedCircle} = i / 3;
-114   \}
-115   \textcolor{keywordflow}{if} (\hyperlink{Main_8cpp_a1808237327922f53b18e2aedcc276321}{\_selectedCircle} == -1) \{
-116     \hyperlink{Main_8cpp_a8b4387365f7dd4433217d448711f1c5b}{\_simulator}.\hyperlink{classRobotSimulator_a3ce83e536763d1892fb099ba110be183}{\_circles}.push\_back(mousePosX);
-117     \hyperlink{Main_8cpp_a8b4387365f7dd4433217d448711f1c5b}{\_simulator}.\hyperlink{classRobotSimulator_a3ce83e536763d1892fb099ba110be183}{\_circles}.push\_back(mousePosY);
-118     \hyperlink{Main_8cpp_a8b4387365f7dd4433217d448711f1c5b}{\_simulator}.\hyperlink{classRobotSimulator_a3ce83e536763d1892fb099ba110be183}{\_circles}.push\_back(10.0);
-119   \}
-120 \}
+106                                                      \{
+107   \textcolor{keywordflow}{if} (whichBtn == GLUT\_LEFT\_BUTTON) \{
+108     \hyperlink{Main_8cpp_a1808237327922f53b18e2aedcc276321}{\_selectedCircle} = -1;
+109     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{size\_t} i = 0; i < \hyperlink{Main_8cpp_a8b4387365f7dd4433217d448711f1c5b}{\_simulator}.\hyperlink{classRobotSimulator_a3ce83e536763d1892fb099ba110be183}{\_circles}.size()
+110          && \hyperlink{Main_8cpp_a1808237327922f53b18e2aedcc276321}{\_selectedCircle} == -1; i += 3) \{
+111       \textcolor{keyword}{const} \textcolor{keywordtype}{double} \_x = \hyperlink{Main_8cpp_a8b4387365f7dd4433217d448711f1c5b}{\_simulator}.\hyperlink{classRobotSimulator_a3ce83e536763d1892fb099ba110be183}{\_circles}[i];
+112       \textcolor{keyword}{const} \textcolor{keywordtype}{double} \_y = \hyperlink{Main_8cpp_a8b4387365f7dd4433217d448711f1c5b}{\_simulator}.\hyperlink{classRobotSimulator_a3ce83e536763d1892fb099ba110be183}{\_circles}[i + 1];
+113       \textcolor{keyword}{const} \textcolor{keywordtype}{double} \_r  = \hyperlink{Main_8cpp_a8b4387365f7dd4433217d448711f1c5b}{\_simulator}.\hyperlink{classRobotSimulator_a3ce83e536763d1892fb099ba110be183}{\_circles}[i + 2];
+114       \textcolor{keyword}{const} \textcolor{keywordtype}{double} \_d  = sqrt((mousePosX - \_x) * (mousePosX - \_x) +
+115                               (mousePosY - \_y) * (mousePosY - \_y));
+116       \textcolor{keywordflow}{if} (\_d <= \_r)
+117         \hyperlink{Main_8cpp_a1808237327922f53b18e2aedcc276321}{\_selectedCircle} = i / 3;
+118     \}
+119     \textcolor{keywordflow}{if} (\hyperlink{Main_8cpp_a1808237327922f53b18e2aedcc276321}{\_selectedCircle} == -1) \{
+120       \hyperlink{Main_8cpp_a8b4387365f7dd4433217d448711f1c5b}{\_simulator}.\hyperlink{classRobotSimulator_a3ce83e536763d1892fb099ba110be183}{\_circles}.push\_back(mousePosX);
+121       \hyperlink{Main_8cpp_a8b4387365f7dd4433217d448711f1c5b}{\_simulator}.\hyperlink{classRobotSimulator_a3ce83e536763d1892fb099ba110be183}{\_circles}.push\_back(mousePosY);
+122       \hyperlink{Main_8cpp_a8b4387365f7dd4433217d448711f1c5b}{\_simulator}.\hyperlink{classRobotSimulator_a3ce83e536763d1892fb099ba110be183}{\_circles}.push\_back(40.0);
+123     \}
+124   \}
+125 \}
 \end{DoxyCode}
 \hypertarget{Main_8cpp_a148391bd47bc66d909351b14aed2f524}{\index{Main.\-cpp@{Main.\-cpp}!Handle\-Event\-On\-Timer@{Handle\-Event\-On\-Timer}}
 \index{Handle\-Event\-On\-Timer@{Handle\-Event\-On\-Timer}!Main.cpp@{Main.\-cpp}}
@@ -400,7 +414,7 @@ Function to handle an event on mouse click. It also checks if the cursor is insi
 )}}\label{Main_8cpp_a148391bd47bc66d909351b14aed2f524}
 
 
-\{ function\-\_\-description \} 
+Handle for Timer Overflow. 
 
 
 \begin{DoxyParams}{Parameters}
@@ -412,22 +426,29 @@ none
 \end{DoxyReturn}
 
 \begin{DoxyCode}
-177                               \{
-178   \textcolor{keywordflow}{if} (\hyperlink{Main_8cpp_acb8d75a5b852585e8244cf2ff5f32b4a}{\_plan} && !\hyperlink{Main_8cpp_a8b4387365f7dd4433217d448711f1c5b}{\_simulator}.\hyperlink{classRobotSimulator_a2a4c5f6ce1c2388f02f9006811e6b6e0}{HasRobotReachedGoal}()) \{
-179     \hyperlink{structRobotMove}{RobotMove} move = \hyperlink{Main_8cpp_a3fc78847990f68e5baa01fdcd3be2992}{\_planner}->\hyperlink{classRobotPlanner_a6540d24f5f096465009b18b42320bd1f}{NextMove}();
-180     \hyperlink{Main_8cpp_a8b4387365f7dd4433217d448711f1c5b}{\_simulator}.\hyperlink{classRobotSimulator_a33390e3aa4106ca2e2ee8dd414bdcaea}{AddToRobotConfiguration}(move.
+180                               \{
+181   \textcolor{keywordflow}{if} (\hyperlink{Main_8cpp_acb8d75a5b852585e8244cf2ff5f32b4a}{\_plan} && \hyperlink{Main_8cpp_a8b4387365f7dd4433217d448711f1c5b}{\_simulator}.\hyperlink{classRobotSimulator_a2a4c5f6ce1c2388f02f9006811e6b6e0}{HasRobotReachedGoal}()) \{
+182     std::cout << \textcolor{stringliteral}{"\(\backslash\)n\(\backslash\)n Goal Reached!!!!!!!!! \(\backslash\)n\(\backslash\)n Press escape key to exit"};
+183   \}
+184   \textcolor{keywordflow}{if} (\hyperlink{Main_8cpp_acb8d75a5b852585e8244cf2ff5f32b4a}{\_plan} && !\hyperlink{Main_8cpp_a8b4387365f7dd4433217d448711f1c5b}{\_simulator}.\hyperlink{classRobotSimulator_a2a4c5f6ce1c2388f02f9006811e6b6e0}{HasRobotReachedGoal}() && 
+      \hyperlink{Main_8cpp_a2e0c451bdb326fc276979768c86734d4}{attempt} > \hyperlink{Main_8cpp_a8c730a41dcccce68039aea9f991e1868}{ATTEMPTS}) \{
+185     std::cout << \textcolor{stringliteral}{"\(\backslash\)n\(\backslash\)nStuck in local minima!!!!!\(\backslash\)n\(\backslash\)nPress escape key to exit"};
+186   \}
+187   \textcolor{keywordflow}{if} (\hyperlink{Main_8cpp_acb8d75a5b852585e8244cf2ff5f32b4a}{\_plan} && !\hyperlink{Main_8cpp_a8b4387365f7dd4433217d448711f1c5b}{\_simulator}.\hyperlink{classRobotSimulator_a2a4c5f6ce1c2388f02f9006811e6b6e0}{HasRobotReachedGoal}()) \{
+188     \hyperlink{Main_8cpp_a2e0c451bdb326fc276979768c86734d4}{attempt}++;
+189     \hyperlink{structRobotMove}{RobotMove} move = \hyperlink{Main_8cpp_a3fc78847990f68e5baa01fdcd3be2992}{\_planner}->\hyperlink{classRobotPlanner_a6540d24f5f096465009b18b42320bd1f}{NextMove}();
+190     \hyperlink{Main_8cpp_a8b4387365f7dd4433217d448711f1c5b}{\_simulator}.\hyperlink{classRobotSimulator_a33390e3aa4106ca2e2ee8dd414bdcaea}{AddToRobotConfiguration}(move.
       \hyperlink{structRobotMove_aeb93adca1b150538c56a548fb3a060f7}{m\_dx}, move.\hyperlink{structRobotMove_a8da71ddc10ffe34d3cc0f9d0cb26e33c}{m\_dy}, move.\hyperlink{structRobotMove_a667d60a557ec5177f77cd0bcf98ba84b}{m\_dtheta});
-181   \}
-182 \}
+191   \}
+192 \}
 \end{DoxyCode}
-\hypertarget{Main_8cpp_a3c04138a5bfe5d72780bb7e82a18e627}{\index{Main.\-cpp@{Main.\-cpp}!main@{main}}
+\hypertarget{Main_8cpp_ae66f6b31b5ad750f1fe042a706a4e3d4}{\index{Main.\-cpp@{Main.\-cpp}!main@{main}}
 \index{main@{main}!Main.cpp@{Main.\-cpp}}
 \subsubsection[{main}]{\setlength{\rightskip}{0pt plus 5cm}int main (
 \begin{DoxyParamCaption}
-\item[{int}]{argc, }
-\item[{char $\ast$$\ast$}]{argv}
+{}
 \end{DoxyParamCaption}
-)}}\label{Main_8cpp_a3c04138a5bfe5d72780bb7e82a18e627}
+)}}\label{Main_8cpp_ae66f6b31b5ad750f1fe042a706a4e3d4}
 
 
 program entrypoint 
@@ -445,11 +466,12 @@ integer 0 upon exit success \par
 \end{DoxyReturn}
 
 \begin{DoxyCode}
-262                                 \{
-263   \hyperlink{Main_8cpp_a3fc78847990f68e5baa01fdcd3be2992}{\_planner} = \textcolor{keyword}{new} \hyperlink{classRobotPlanner}{RobotPlanner}(&\hyperlink{Main_8cpp_a8b4387365f7dd4433217d448711f1c5b}{\_simulator});
-264   \hyperlink{Main_8cpp_ad491929288f4c6a9d207f9703e3d6795}{DisplayLoop}();
-265   \textcolor{keywordflow}{return} 0;
-266 \}
+266            \{
+267   \hyperlink{Main_8cpp_a2e0c451bdb326fc276979768c86734d4}{attempt} = 0;
+268   \hyperlink{Main_8cpp_a3fc78847990f68e5baa01fdcd3be2992}{\_planner} = \textcolor{keyword}{new} \hyperlink{classRobotPlanner}{RobotPlanner}(&\hyperlink{Main_8cpp_a8b4387365f7dd4433217d448711f1c5b}{\_simulator});
+269   \hyperlink{Main_8cpp_ad491929288f4c6a9d207f9703e3d6795}{DisplayLoop}();
+270   \textcolor{keywordflow}{return} 0;
+271 \}
 \end{DoxyCode}
 
 
@@ -466,3 +488,6 @@ integer 0 upon exit success \par
 \hypertarget{Main_8cpp_a8b4387365f7dd4433217d448711f1c5b}{\index{Main.\-cpp@{Main.\-cpp}!\-\_\-simulator@{\-\_\-simulator}}
 \index{\-\_\-simulator@{\-\_\-simulator}!Main.cpp@{Main.\-cpp}}
 \subsubsection[{\-\_\-simulator}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Robot\-Simulator} \-\_\-simulator}}\label{Main_8cpp_a8b4387365f7dd4433217d448711f1c5b}
+\hypertarget{Main_8cpp_a2e0c451bdb326fc276979768c86734d4}{\index{Main.\-cpp@{Main.\-cpp}!attempt@{attempt}}
+\index{attempt@{attempt}!Main.cpp@{Main.\-cpp}}
+\subsubsection[{attempt}]{\setlength{\rightskip}{0pt plus 5cm}int attempt}}\label{Main_8cpp_a2e0c451bdb326fc276979768c86734d4}

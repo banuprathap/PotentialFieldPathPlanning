@@ -7,12 +7,12 @@
 
 var indexSectionsWithContent =
 {
-  0: "_acdghikmnprt~",
-  1: "prt",
+  0: "_acdghikmnprtu~",
+  1: "pr",
   2: "ampt",
   3: "acdghimnrt~",
   4: "_adkmr",
-  5: "p"
+  5: "apu"
 };
 
 var indexSectionNames =

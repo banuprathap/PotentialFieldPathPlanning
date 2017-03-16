@@ -61,14 +61,18 @@ struct RobotMove {
  * @brief      Class for RobotPlanner.
  */
 class RobotPlanner {
-  public:
-  	/**< Obstacles beyond this distance are omitted in calculating potentials. */
+public:
+    /**< Obstacles beyond this are omitted in calculating potentials. */
     int distThreshold = 50;
-    int k = 3;  /**<  Degree of calculating potential. */
-    double attPotScaling = 20000;  /**< Scaling factor for attractive potential. */
-    double repPotScaling = 30000;  /**< Scaling factor for repulsive potential. */
-    double minAttPot = 0.5;  /**< Minimum attractive potential at any point. */
-    
+    /**<  Degree of calculating potential. */
+    int k = 3;
+    /**< Scaling factor for attractive potential. */
+    double attPotScaling = 20000;
+    /**< Scaling factor for repulsive potential. */
+    double repPotScaling = 30000;
+    /**< Minimum attractive potential at any point. */
+    double minAttPot = 0.5;
+
 
 
     explicit RobotPlanner(RobotSimulator * const simulator);
@@ -77,7 +81,7 @@ class RobotPlanner {
 
     RobotMove NextMove(void);
 
-  private:
+ private:
     RobotSimulator *p_simulator;
 };
 

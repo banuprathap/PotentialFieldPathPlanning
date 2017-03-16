@@ -32,7 +32,7 @@ script:
   - export CXX=$COMPILER;
   - mkdir build
   - cd build
-  - ${DEPS_DIR}/cmake/bin/cmake -DCOVERAGE=ON -DCMAKE_BUILD_TYPE=Debug ../  
+  - cmake -DCOVERAGE=ON -DCMAKE_BUILD_TYPE=Debug ../  
   - make
   - make code_coverage
   - test/cpp-test
