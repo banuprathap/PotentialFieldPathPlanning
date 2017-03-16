@@ -58,7 +58,7 @@ RobotSimulator::RobotSimulator(void) {
   _robot._sizeX = 20; /**< Robot length. */
   _robot._sizeY = 20; /**< Robot height. */
   _robot._theta = 0;   /**< Initial robot orientation. */
-  _robot._maxSpeed = 5;  /**< Maximum safe speed for the robot. */
+  _robot._maxSpeed = 0.75;  /**< Maximum safe speed for the robot. */
   _robot._maxAccel = 5;  /**< Maximum safe acceleration for the robot. */
   _robot._maxTurn = 10 * PI /
                     180;  /**< Maximum safe turning angle for the robot. */
@@ -100,26 +100,6 @@ RobotSimulator::~RobotSimulator(void) {
 }
 
 /**
- * @brief      Returns closest point on the obstacle i, from given point
- *
- * @param[in]  i     Obstacle number
- * @param[in]  x     x coordinate of the point of interest
- * @param[in]  y     y coordinate of the point of interest
- *
- * @return     Returns a structure variable
- */
-Point RobotSimulator::ClosestPointOnObstacle(const int i, const double x,
-    const double y) {
-  const double cx = _circles[3 + 3 * i];
-  const double cy = _circles[4 + 3 * i];
-  const double r  = _circles[5 + 3 * i];
-  const double d  = sqrt((cx - x) * (cx - x) + (cy - y) * (cy - y));
-  Point p;
-  p._x = cx + r * (x - cx) / d;
-  p._y = cy + r * (y - cy) / d;
-  return p;
-}
-/**
  * @brief      Determines if colliding.
  *
  * @param[in]  x     { parameter_description }
@@ -135,14 +115,13 @@ bool RobotSimulator::isColliding(const double x, const double y) {
        || y > 500 - sizeDiag ) {
     col = true;
   } else {
-    for (int i = 3; i < _circles.size(); i += 3) {
+    for (size_t i = 3; i < _circles.size(); i += 3) {
       const double _x = _circles[i];
       const double _y = _circles[i + 1];
       const double _r = _circles[i + 2];
       const double dist = sqrt((x - _x) * (x - _x) + (y - _y) * (y - _y));
-      if (dist <= _r - sizeDiag) {
+      if (dist < _r + sizeDiag) {
         col = true;
-        std::cout << col;
         break;
       }
     }
@@ -150,32 +129,6 @@ bool RobotSimulator::isColliding(const double x, const double y) {
   return col;
 }
 
-/**
- * @brief      Updates robot's corner positions
- *
- * @param[in]  _R    struct of type Robot.
- * @return     none
- */
-
-/*
-void RobotSimulator::UpdateRobotVertices(struct RobotSimulator::Robot _R) {
-  double sizeDiag = sqrt(_R._sizeX * _R._sizeX + _R._sizeY * _R._sizeY);
-  _robot._initVertices.push_back(_R._x + sizeDiag * sin(_R._theta - PI / 4));
-  _robot._initVertices.push_back(_R._y + sizeDiag * cos(_R._theta - PI / 4));
-  _robot._initVertices.push_back(_R._x + sizeDiag * sin(_R._theta + PI / 4));
-  _robot._initVertices.push_back(_R._y + sizeDiag * cos(_R._theta + PI / 4));
-  _robot._initVertices.push_back(_R._x + sizeDiag *
-                                 sin(PI + _R._theta - PI / 4));
-  _robot._initVertices.push_back(_R._y + sizeDiag *
-                                 cos(PI + _R._theta - PI / 4));
-  _robot._initVertices.push_back(_R._x + sizeDiag *
-                                 sin(PI + _R._theta + PI / 4));
-  _robot._initVertices.push_back(_R._y + sizeDiag *
-                                 cos(PI + _R._theta + PI / 4));
-  _robot._currVertices.assign(_robot._initVertices.begin(),
-                              _robot._initVertices.end());
-}
-*/
 /**
  * @brief      Determines if robot has reached goal.
  * @param      none
@@ -203,9 +156,6 @@ void RobotSimulator::AddToRobotConfiguration(const double dx,
   _robot._x += dx;
   _robot._y += dy;
   _robot._theta += dtheta;
-  if (isColliding(_robot._x, _robot._y)) {
-    //  throw "Robot Collided";
-  }
   RenderRobot();
 }
 void RobotSimulator::RenderRobot() {
@@ -224,4 +174,3 @@ void RobotSimulator::RenderRobot() {
   _robot._currVertices[7] = _robot._y + halfDiag * sin(_robot._theta + PI / 4 +
                             PI);
 }
-

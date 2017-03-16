@@ -65,10 +65,10 @@ class RobotPlanner {
   	/**< Obstacles beyond this distance are omitted in calculating potentials. */
     int distThreshold = 50;
     int k = 3;  /**<  Degree of calculating potential. */
-    double attPotScaling = 50000;  /**< Scaling factor for attractive potential. */
-    double repPotScaling = 5000;  /**< Scaling factor for repulsive potential. */
-    double minAttPot = 5;  /**< Minimum attractive potential at any point. */
-    double maxturn = 10 * PI / 180;
+    double attPotScaling = 20000;  /**< Scaling factor for attractive potential. */
+    double repPotScaling = 30000;  /**< Scaling factor for repulsive potential. */
+    double minAttPot = 0.5;  /**< Minimum attractive potential at any point. */
+    
 
 
     explicit RobotPlanner(RobotSimulator * const simulator);

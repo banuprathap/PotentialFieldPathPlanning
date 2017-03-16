@@ -66,28 +66,6 @@ double Distance(Point One, Point Two) {
               (One._y - Two._y));
 }
 
-/*RobotMove RobotPlanner::NextMove(void) {
-  RobotMove move;
-  Point closest;
-  Point R, G, O;
-  R._x = p_simulator->GetRobotX();
-  R._y = p_simulator->GetRobotY();
-  _theta = p_simulator->GetRobotTheta();
-  G._x = p_simulator->GetGoalCenterX();
-  G._y = p_simulator->GetGoalCenterY();
-  goalRad = p_simulator->GetGoalRadius();
-  int n = p_simulator->GetNrObstacles();
-  distanceGoal = Distance(R, G);
-  angleGoal = atan2(G._y - R._y, G._x - R._x);
-  for (int i = 0; i <= n; i++) {
-    O = p_simulator->ClosestPointOnObstacle(i, R._x, R._y);
-    if (Distance(R, O) < 50) {
-
-    }
-  }
-  return move;
-}
-*/
 RobotMove RobotPlanner::NextMove(void) {
   RobotMove move;
   if (!p_simulator->HasRobotReachedGoal()) {
@@ -110,77 +88,62 @@ RobotMove RobotPlanner::NextMove(void) {
     sizeY = p_simulator->GetRobotSizeY();
     sizeHalfDiag = sqrt(pow(sizeX / 2, 2) + pow(sizeY / 2, 2));
     //  speed
-    robotSpeed = 10;
+    robotSpeed = 5;
     //  Calculate distance from obstacle at front
     i = sizeX / 2 + 1;
     while (1) {
-      //  std::cout << i << std::endl;
-      double _x = (R._x + i * sin(currDirection));
-      double _y = (R._y + i * cos(currDirection));
-      //  std::cout << _x << "\t" << _y << std::endl;
+      double _x = (R._x + i * cos(currDirection));
+      double _y = (R._y + i * sin(currDirection));
       if (p_simulator->isColliding(_x, _y)) {
-        std::cout << _x << "\t" << _y << std::endl;
         break;
       }
       i++;
-    }  //  std::cout << "check 1" << std::endl;
+    }
     double distanceFront = i - sizeX / 2;
-    //  std::cout << distanceFront << std::endl;
     //  Calculate distance from obstacle at left
     i = sizeY / 2 + 1;
     while (1) {
-      //  std::cout << i << std::endl;
-      double _x = (R._x + i * sin(currDirection - PI / 2));
-      double _y = (R._y + i * cos(currDirection - PI / 2));
-      //  std::cout << _x << "\t" << _y << std::endl;
+      double _x = (R._x + i * cos(currDirection - PI / 2));
+      double _y = (R._y + i * sin(currDirection - PI / 2));
       if (p_simulator->isColliding(_x, _y)) {
-        std::cout << _x << "\t" << _y << std::endl;
         break;
       }
       i++;
-    }   //  std::cout << "check 2" << std::endl;
+    }
     double distanceLeft = i - sizeY / 2;
-    //  std::cout << distanceLeft << std::endl;
     //  Calculate distance from obstacle at Right
     i = sizeY / 2 + 1;
     while (1) {
-      double _x = (R._x + i * sin(currDirection + PI / 2));
-      double _y = (R._y + i * cos(currDirection + PI / 2));
-      //  std::cout << _x << "\t" << _y << std::endl;
+      double _x = (R._x + i * cos(currDirection + PI / 2));
+      double _y = (R._y + i * sin(currDirection + PI / 2));
       if (p_simulator->isColliding(_x, _y)) {
-        std::cout << _x << "\t" << _y << std::endl;
         break;
       }
       i++;
-    }   //  std::cout << "check 3" << std::endl;
+    }
     double distanceRight = i - sizeY / 2;
-    //  std::cout << distanceRight << std::endl;
     //  Calculate distance from obstacle at Front-left-diagonal
     i = sizeHalfDiag  + 1;
     while (1) {
-      double _x = (R._x + i * sin(currDirection - PI / 4));
-      double _y = (R._y + i * cos(currDirection - PI / 4));
+      double _x = (R._x + i * cos(currDirection - PI / 4));
+      double _y = (R._y + i * sin(currDirection - PI / 4));
       if (p_simulator->isColliding(_x, _y)) {
-        std::cout << _x << "\t" << _y << std::endl;
         break;
       }
       i++;
-    }  //  std::cout << "check 4" << std::endl;
+    }
     double distanceFrontLeftDiagonal = i - sizeHalfDiag;
-    //  std::cout << distanceFrontLeftDiagonal << std::endl;
     //  Calculate distance from obstacle at Front-left-diagonal
     i = sizeHalfDiag + 1;
     while (1) {
-      double _x = (R._x + i * sin(currDirection + PI / 4));
-      double _y = (R._y + i * cos(currDirection + PI / 4));
+      double _x = (R._x + i * cos(currDirection + PI / 4));
+      double _y = (R._y + i * sin(currDirection + PI / 4));
       if (p_simulator->isColliding(_x, _y)) {
-        //  std::cout << _x << "\t" << _y << std::endl;
         break;
       }
       i++;
-    }  //  std::cout << "check 5" << std::endl;
+    }
     double distanceFrontRightDiagonal = i -  sizeHalfDiag;
-    //  std::cout << distanceFrontRightDiagonal << std::endl;
     //  Goal
     distanceGoal = sqrt((R._x - G._x) * (R._x - G._x) + (R._y - G. _y) *
                         (R._y - G._y));
@@ -189,17 +152,21 @@ RobotMove RobotPlanner::NextMove(void) {
     repPotY = 1.0 / pow(distanceFront, k) * sin(currDirection) +
               1.0 / pow((distanceLeft), k) * sin(currDirection - PI / 2) +
               1.0 / pow((distanceRight), k) * sin(currDirection + PI / 2) +
-              1.0 / pow((distanceFrontLeftDiagonal), k) * sin(currDirection - PI / 4) +
-              1.0 / pow((distanceFrontRightDiagonal), k) * sin(currDirection + PI / 4);
+              1.0 / pow((distanceFrontLeftDiagonal), k) *
+              sin(currDirection - PI / 4) +
+              1.0 / pow((distanceFrontRightDiagonal), k) *
+              sin(currDirection + PI / 4);
     repPotX = 1.0 / pow((distanceFront), k) * cos(currDirection) +
               1.0 / pow((distanceLeft), k) * cos(currDirection - PI / 2) +
               1.0 / pow((distanceRight), k) * cos(currDirection + PI / 2) +
-              1.0 / pow((distanceFrontLeftDiagonal), k) * cos(currDirection - PI / 4) +
-              1.0 / pow((distanceFrontRightDiagonal), k) * cos(currDirection + PI / 4);
+              1.0 / pow((distanceFrontLeftDiagonal), k) *
+              cos(currDirection - PI / 4) +
+              1.0 / pow((distanceFrontRightDiagonal), k) *
+              cos(currDirection + PI / 4);
     attPotY = std::max(pow((1.0 / distanceGoal), k),
                        minAttPot) * sin(angleGoal)  * attPotScaling;
     attPotX = std::max(pow((1.0 / distanceGoal), k) ,
-                       minAttPot) * cos(angleGoal) * attPotScaling ;
+                       minAttPot) * cos(angleGoal) * attPotScaling;
     totPotX = attPotX - (repPotScaling * repPotX);
     totPotY = attPotY - (repPotScaling * repPotY);
     //  dTheta
@@ -213,7 +180,7 @@ RobotMove RobotPlanner::NextMove(void) {
     }  //  check to get the angle between - pi and pi
     steer = std::min(maxTurn, steer);
     steer = std::max(-maxTurn, steer);
-//  set new speed
+    //  set new speed
     speed = sqrt((robotSpeed * sin(currDirection) + totPotY) *
                  (robotSpeed * sin(currDirection) + totPotY) +
                  (robotSpeed * cos(currDirection) + totPotX) *
@@ -224,12 +191,17 @@ RobotMove RobotPlanner::NextMove(void) {
     robotSpeed = std::max(robotSpeed, 0.0);
     if (robotSpeed == 0)
       std::cout << "robot had to stop to avoid collission" << std::endl;
-    move.m_dx = robotSpeed * sin(currDirection);
-    move.m_dy = robotSpeed * cos(currDirection);
+    if (!p_simulator->isColliding(R._x + robotSpeed * sin(currDirection),
+                     R._y + robotSpeed * cos(currDirection))) {
+      move.m_dx = robotSpeed * sin(currDirection);
+      move.m_dy = robotSpeed * cos(currDirection);
+      move.m_dtheta = steer;
+    } else if (!p_simulator->isColliding(R._x + 1, R._y + 1)) {
+      move.m_dx = 1;
+      move.m_dy = 1;
+      move.m_dtheta = PI * 0.75;
+    }
     move.m_speed = robotSpeed;
-    move.m_dtheta = steer;
-  } else {
-    std::cout << "DONE" << std::endl;
   }
   return move;
 }

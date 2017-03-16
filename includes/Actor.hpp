@@ -45,6 +45,7 @@
 
 #ifndef INCLUDES_ACTOR_HPP_
 #define INCLUDES_ACTOR_HPP_
+#define UNUSED(x) (void)(x)
 #include <iostream>
 #include <cmath>
 #include <vector>
@@ -232,12 +233,6 @@ class RobotSimulator {
     void RenderRobot();
 
   private:
-    /**
-     * @brief      { function_description }
-     *
-     * @param[in]  _R    { parameter_description }
-     */
-    void UpdateRobotVertices(struct Robot _R);
 
     /**
      * @brief      Structure to store Robot information

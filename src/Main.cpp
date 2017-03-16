@@ -45,10 +45,13 @@
 #include <Actor.hpp>
 #include <Planner.hpp>
 
+#define ATTEMPTS 50000
+
 RobotPlanner   *_planner;
 RobotSimulator _simulator;
 
 int _selectedCircle;
+int attempt;
 bool _plan;
 /**
  * @brief      Draws a circle.
@@ -101,24 +104,25 @@ void HandleEventOnDisplay(void) {
  */
 void HandleEventOnMouseClick(const int whichBtn, const double mousePosX,
                              const double mousePosY) {
-  _selectedCircle = -1;
-  for (int i = 0; i < _simulator._circles.size()
-       && _selectedCircle == -1; i += 3) {
-    const double _x = _simulator._circles[i];
-    const double _y = _simulator._circles[i + 1];
-    const double _r  = _simulator._circles[i + 2];
-    const double _d  = sqrt((mousePosX - _x) * (mousePosX - _x) +
-                            (mousePosY - _y) * (mousePosY - _y));
-    if (_d <= _r)
-      _selectedCircle = i / 3;
-  }
-  if (_selectedCircle == -1) {
-    _simulator._circles.push_back(mousePosX);
-    _simulator._circles.push_back(mousePosY);
-    _simulator._circles.push_back(40.0);
+  if (whichBtn == GLUT_LEFT_BUTTON) {
+    _selectedCircle = -1;
+    for (size_t i = 0; i < _simulator._circles.size()
+         && _selectedCircle == -1; i += 3) {
+      const double _x = _simulator._circles[i];
+      const double _y = _simulator._circles[i + 1];
+      const double _r  = _simulator._circles[i + 2];
+      const double _d  = sqrt((mousePosX - _x) * (mousePosX - _x) +
+                              (mousePosY - _y) * (mousePosY - _y));
+      if (_d <= _r)
+        _selectedCircle = i / 3;
+    }
+    if (_selectedCircle == -1) {
+      _simulator._circles.push_back(mousePosX);
+      _simulator._circles.push_back(mousePosY);
+      _simulator._circles.push_back(40.0);
+    }
   }
 }
-
 /**
  * @brief      Call back for an event on display
  * @param  none
@@ -151,7 +155,6 @@ void CallbackEventOnDisplay(void) {
 void CallbackEventOnMouseClick(int whichBtn, int state, int mousePosX,
                                int mousePosY) {
   if (state == GLUT_DOWN) {
-    //  std::cout << mousePosX << "\t" << mousePosY << std::endl;
     HandleEventOnMouseClick(whichBtn, mousePosX , mousePosY);
     glutPostRedisplay();
   }
@@ -175,7 +178,14 @@ void CallbackEventOnMouseMove(int mousePosX, int mousePosY) {
  * @return none
  */
 void HandleEventOnTimer(void) {
+  if (_plan && _simulator.HasRobotReachedGoal()) {
+    std::cout << "\n\n Goal Reached!!!!!!!!! \n\n Press escape key to exit";
+  }
+  if (_plan && !_simulator.HasRobotReachedGoal() && attempt > ATTEMPTS) {
+    std::cout << "\n\nStuck in local minima!!!!!\n\nPress escape key to exit";
+  }
   if (_plan && !_simulator.HasRobotReachedGoal()) {
+    attempt++;
     RobotMove move = _planner->NextMove();
     _simulator.AddToRobotConfiguration(move.m_dx, move.m_dy, move.m_dtheta);
   }
@@ -187,13 +197,9 @@ void HandleEventOnTimer(void) {
  */
 void CallbackEventOnTimer(int dummy) {
   HandleEventOnTimer();
-  glutTimerFunc(150, CallbackEventOnTimer, dummy);
+  glutTimerFunc(30, CallbackEventOnTimer, dummy);
   glutPostRedisplay();
 }
-
-
-
-
 /**
  * @brief      Call back for an event on keyboard press
  *
@@ -203,24 +209,23 @@ void CallbackEventOnTimer(int dummy) {
  */
 void CallbackEventOnKeyPress(const unsigned char key, const int mousePosX,
                              const int mousePosY) {
+  UNUSED(mousePosX);
+  UNUSED(mousePosY);
   std::cout << "pressed key = " << key << std::endl;
   switch (key) {
   case 27:  //  escape key
     exit(0);
   case 's':
     _plan = !_plan;
-    /*
-    for (int i = 3; i < _simulator._circles.size(); i += 3) {
+    for (size_t i = 3; i < _simulator._circles.size(); i += 3) {
       const double _x = _simulator._circles[i];
       const double _y = _simulator._circles[i + 1];
-      const double _r  = _simulator._circles[i + 2];
+      //  const double _r  = _simulator._circles[i + 2];
       std::cout << _x << "\t" << _y << std::endl;
     }
-    */
     break;
   }
 }
-
 /**
  * @brief      Main display loop
  * @param  none
@@ -242,14 +247,12 @@ void DisplayLoop(void) {
   // Callback for mouse cursor movement
   glutMotionFunc(CallbackEventOnMouseMove);
   // Callback for timer. To refresh the window
-  glutTimerFunc(150, CallbackEventOnTimer, 0);
+  glutTimerFunc(30, CallbackEventOnTimer, 0);
   glutIdleFunc(NULL);
   glutKeyboardFunc(CallbackEventOnKeyPress);
   // enter GLUT event processing cycle
   glutMainLoop();
 }
-
-
 /**
  * @brief      program entrypoint
  *
@@ -259,10 +262,9 @@ void DisplayLoop(void) {
  * @return     integer 0 upon exit success \n
              integer -1 upon exit failure
  */
-int main(int argc, char **argv) {
+int main() {
+  attempt = 0;
   _planner = new RobotPlanner(&_simulator);
   DisplayLoop();
   return 0;
 }
-
-

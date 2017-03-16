@@ -79,7 +79,6 @@ TEST(ReachedGoal, NotReach) {
 
 
 TEST(ReachedGoal, Reach) {
-  RobotPlanner   *_planner;
   RobotSimulator t_simulator;
   // _planner = new RobotPlanner(&_simulator);
   double dx =  t_simulator.GetGoalCenterX() - t_simulator.GetRobotX();
