@@ -1,7 +1,6 @@
 sudo: required
 dist: trusty
 
-
 # Enable C++ support
 # Modern cpp settings from
 #  http://genbattle.bitbucket.org/blog/2016/01/17/c++-travis-ci/
@@ -14,20 +13,17 @@ matrix:
         apt:
           sources:
             - ubuntu-toolchain-r-test
-            - george-edison55-precise-backports
           packages:
             - g++-5
             - cmake
             - cmake-data
       env: COMPILER=g++-5
 
-before_install:
-  - sudo apt-get update 
+before_install: 
   - sudo apt-get install build-essential
   - sudo apt-get install freeglut3-dev
   - sudo apt-get install libxmu-dev libxi-dev  
   - pip install --user cpp-coveralls
-
   
 install:
   - sudo apt-get install -y -qq lcov
