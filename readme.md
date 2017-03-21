@@ -48,7 +48,8 @@ perform tests on module function.  Test covers setting module parameters, comput
 correctness of shortest path, and robustness of computing shortest path.
 
 
-Finally, the implementation process of this project follows SIP(Solo Iterative Process) model in software engineering.  
+Finally, the implementation process of this project follows SIP(Solo Iterative Process) model in software engineering. 
+
 STATUS
 =======
 - ~~Proposal Pending Approval~~
@@ -65,6 +66,7 @@ TODO
 - ~~made _circles public  (investigate other options)~~
 - ~~Implement heuristic cost function with euclidean distance~~
 - ~~Implement MoveRobot()~~
+
 Future Work
 ------------
 The potential field path planner naturally suffers from the curse of local minima. This project will be extended in future to avoid such traps by one of the following methods.
@@ -82,9 +84,7 @@ SIP
 3. Code Optimization & Documentation
    - During this stage, all the compiler warnings were addressed and all the program blocks were commented using Doxygen syntax. This ensures the overall quality of the software product.
 
-Backlogs can be found  [here][backlogs].
-
-[backlogs]: (https://docs.google.com/a/terpmail.umd.edu/spreadsheets/d/1iUfZD_q6N5AdZn11GtuUNW_BCMHTRgVdXwcLb2_1gZw/edit?usp=sharing)
+Backlogs can be found  [here](https://docs.google.com/a/terpmail.umd.edu/spreadsheets/d/1iUfZD_q6N5AdZn11GtuUNW_BCMHTRgVdXwcLb2_1gZw/edit?usp=sharing).
 
 UML class/activity diagrams can be found [here](https://github.com/banuprathap/PotentialFieldPathPlanning/tree/master/UML%20Diagrams).
 
